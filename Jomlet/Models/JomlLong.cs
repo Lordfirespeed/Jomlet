@@ -1,22 +1,22 @@
 ﻿namespace Tomlet.Models;
 
-public class TomlLong : TomlValue
+public class JomlLong : TomlValue
 {
     private long _value;
 
-    public TomlLong(long value)
+    public JomlLong(long value)
     {
         _value = value;
     }
         
-    internal static TomlLong? Parse(string valueInToml)
+    internal static JomlLong? Parse(string valueInToml)
     {
         var nullableDouble = JomlNumberUtils.GetLongValue(valueInToml);
 
         if (!nullableDouble.HasValue)
             return null;
 
-        return new TomlLong(nullableDouble.Value);
+        return new JomlLong(nullableDouble.Value);
     }
 
     public long Value => _value;

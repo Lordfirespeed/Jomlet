@@ -29,10 +29,10 @@ namespace Tomlet.Tests
 
             //Check values
             Assert.Collection(document.Entries.Values,
-                entry => Assert.Equal(99, Assert.IsType<TomlLong>(entry).Value),
-                entry => Assert.Equal(42, Assert.IsType<TomlLong>(entry).Value),
-                entry => Assert.Equal(0, Assert.IsType<TomlLong>(entry).Value),
-                entry => Assert.Equal(-17, Assert.IsType<TomlLong>(entry).Value)
+                entry => Assert.Equal(99, Assert.IsType<JomlLong>(entry).Value),
+                entry => Assert.Equal(42, Assert.IsType<JomlLong>(entry).Value),
+                entry => Assert.Equal(0, Assert.IsType<JomlLong>(entry).Value),
+                entry => Assert.Equal(-17, Assert.IsType<JomlLong>(entry).Value)
             );
         }
         
@@ -53,10 +53,10 @@ namespace Tomlet.Tests
 
             //Check values
             Assert.Collection(document.Entries.Values,
-                entry => Assert.Equal(1000, Assert.IsType<TomlLong>(entry).Value),
-                entry => Assert.Equal(5349221, Assert.IsType<TomlLong>(entry).Value),
-                entry => Assert.Equal(5349221, Assert.IsType<TomlLong>(entry).Value),
-                entry => Assert.Equal(12345, Assert.IsType<TomlLong>(entry).Value)
+                entry => Assert.Equal(1000, Assert.IsType<JomlLong>(entry).Value),
+                entry => Assert.Equal(5349221, Assert.IsType<JomlLong>(entry).Value),
+                entry => Assert.Equal(5349221, Assert.IsType<JomlLong>(entry).Value),
+                entry => Assert.Equal(12345, Assert.IsType<JomlLong>(entry).Value)
             );
         }
 

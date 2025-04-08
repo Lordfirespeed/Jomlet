@@ -195,8 +195,8 @@ namespace Tomlet.Tests
                 entry => Assert.Equal(Assert.IsType<TomlString>(entry).StringValue, Assert.IsType<TomlString>(entry).ToString()),
                 entry => Assert.Equal(Assert.IsType<TomlString>(entry).StringValue, Assert.IsType<TomlString>(entry).ToString()),
                 entry => Assert.Equal(Assert.IsType<TomlString>(entry).StringValue, Assert.IsType<TomlString>(entry).ToString()),
-                entry => Assert.Equal(Assert.IsType<TomlLong>(entry).StringValue, Assert.IsType<TomlLong>(entry).ToString()),
-                entry => Assert.Equal(Assert.IsType<TomlLong>(entry).StringValue, Assert.IsType<TomlLong>(entry).ToString())
+                entry => Assert.Equal(Assert.IsType<JomlLong>(entry).StringValue, Assert.IsType<JomlLong>(entry).ToString()),
+                entry => Assert.Equal(Assert.IsType<JomlLong>(entry).StringValue, Assert.IsType<JomlLong>(entry).ToString())
             );
         }
     }

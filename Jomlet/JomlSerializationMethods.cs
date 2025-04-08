@@ -43,34 +43,34 @@ public static class JomlSerializationMethods
         Register(JomlBoolean.ValueOf, value => (value as JomlBoolean)?.Value ?? throw new TomlTypeMismatchException(typeof(JomlBoolean), value.GetType(), typeof(bool)));
 
         //Byte
-        Register(i => new TomlLong(i), value => (byte)((value as TomlLong)?.Value ?? throw new TomlTypeMismatchException(typeof(TomlLong), value.GetType(), typeof(byte))));
+        Register(i => new JomlLong(i), value => (byte)((value as JomlLong)?.Value ?? throw new TomlTypeMismatchException(typeof(JomlLong), value.GetType(), typeof(byte))));
 
         //SByte
-        Register(i => new TomlLong(i), value => (sbyte)((value as TomlLong)?.Value ?? throw new TomlTypeMismatchException(typeof(TomlLong), value.GetType(), typeof(sbyte))));
+        Register(i => new JomlLong(i), value => (sbyte)((value as JomlLong)?.Value ?? throw new TomlTypeMismatchException(typeof(JomlLong), value.GetType(), typeof(sbyte))));
 
         //UShort
-        Register(i => new TomlLong(i), value => (ushort)((value as TomlLong)?.Value ?? throw new TomlTypeMismatchException(typeof(TomlLong), value.GetType(), typeof(ushort))));
+        Register(i => new JomlLong(i), value => (ushort)((value as JomlLong)?.Value ?? throw new TomlTypeMismatchException(typeof(JomlLong), value.GetType(), typeof(ushort))));
 
         //Short
-        Register(i => new TomlLong(i), value => (short)((value as TomlLong)?.Value ?? throw new TomlTypeMismatchException(typeof(TomlLong), value.GetType(), typeof(short))));
+        Register(i => new JomlLong(i), value => (short)((value as JomlLong)?.Value ?? throw new TomlTypeMismatchException(typeof(JomlLong), value.GetType(), typeof(short))));
 
         //UInt
-        Register(i => new TomlLong(i), value => (uint)((value as TomlLong)?.Value ?? throw new TomlTypeMismatchException(typeof(TomlLong), value.GetType(), typeof(uint))));
+        Register(i => new JomlLong(i), value => (uint)((value as JomlLong)?.Value ?? throw new TomlTypeMismatchException(typeof(JomlLong), value.GetType(), typeof(uint))));
 
         //Int
-        Register(i => new TomlLong(i), value => (int)((value as TomlLong)?.Value ?? throw new TomlTypeMismatchException(typeof(TomlLong), value.GetType(), typeof(int))));
+        Register(i => new JomlLong(i), value => (int)((value as JomlLong)?.Value ?? throw new TomlTypeMismatchException(typeof(JomlLong), value.GetType(), typeof(int))));
 
         //ULong
-        Register(l => new TomlLong((long)l), value => (ulong)((value as TomlLong)?.Value ?? throw new TomlTypeMismatchException(typeof(TomlLong), value.GetType(), typeof(ulong))));
+        Register(l => new JomlLong((long)l), value => (ulong)((value as JomlLong)?.Value ?? throw new TomlTypeMismatchException(typeof(JomlLong), value.GetType(), typeof(ulong))));
 
         //Long
-        Register(l => new TomlLong(l), value => (value as TomlLong)?.Value ?? throw new TomlTypeMismatchException(typeof(TomlLong), value.GetType(), typeof(long)));
+        Register(l => new JomlLong(l), value => (value as JomlLong)?.Value ?? throw new TomlTypeMismatchException(typeof(JomlLong), value.GetType(), typeof(long)));
 
         //Double
-        Register(d => new JomlDouble(d), value => (value as JomlDouble)?.Value ?? (value as TomlLong)?.Value ?? throw new TomlTypeMismatchException(typeof(JomlDouble), value.GetType(), typeof(double)));
+        Register(d => new JomlDouble(d), value => (value as JomlDouble)?.Value ?? (value as JomlLong)?.Value ?? throw new TomlTypeMismatchException(typeof(JomlDouble), value.GetType(), typeof(double)));
 
         //Float
-        Register(f => new JomlDouble(f), value => (float)((value as JomlDouble)?.Value ?? (value as TomlLong)?.Value ?? throw new TomlTypeMismatchException(typeof(JomlDouble), value.GetType(), typeof(float))));
+        Register(f => new JomlDouble(f), value => (float)((value as JomlDouble)?.Value ?? (value as JomlLong)?.Value ?? throw new TomlTypeMismatchException(typeof(JomlDouble), value.GetType(), typeof(float))));
 
         //LocalDate(Time)
         Register(dt => dt.TimeOfDay == TimeSpan.Zero ? new JomlLocalDate(dt) : new JomlLocalDateTime(dt), value => (value as ITomlValueWithDateTime)?.Value ?? throw new TomlTypeMismatchException(typeof(ITomlValueWithDateTime), value.GetType(), typeof(DateTime)));

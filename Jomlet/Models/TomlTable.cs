@@ -364,8 +364,8 @@ public class TomlTable : TomlValue, IEnumerable<KeyValuePair<string, TomlValue>>
 
         var value = GetValue(JomlUtils.AddCorrectQuotes(key));
 
-        if (value is not TomlLong lng)
-            throw new TomlTypeMismatchException(typeof(TomlLong), value.GetType(), typeof(int));
+        if (value is not JomlLong lng)
+            throw new TomlTypeMismatchException(typeof(JomlLong), value.GetType(), typeof(int));
 
         return (int)lng.Value;
     }
@@ -384,8 +384,8 @@ public class TomlTable : TomlValue, IEnumerable<KeyValuePair<string, TomlValue>>
 
         var value = GetValue(JomlUtils.AddCorrectQuotes(key));
 
-        if (value is not TomlLong lng)
-            throw new TomlTypeMismatchException(typeof(TomlLong), value.GetType(), typeof(int));
+        if (value is not JomlLong lng)
+            throw new TomlTypeMismatchException(typeof(JomlLong), value.GetType(), typeof(int));
 
         return lng.Value;
     }
