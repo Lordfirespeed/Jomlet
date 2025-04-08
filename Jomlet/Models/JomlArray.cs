@@ -24,15 +24,15 @@ public class JomlArray : TomlValue, IEnumerable<TomlValue>
             ArrayValues.Add(tomlValue);
     }
 
-    public bool IsTableArray => IsLockedToBeTableArray || ArrayValues.All(t => t is TomlTable);
+    public bool IsTableArray => IsLockedToBeTableArray || ArrayValues.All(t => t is JomlTable);
 
     public bool CanBeSerializedInline => !IsTableArray || //Simple array
-                                         ArrayValues.All(o => o is TomlTable { ShouldBeSerializedInline: true }) && ArrayValues.Count <= 5; //Table array of inline tables, 5 or fewer of them.
+                                         ArrayValues.All(o => o is JomlTable { ShouldBeSerializedInline: true }) && ArrayValues.Count <= 5; //Table array of inline tables, 5 or fewer of them.
 
     /// <summary>
     /// Returns true if this is not a table-array, there are not any sub-arrays or tables, and none of the entries contain comments.
     /// </summary>
-    public bool IsSimpleArray => !IsLockedToBeTableArray && !ArrayValues.Any(o => o is JomlArray or TomlTable || !o.Comments.ThereAreNoComments);
+    public bool IsSimpleArray => !IsLockedToBeTableArray && !ArrayValues.Any(o => o is JomlArray or JomlTable || !o.Comments.ThereAreNoComments);
 
     // ReSharper disable once UnusedMember.Global
     public TomlValue this[int index] => ArrayValues[index];
@@ -96,7 +96,7 @@ public class JomlArray : TomlValue, IEnumerable<TomlValue>
         var first = true;
         foreach (var value in this)
         {
-            if (value is not TomlTable table)
+            if (value is not JomlTable table)
                 throw new Exception($"Toml Table-Array contains non-table entry? Value is {value}");
 
             if (value.Comments.PrecedingComment != null)

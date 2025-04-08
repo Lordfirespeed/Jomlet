@@ -32,7 +32,7 @@ public class CommentSerializationTests
         //Test comments being added to table headers.
         //To force the table to be serialized long form, we add a comment to an element in it
         var doc = JomlDocument.CreateEmpty();
-        var table = new TomlTable
+        var table = new JomlTable
         {
             Comments =
             {
@@ -60,7 +60,7 @@ key = ""value"" # Inline comment on value";
         //Test comments on table-array headers, and the logic around preceding comments on both the TA and first table
 
         var doc = JomlDocument.CreateEmpty();
-        var table = new TomlTable
+        var table = new JomlTable
         {
             Comments =
             {

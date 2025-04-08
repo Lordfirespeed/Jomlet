@@ -138,7 +138,7 @@ public static class JomletMain
         return val switch
         {
             JomlDocument doc => doc,
-            TomlTable table => new JomlDocument(table),
+            JomlTable table => new JomlDocument(table),
             _ => throw new TomlPrimitiveToDocumentException(type)
         };
     }

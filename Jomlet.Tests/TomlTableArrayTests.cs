@@ -22,9 +22,9 @@ namespace Tomlet.Tests
             var products = Assert.IsType<JomlArray>(document.GetValue("products"));
             Assert.Equal(3, products.Count);
 
-            var product1 = Assert.IsType<TomlTable>(products[0]);
-            var product2 = Assert.IsType<TomlTable>(products[1]);
-            var product3 = Assert.IsType<TomlTable>(products[2]);
+            var product1 = Assert.IsType<JomlTable>(products[0]);
+            var product2 = Assert.IsType<JomlTable>(products[1]);
+            var product3 = Assert.IsType<JomlTable>(products[2]);
             
             Assert.Equal("Hammer", product1.GetString("name"));
             Assert.Equal(738594937, product1.GetInteger("sku"));
@@ -47,11 +47,11 @@ namespace Tomlet.Tests
             Assert.Equal(2, document.GetArray("fruits").Count);
 
             //Apple
-            var firstFruit = Assert.IsType<TomlTable>(document.GetArray("fruits")[0]);
+            var firstFruit = Assert.IsType<JomlTable>(document.GetArray("fruits")[0]);
             Assert.Equal("apple", firstFruit.GetString("name"));
 
-            var physical = Assert.IsType<TomlTable>(firstFruit.GetValue("physical"));
-            var jam = Assert.IsType<TomlTable>(firstFruit.GetValue("jam"));
+            var physical = Assert.IsType<JomlTable>(firstFruit.GetValue("physical"));
+            var jam = Assert.IsType<JomlTable>(firstFruit.GetValue("jam"));
             var varieties = Assert.IsType<JomlArray>(firstFruit.GetValue("varieties"));
             
             Assert.Equal("red", physical.GetString("color"));
@@ -61,21 +61,21 @@ namespace Tomlet.Tests
             Assert.Equal("sticky", jam.GetString("feel"));
 
             Assert.Equal(2, varieties.Count);
-            Assert.Equal("red delicious", Assert.IsType<TomlTable>(varieties[0]).GetString("name"));
-            Assert.Equal("granny smith", Assert.IsType<TomlTable>(varieties[1]).GetString("name"));
+            Assert.Equal("red delicious", Assert.IsType<JomlTable>(varieties[0]).GetString("name"));
+            Assert.Equal("granny smith", Assert.IsType<JomlTable>(varieties[1]).GetString("name"));
             
             //Banana
-            var secondFruit = Assert.IsType<TomlTable>(document.GetArray("fruits")[1]);
+            var secondFruit = Assert.IsType<JomlTable>(document.GetArray("fruits")[1]);
             Assert.Equal("banana", secondFruit.GetString("name"));
 
-            physical = Assert.IsType<TomlTable>(secondFruit.GetValue("physical"));
-            var newtonian = Assert.IsType<TomlTable>(physical.GetValue("newtonian"));
+            physical = Assert.IsType<JomlTable>(secondFruit.GetValue("physical"));
+            var newtonian = Assert.IsType<JomlTable>(physical.GetValue("newtonian"));
             varieties = Assert.IsType<JomlArray>(secondFruit.GetValue("varieties"));
 
             Assert.Equal("yellow", physical.GetString("color"));
             Assert.Equal(118, newtonian.GetInteger("weight"));
 
-            Assert.Single(varieties, val => Assert.IsType<TomlTable>(val).GetString("name") == "plantain");
+            Assert.Single(varieties, val => Assert.IsType<JomlTable>(val).GetString("name") == "plantain");
         }
 
         [Fact]

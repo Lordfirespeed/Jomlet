@@ -10,7 +10,7 @@ using Tomlet.Extensions;
 namespace Tomlet.Models;
 
 [SuppressMessage("ReSharper", "UnusedMember.Global")]
-public class TomlTable : TomlValue, IEnumerable<KeyValuePair<string, TomlValue>>
+public class JomlTable : TomlValue, IEnumerable<KeyValuePair<string, TomlValue>>
 {
     public readonly Dictionary<string, TomlValue> Entries = new();
 
@@ -26,7 +26,7 @@ public class TomlTable : TomlValue, IEnumerable<KeyValuePair<string, TomlValue>>
     public bool ShouldBeSerializedInline => !ForceNoInline && Entries.Count < 4
                                                            && Entries.All(e => !e.Key.Contains(" ")
                                                                                && e.Value.Comments.ThereAreNoComments
-                                                                               && (e.Value is JomlArray arr ? arr.IsSimpleArray : e.Value is not TomlTable));
+                                                                               && (e.Value is JomlArray arr ? arr.IsSimpleArray : e.Value is not JomlTable));
 
     public override string SerializedValue
     {
@@ -62,7 +62,7 @@ public class TomlTable : TomlValue, IEnumerable<KeyValuePair<string, TomlValue>>
         //Three passes: Simple key-value pairs including inline arrays and tables, sub-tables, then sub-table-arrays.
         foreach (var (subKey, value) in Entries)
         {
-            if (value is TomlTable { ShouldBeSerializedInline: false } or JomlArray { CanBeSerializedInline: false })
+            if (value is JomlTable { ShouldBeSerializedInline: false } or JomlArray { CanBeSerializedInline: false })
                 continue;
 
             WriteValueToStringBuilder(keyName, subKey, builder);
@@ -70,7 +70,7 @@ public class TomlTable : TomlValue, IEnumerable<KeyValuePair<string, TomlValue>>
 
         foreach (var (subKey, value) in Entries)
         {
-            if (value is not TomlTable { ShouldBeSerializedInline: false })
+            if (value is not JomlTable { ShouldBeSerializedInline: false })
                 continue;
 
             WriteValueToStringBuilder(keyName, subKey, builder);
@@ -116,10 +116,10 @@ public class TomlTable : TomlValue, IEnumerable<KeyValuePair<string, TomlValue>>
             case JomlArray subArray:
                 builder.Append(subKey).Append(" = ").Append(subArray.SerializedValue);
                 break;
-            case TomlTable { ShouldBeSerializedInline: true } subTable:
+            case JomlTable { ShouldBeSerializedInline: true } subTable:
                 builder.Append(subKey).Append(" = ").Append(subTable.SerializedValue);
                 break;
-            case TomlTable subTable:
+            case JomlTable subTable:
                 builder.Append(subTable.SerializeNonInlineTable(fullSubKey)).Append('\n');
                 return; //Return because we don't handle inline comment here.
             default:
@@ -220,7 +220,7 @@ public class TomlTable : TomlValue, IEnumerable<KeyValuePair<string, TomlValue>>
             if (!Entries.TryGetValue(DeQuoteKey(ourKeyName), out var existingValue))
             {
                 //We don't have a sub-table with this name defined. That's fine, make one.
-                var subtable = new TomlTable();
+                var subtable = new JomlTable();
                 if (callParserForm)
                     ParserPutValue(ourKeyName, subtable, lineNumber!.Value);
                 else
@@ -235,7 +235,7 @@ public class TomlTable : TomlValue, IEnumerable<KeyValuePair<string, TomlValue>>
             }
 
             //We have a key by this name already. Is it a table?
-            if (existingValue is not TomlTable existingTable)
+            if (existingValue is not JomlTable existingTable)
             {
                 //No - throw an exception
                 if (lineNumber.HasValue)
@@ -275,7 +275,7 @@ public class TomlTable : TomlValue, IEnumerable<KeyValuePair<string, TomlValue>>
         if (!Entries.TryGetValue(ourKeyName, out var existingKey))
             return false;
 
-        if (existingKey is TomlTable table)
+        if (existingKey is JomlTable table)
             return table.ContainsKey(restOfKey);
 
         throw new TomlContainsDottedKeyNonTableException(key);
@@ -324,7 +324,7 @@ public class TomlTable : TomlValue, IEnumerable<KeyValuePair<string, TomlValue>>
         if (!Entries.TryGetValue(ourKeyName, out var existingKey))
             throw new TomlNoSuchValueException(key); //Should already be handled by ContainsKey test
 
-        if (existingKey is TomlTable table)
+        if (existingKey is JomlTable table)
             return table.GetValue(restOfKey);
 
         throw new Exception("Tomlet Internal bug - existing key is not a table in TomlTable GetValue, but we didn't throw in ContainsKey?");
@@ -457,15 +457,15 @@ public class TomlTable : TomlValue, IEnumerable<KeyValuePair<string, TomlValue>>
     /// <returns>The TOML table associated with the key.</returns>
     /// <exception cref="TomlTypeMismatchException">If the value associated with this key is not a table.</exception>
     /// <exception cref="TomlNoSuchValueException">If the key is not present in the table.</exception>
-    public TomlTable GetSubTable(string key)
+    public JomlTable GetSubTable(string key)
     {
         if (key == null)
             throw new ArgumentNullException("key");
 
         var value = GetValue(JomlUtils.AddCorrectQuotes(key));
 
-        if (value is not TomlTable tbl)
-            throw new TomlTypeMismatchException(typeof(TomlTable), value.GetType(), typeof(TomlTable));
+        if (value is not JomlTable tbl)
+            throw new TomlTypeMismatchException(typeof(JomlTable), value.GetType(), typeof(JomlTable));
 
         return tbl;
     }

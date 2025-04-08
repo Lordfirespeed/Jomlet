@@ -19,7 +19,7 @@ public class JomlParser
     private int _lineNumber = 1;
 
     private string[] _tableNames = new string[0];
-    private TomlTable? _currentTable;
+    private JomlTable? _currentTable;
 
     // ReSharper disable once UnusedMember.Global
     [ExcludeFromCodeCoverage]
@@ -754,7 +754,7 @@ public class JomlParser
         return result;
     }
 
-    private TomlTable ReadInlineTable(JomletStringReader reader)
+    private JomlTable ReadInlineTable(JomletStringReader reader)
     {
         //Consume the opening brace
         if (!reader.ExpectAndConsume('{'))
@@ -763,7 +763,7 @@ public class JomlParser
         //Move to the first key
         _lineNumber += reader.SkipAnyCommentNewlineWhitespaceEtc();
 
-        var result = new TomlTable {Defined = true};
+        var result = new JomlTable {Defined = true};
 
         while (reader.TryPeek(out _))
         {
@@ -820,23 +820,23 @@ public class JomlParser
         return result;
     }
 
-    private TomlTable ReadTableStatement(JomletStringReader reader, JomlDocument document)
+    private JomlTable ReadTableStatement(JomletStringReader reader, JomlDocument document)
     {
         //Table name
         var currentTableKey = reader.ReadWhile(c => !c.IsEndOfArrayChar() && !c.IsNewline());
 
-        var parent = (TomlTable) document;
+        var parent = (JomlTable) document;
         var relativeKey = currentTableKey;
         FindParentAndRelativeKey(ref parent, ref relativeKey);
 
-        TomlTable table;
+        JomlTable table;
         try
         {
             if (parent.ContainsKey(relativeKey))
             {
                 try
                 {
-                    table = (TomlTable) parent.GetValue(relativeKey);
+                    table = (JomlTable) parent.GetValue(relativeKey);
 
                     //The cast succeeded - we are defining an existing table
                     if (table.Defined)
@@ -853,7 +853,7 @@ public class JomlParser
             }
             else
             {
-                table = new TomlTable {Defined = true};
+                table = new JomlTable {Defined = true};
                 parent.ParserPutValue(relativeKey, table, _lineNumber);
             }
         }
@@ -901,7 +901,7 @@ public class JomlParser
         if (!reader.ExpectAndConsume(']') || !reader.ExpectAndConsume(']'))
             throw new UnterminatedTomlTableArrayException(_lineNumber);
 
-        TomlTable parentTable = document;
+        JomlTable parentTable = document;
         var relativeKey = arrayName;
         FindParentAndRelativeKey(ref parentTable, ref relativeKey);
 
@@ -934,7 +934,7 @@ public class JomlParser
         }
 
         // Create new table and add it to the array
-        _currentTable = new TomlTable {Defined = true};
+        _currentTable = new JomlTable {Defined = true};
         array.ArrayValues.Add(_currentTable);
 
         //Save table names
@@ -943,7 +943,7 @@ public class JomlParser
         return array;
     }
 
-    private void FindParentAndRelativeKey(ref TomlTable parent, ref string relativeName)
+    private void FindParentAndRelativeKey(ref JomlTable parent, ref string relativeName)
     {
         for (var index = 0; index < _tableNames.Length; index++)
         {
@@ -954,13 +954,13 @@ public class JomlParser
             }
 
             var value = parent.GetValue(rootTableName);
-            if (value is TomlTable subTable)
+            if (value is JomlTable subTable)
             {
                 parent = subTable;
             }
             else if (value is JomlArray array)
             {
-                parent = (TomlTable) array.Last();
+                parent = (JomlTable) array.Last();
             }
             else
             {

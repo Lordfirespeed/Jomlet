@@ -52,14 +52,14 @@ internal static class JomlCompositeSerializer
             props = props.Where(p => GenericExtensions.GetCustomAttribute<TomlNonSerializedAttribute>(p) == null).ToArray();
 
             if (fields.Length + props.Length == 0)
-                return _ => new TomlTable();
+                return _ => new JomlTable();
 
             serializer = instance =>
             {
                 if (instance == null)
                     throw new ArgumentNullException(nameof(instance), "Object being serialized is null. TOML does not support null values.");
 
-                var resultTable = new TomlTable {ForceNoInline = isForcedNoInline};
+                var resultTable = new JomlTable {ForceNoInline = isForcedNoInline};
 
                 foreach (var field in fields)
                 {
@@ -84,7 +84,7 @@ internal static class JomlCompositeSerializer
                     tomlValue.Comments.InlineComment = thisFieldAttribs.inline?.Comment;
                     tomlValue.Comments.PrecedingComment = thisFieldAttribs.preceding?.Comment;
                     
-                    if(thisFieldAttribs.noInline != null && tomlValue is TomlTable table)
+                    if(thisFieldAttribs.noInline != null && tomlValue is JomlTable table)
                         table.ForceNoInline = true;
 
                     resultTable.PutValue(thisFieldAttribs.field?.GetMappedString() ?? field.Name, tomlValue);
@@ -113,7 +113,7 @@ internal static class JomlCompositeSerializer
                     tomlValue.Comments.InlineComment = thisPropAttribs.inline?.Comment;
                     tomlValue.Comments.PrecedingComment = thisPropAttribs.preceding?.Comment;
 
-                    if (thisPropAttribs.noInline != null && tomlValue is TomlTable table)
+                    if (thisPropAttribs.noInline != null && tomlValue is JomlTable table)
                         table.ForceNoInline = true;
 
                     resultTable.PutValue(thisPropAttribs.prop?.GetMappedString() ?? prop.Name, tomlValue);

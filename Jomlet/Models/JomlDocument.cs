@@ -2,7 +2,7 @@
 
 namespace Tomlet.Models;
 
-public class JomlDocument : TomlTable
+public class JomlDocument : JomlTable
 {
     // ReSharper disable once UnusedMember.Global
     public static JomlDocument CreateEmpty() => new();
@@ -14,7 +14,7 @@ public class JomlDocument : TomlTable
         //Non-public ctor.
     }
 
-    internal JomlDocument(TomlTable from)
+    internal JomlDocument(JomlTable from)
     {
         foreach (var key in from.Keys)
         {

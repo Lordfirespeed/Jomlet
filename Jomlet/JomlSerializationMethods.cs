@@ -364,8 +364,8 @@ public static class JomlSerializationMethods
 
         return value =>
         {
-            if (value is not TomlTable table)
-                throw new TomlTypeMismatchException(typeof(TomlTable), value.GetType(), typeof(Dictionary<string, T>));
+            if (value is not JomlTable table)
+                throw new TomlTypeMismatchException(typeof(JomlTable), value.GetType(), typeof(Dictionary<string, T>));
 
             return table.Entries.ToDictionary(entry => entry.Key, entry => (T)deserializer(entry.Value));
         };
@@ -385,8 +385,8 @@ public static class JomlSerializationMethods
         var type = typeof(TKey);
         return value =>
         {
-            if (value is not TomlTable table)
-                throw new TomlTypeMismatchException(typeof(TomlTable), value.GetType(), typeof(Dictionary<TKey, TValue>));
+            if (value is not JomlTable table)
+                throw new TomlTypeMismatchException(typeof(JomlTable), value.GetType(), typeof(Dictionary<TKey, TValue>));
 
             return table.Entries.ToDictionary(
                 entry =>
@@ -441,7 +441,7 @@ public static class JomlSerializationMethods
     {
         var valueSerializer = GetSerializer(typeof(TValue), options);
 
-        var ret = new TomlTable();
+        var ret = new JomlTable();
         foreach (var entry in dict)
         {
             var keyAsString = entry.Key.ToString();
@@ -501,7 +501,7 @@ public static class JomlSerializationMethods
     {
         RegisterSerializer<Dictionary<string, T>>(dict =>
         {
-            var table = new TomlTable();
+            var table = new JomlTable();
 
             if (dict == null)
                 return table;
@@ -527,8 +527,8 @@ public static class JomlSerializationMethods
     {
         RegisterDeserializer(value =>
         {
-            if (value is not TomlTable table)
-                throw new TomlTypeMismatchException(typeof(TomlTable), value.GetType(), typeof(Dictionary<string, T>));
+            if (value is not JomlTable table)
+                throw new TomlTypeMismatchException(typeof(JomlTable), value.GetType(), typeof(Dictionary<string, T>));
 
             return table.Entries
                 .Select(kvp => new KeyValuePair<string, T>(kvp.Key, deserializer.Invoke(kvp.Value)))

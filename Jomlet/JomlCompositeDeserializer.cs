@@ -70,8 +70,8 @@ internal static class JomlCompositeDeserializer
 
             deserializer = value =>
             {
-                if (value is not TomlTable table)
-                    throw new TomlTypeMismatchException(typeof(TomlTable), value.GetType(), type);
+                if (value is not JomlTable table)
+                    throw new TomlTypeMismatchException(typeof(JomlTable), value.GetType(), type);
 
                 var instance = CreateInstance(type, value, options, out var assignedMembers);
 
@@ -137,8 +137,8 @@ internal static class JomlCompositeDeserializer
     private static object CreateInstance(Type type, TomlValue tomlValue, JomlSerializerOptions options, out HashSet<string> assignedMembers)
 #endif
     {
-        if (tomlValue is not TomlTable table)
-            throw new TomlTypeMismatchException(typeof(TomlTable), tomlValue.GetType(), type);
+        if (tomlValue is not JomlTable table)
+            throw new TomlTypeMismatchException(typeof(JomlTable), tomlValue.GetType(), type);
         
         if (!type.TryGetBestMatchConstructor(out var constructor))
         {
