@@ -9,5 +9,5 @@ public class JomlKeyRedefinitionException : JomlExceptionWithLine
         _key = key;
     }
 
-    public override string Message => $"TOML document attempts to re-define key '{_key}' on line {LineNumber}";
+    public override string Message => $"JOML document attempts to re-define key '{_key}' on line {LineNumber}";
 }

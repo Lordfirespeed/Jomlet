@@ -13,12 +13,12 @@ public class JomlTypeMismatchException : JomlException
 
     public JomlTypeMismatchException(Type expected, Type actual, Type context)
     {
-        ExpectedTypeName = typeof(JomlValue).IsAssignableFrom(expected) ? expected.Name.Replace("Toml", "") : expected.Name;
-        ActualTypeName = typeof(JomlValue).IsAssignableFrom(actual) ? actual.Name.Replace("Toml", "") : actual.Name;
+        ExpectedTypeName = typeof(JomlValue).IsAssignableFrom(expected) ? expected.Name.Replace("Joml", "") : expected.Name;
+        ActualTypeName = typeof(JomlValue).IsAssignableFrom(actual) ? actual.Name.Replace("Joml", "") : actual.Name;
         ExpectedType = expected;
         ActualType = actual;
         _context = context;
     }
 
-    public override string Message => $"While trying to convert to type {_context}, a TOML value of type {ExpectedTypeName} was required but a value of type {ActualTypeName} was found";
+    public override string Message => $"While trying to convert to type {_context}, a JOML value of type {ExpectedTypeName} was required but a value of type {ActualTypeName} was found";
 }

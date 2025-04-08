@@ -6,5 +6,5 @@ public class NewLineInJomlInlineTableException : JomlExceptionWithLine
     {
     }
 
-    public override string Message => "Found a new-line character within a TOML inline table. This is not allowed.";
+    public override string Message => "Found a new-line character within a JOML inline table. This is not allowed.";
 }

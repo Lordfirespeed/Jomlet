@@ -95,7 +95,7 @@ namespace Jomlet.Tests
 
             var ex = Assert.Throws<JomlFieldTypeMismatchException>(() => JomletMain.To<SimplePrimitiveTestClass>(document));
 
-            var msg = $"While deserializing an object of type {typeof(SimplePrimitiveTestClass).FullName}, found field MyFloat expecting a type of Double, but value in TOML was of type String";
+            var msg = $"While deserializing an object of type {typeof(SimplePrimitiveTestClass).FullName}, found field MyFloat expecting a type of Double, but value in JOML was of type String";
             Assert.Equal(msg, ex.Message);
         }
 

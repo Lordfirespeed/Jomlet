@@ -6,5 +6,5 @@ public class JomlStringException :JomlExceptionWithLine
     {
     }
 
-    public override string Message => $"Found an invalid TOML string on line {LineNumber}";
+    public override string Message => $"Found an invalid JOML string on line {LineNumber}";
 }

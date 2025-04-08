@@ -9,5 +9,5 @@ public class JomlContainsDottedKeyNonTableException : JomlException
         Key = key;
     }
 
-    public override string Message => $"A call was made on a TOML table which attempted to access a sub-key of {Key}, but the value it refers to is not a table";
+    public override string Message => $"A call was made on a JOML table which attempted to access a sub-key of {Key}, but the value it refers to is not a table";
 }

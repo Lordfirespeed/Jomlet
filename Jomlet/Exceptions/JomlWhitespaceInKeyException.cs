@@ -6,5 +6,5 @@ public class JomlWhitespaceInKeyException : JomlExceptionWithLine
     {
     }
 
-    public override string Message => "Found whitespace in an unquoted TOML key at line " + LineNumber;
+    public override string Message => "Found whitespace in an unquoted JOML key at line " + LineNumber;
 }

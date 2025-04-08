@@ -8,5 +8,5 @@ public class JomlInternalException : JomlExceptionWithLine
     {
     }
 
-    public override string Message => $"An internal exception occured while parsing line {LineNumber} of the TOML document";
+    public override string Message => $"An internal exception occured while parsing line {LineNumber} of the JOML document";
 }

@@ -9,5 +9,5 @@ public class JomlTableRedefinitionException : JomlExceptionWithLine
         _key = key;
     }
 
-    public override string Message => $"TOML document attempts to re-define table '{_key}' on line {LineNumber}";
+    public override string Message => $"JOML document attempts to re-define table '{_key}' on line {LineNumber}";
 }

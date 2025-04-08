@@ -6,5 +6,5 @@ public class UnterminatedJomlStringException : JomlExceptionWithLine
     {
     }
 
-    public override string Message => $"Found an unterminated TOML string on line {LineNumber}";
+    public override string Message => $"Found an unterminated JOML string on line {LineNumber}";
 }

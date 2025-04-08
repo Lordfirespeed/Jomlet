@@ -11,5 +11,5 @@ public class JomlPrimitiveToDocumentException : JomlException
         this.primitiveType = primitiveType;
     }
 
-    public override string Message => $"Tried to create a TOML document from a primitive value of type {primitiveType.Name}. Documents can only be created from objects.";
+    public override string Message => $"Tried to create a JOML document from a primitive value of type {primitiveType.Name}. Documents can only be created from objects.";
 }

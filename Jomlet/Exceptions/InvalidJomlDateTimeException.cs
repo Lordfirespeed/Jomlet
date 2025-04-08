@@ -9,5 +9,5 @@ public class InvalidJomlDateTimeException : JomlExceptionWithLine
         _inputString = inputString;
     }
 
-    public override string Message => $"Found an invalid TOML date/time string '{_inputString}' on line {LineNumber}";
+    public override string Message => $"Found an invalid JOML date/time string '{_inputString}' on line {LineNumber}";
 }

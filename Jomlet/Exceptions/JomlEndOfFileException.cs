@@ -6,5 +6,5 @@ public class JomlEndOfFileException : JomlExceptionWithLine
     {
     }
 
-    public override string Message => $"Found unexpected EOF on line {LineNumber} when parsing TOML file";
+    public override string Message => $"Found unexpected EOF on line {LineNumber} when parsing JOML file";
 }

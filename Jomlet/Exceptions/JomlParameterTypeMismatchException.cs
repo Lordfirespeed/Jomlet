@@ -14,5 +14,5 @@ public class JomlParameterTypeMismatchException : JomlTypeMismatchException
         _paramBeingDeserialized = paramBeingDeserialized;
     }
 
-    public override string Message => $"While deserializing an object of type {_typeBeingInstantiated}, found parameter {_paramBeingDeserialized.Name} expecting a type of {ExpectedTypeName}, but value in TOML was of type {ActualTypeName}";
+    public override string Message => $"While deserializing an object of type {_typeBeingInstantiated}, found parameter {_paramBeingDeserialized.Name} expecting a type of {ExpectedTypeName}, but value in JOML was of type {ActualTypeName}";
 }

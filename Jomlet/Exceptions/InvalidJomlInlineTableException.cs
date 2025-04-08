@@ -6,5 +6,5 @@ public class InvalidJomlInlineTableException : JomlExceptionWithLine
     {
     }
 
-    public override string Message => $"Found an invalid inline TOML table on line {LineNumber}. See further down for cause.";
+    public override string Message => $"Found an invalid inline JOML table on line {LineNumber}. See further down for cause.";
 }

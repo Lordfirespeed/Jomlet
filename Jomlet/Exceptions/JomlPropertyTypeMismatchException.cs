@@ -14,5 +14,5 @@ public class JomlPropertyTypeMismatchException : JomlTypeMismatchException
         _propBeingDeserialized = propBeingDeserialized;
     }
 
-    public override string Message => $"While deserializing an object of type {_typeBeingInstantiated}, found property {_propBeingDeserialized.Name} expecting a type of {ExpectedTypeName}, but value in TOML was of type {ActualTypeName}";
+    public override string Message => $"While deserializing an object of type {_typeBeingInstantiated}, found property {_propBeingDeserialized.Name} expecting a type of {ExpectedTypeName}, but value in JOML was of type {ActualTypeName}";
 }

@@ -9,5 +9,5 @@ public class JomlTableLockedException : JomlExceptionWithLine
         _key = key;
     }
 
-    public override string Message => $"TOML table is locked (e.g. defined inline), cannot add or update key {_key} to it on line {LineNumber}";
+    public override string Message => $"JOML table is locked (e.g. defined inline), cannot add or update key {_key} to it on line {LineNumber}";
 }
