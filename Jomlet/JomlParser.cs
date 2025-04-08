@@ -712,7 +712,7 @@ public class JomlParser
     {
         //Consume the opening bracket
         if (!reader.ExpectAndConsume('['))
-            throw new ArgumentException("Internal Tomlet Bug: ReadArray called and first char is not a [");
+            throw new ArgumentException("Internal Jomlet Bug: ReadArray called and first char is not a [");
 
         //Move to the first value
         _lineNumber += reader.SkipAnyCommentNewlineWhitespaceEtc();
@@ -758,7 +758,7 @@ public class JomlParser
     {
         //Consume the opening brace
         if (!reader.ExpectAndConsume('{'))
-            throw new ArgumentException("Internal Tomlet Bug: ReadInlineTable called and first char is not a {");
+            throw new ArgumentException("Internal Jomlet Bug: ReadInlineTable called and first char is not a {");
 
         //Move to the first key
         _lineNumber += reader.SkipAnyCommentNewlineWhitespaceEtc();
@@ -893,7 +893,7 @@ public class JomlParser
     {
         //Consume the (second) opening bracket
         if (!reader.ExpectAndConsume('['))
-            throw new ArgumentException("Internal Tomlet Bug: ReadTableArrayStatement called and first char is not a [");
+            throw new ArgumentException("Internal Jomlet Bug: ReadTableArrayStatement called and first char is not a [");
 
         //Array
         var arrayName = reader.ReadWhile(c => !c.IsEndOfArrayChar() && !c.IsNewline());

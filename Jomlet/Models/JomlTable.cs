@@ -327,7 +327,7 @@ public class JomlTable : JomlValue, IEnumerable<KeyValuePair<string, JomlValue>>
         if (existingKey is JomlTable table)
             return table.GetValue(restOfKey);
 
-        throw new Exception("Tomlet Internal bug - existing key is not a table in TomlTable GetValue, but we didn't throw in ContainsKey?");
+        throw new Exception("Jomlet Internal bug - existing key is not a table in JomlTable GetValue, but we didn't throw in ContainsKey?");
     }
 
     /// <summary>

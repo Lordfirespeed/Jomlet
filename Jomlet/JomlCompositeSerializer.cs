@@ -23,7 +23,7 @@ internal static class JomlCompositeSerializer
         if (type.IsEnum)
         {
             var stringSerializer = JomlSerializationMethods.GetSerializer(typeof(string), options);
-            serializer = o => stringSerializer.Invoke(Enum.GetName(type, o!) ?? throw new ArgumentException($"Tomlet: Cannot serialize {o} as an enum of type {type} because the enum type does not declare a name for that value"));
+            serializer = o => stringSerializer.Invoke(Enum.GetName(type, o!) ?? throw new ArgumentException($"Jomlet: Cannot serialize {o} as an enum of type {type} because the enum type does not declare a name for that value"));
         }
         else
         {

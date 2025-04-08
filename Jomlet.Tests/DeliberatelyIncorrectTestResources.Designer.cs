@@ -28,7 +28,7 @@ namespace Jomlet.Tests {
         internal static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
-                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Tomlet.Tests.DeliberatelyIncorrectTestResources", typeof(DeliberatelyIncorrectTestResources).Assembly);
+                    System.Resources.ResourceManager temp = new System.Resources.ResourceManager("Jomlet.Tests.DeliberatelyIncorrectTestResources", typeof(DeliberatelyIncorrectTestResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
