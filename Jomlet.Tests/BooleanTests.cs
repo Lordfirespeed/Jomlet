@@ -24,8 +24,8 @@ namespace Tomlet.Tests
             );
             
             Assert.Collection(document.Entries.Values,
-                value => Assert.True(Assert.IsType<TomlBoolean>(value).Value),
-                value => Assert.False(Assert.IsType<TomlBoolean>(value).Value)
+                value => Assert.True(Assert.IsType<JomlBoolean>(value).Value),
+                value => Assert.False(Assert.IsType<JomlBoolean>(value).Value)
             );
         }
     }

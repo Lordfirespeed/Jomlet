@@ -1,17 +1,17 @@
 ﻿namespace Tomlet.Models;
 
-public class TomlBoolean : TomlValue
+public class JomlBoolean : TomlValue
 {
-    public static TomlBoolean True => new(true);
-    public static TomlBoolean False => new(false);
+    public static JomlBoolean True => new(true);
+    public static JomlBoolean False => new(false);
         
     private bool _value;
-    private TomlBoolean(bool value)
+    private JomlBoolean(bool value)
     {
         _value = value;
     }
 
-    public static TomlBoolean ValueOf(bool b) => b ? True : False;
+    public static JomlBoolean ValueOf(bool b) => b ? True : False;
 
     public bool Value => _value;
 

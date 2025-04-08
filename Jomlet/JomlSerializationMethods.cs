@@ -40,7 +40,7 @@ public static class JomlSerializationMethods
         Register(s => new TomlString(s!), value => (value as TomlString)?.Value ?? value.StringValue);
 
         //Bool
-        Register(TomlBoolean.ValueOf, value => (value as TomlBoolean)?.Value ?? throw new TomlTypeMismatchException(typeof(TomlBoolean), value.GetType(), typeof(bool)));
+        Register(JomlBoolean.ValueOf, value => (value as JomlBoolean)?.Value ?? throw new TomlTypeMismatchException(typeof(JomlBoolean), value.GetType(), typeof(bool)));
 
         //Byte
         Register(i => new TomlLong(i), value => (byte)((value as TomlLong)?.Value ?? throw new TomlTypeMismatchException(typeof(TomlLong), value.GetType(), typeof(byte))));

@@ -424,8 +424,8 @@ public class TomlTable : TomlValue, IEnumerable<KeyValuePair<string, TomlValue>>
 
         var value = GetValue(JomlUtils.AddCorrectQuotes(key));
 
-        if (value is not TomlBoolean b)
-            throw new TomlTypeMismatchException(typeof(TomlBoolean), value.GetType(), typeof(bool));
+        if (value is not JomlBoolean b)
+            throw new TomlTypeMismatchException(typeof(JomlBoolean), value.GetType(), typeof(bool));
 
         return b.Value;
     }

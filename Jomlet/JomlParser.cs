@@ -329,7 +329,7 @@ public class JomlParser
                 if (!TrueChars.SequenceEqual(charsRead))
                     throw new TomlInvalidValueException(_lineNumber, (char) startOfValue);
 
-                value = TomlBoolean.True;
+                value = JomlBoolean.True;
                 break;
             }
             case 'f':
@@ -340,7 +340,7 @@ public class JomlParser
                 if (!FalseChars.SequenceEqual(charsRead))
                     throw new TomlInvalidValueException(_lineNumber, (char) startOfValue);
 
-                value = TomlBoolean.False;
+                value = JomlBoolean.False;
                 break;
             }
             default:
