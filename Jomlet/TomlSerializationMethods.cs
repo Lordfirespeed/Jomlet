@@ -119,7 +119,7 @@ public static class TomlSerializationMethods
         if(type.IsPrimitive)
             throw new ArgumentException("Can't use reflection-based deserializer for primitive types.", nameof(type));
             
-        return TomlCompositeDeserializer.For(type, options);
+        return JomlCompositeDeserializer.For(type, options);
     }
 
 #if MODERN_DOTNET
@@ -223,7 +223,7 @@ public static class TomlSerializationMethods
             }
         }
 
-        return TomlCompositeDeserializer.For(t, options);
+        return JomlCompositeDeserializer.For(t, options);
     }
 
     private static Serialize<object?> GenericEnumerableSerializer() =>

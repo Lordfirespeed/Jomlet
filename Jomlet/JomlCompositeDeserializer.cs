@@ -11,7 +11,7 @@ using Tomlet.Models;
 
 namespace Tomlet;
 
-internal static class TomlCompositeDeserializer
+internal static class JomlCompositeDeserializer
 {
 #if MODERN_DOTNET
     [UnconditionalSuppressMessage("AOT", "IL2072", Justification = "Any field that is being deserialized to must have been used as a field in the consuming code in order for the code path that queries it to run, so the dynamic code requirement is already satisfied.")]
