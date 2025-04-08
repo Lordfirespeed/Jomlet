@@ -2,7 +2,7 @@
 
 namespace Tomlet;
 
-internal static class TomlKeyUtils
+internal static class JomlKeyUtils
 {
     internal static void GetTopLevelAndSubKeys(string key, out string ourKeyName, out string restOfKey)
     {

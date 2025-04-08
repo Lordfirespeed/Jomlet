@@ -213,7 +213,7 @@ public class TomlTable : TomlValue, IEnumerable<KeyValuePair<string, TomlValue>>
     private void InternalPutValue(string key, TomlValue value, int? lineNumber, bool callParserForm)
     {
         key = key.Trim();
-        TomlKeyUtils.GetTopLevelAndSubKeys(key, out var ourKeyName, out var restOfKey);
+        JomlKeyUtils.GetTopLevelAndSubKeys(key, out var ourKeyName, out var restOfKey);
 
         if (!string.IsNullOrEmpty(restOfKey))
         {
@@ -266,7 +266,7 @@ public class TomlTable : TomlValue, IEnumerable<KeyValuePair<string, TomlValue>>
         if (key == null)
             throw new ArgumentNullException("key");
 
-        TomlKeyUtils.GetTopLevelAndSubKeys(key, out var ourKeyName, out var restOfKey);
+        JomlKeyUtils.GetTopLevelAndSubKeys(key, out var ourKeyName, out var restOfKey);
 
         if (string.IsNullOrEmpty(restOfKey))
             //Non-dotted key
@@ -315,7 +315,7 @@ public class TomlTable : TomlValue, IEnumerable<KeyValuePair<string, TomlValue>>
         if (!ContainsKey(key))
             throw new TomlNoSuchValueException(key);
 
-        TomlKeyUtils.GetTopLevelAndSubKeys(key, out var ourKeyName, out var restOfKey);
+        JomlKeyUtils.GetTopLevelAndSubKeys(key, out var ourKeyName, out var restOfKey);
 
         if (string.IsNullOrEmpty(restOfKey))
             //Non-dotted key
