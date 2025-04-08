@@ -5,6 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using Jomlet.Exceptions;
+using Jomlet.Extensions;
 
 namespace Jomlet.Models;
 
