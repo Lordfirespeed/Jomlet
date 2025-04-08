@@ -58,7 +58,7 @@ namespace Tomlet.Tests
 
             Assert.Single(
                 document.Entries.Values,
-                value => Assert.IsType<TomlLocalDate>(value).Value == new DateTime(1979, 5, 27)
+                value => Assert.IsType<JomlLocalDate>(value).Value == new DateTime(1979, 5, 27)
             );
         }
 

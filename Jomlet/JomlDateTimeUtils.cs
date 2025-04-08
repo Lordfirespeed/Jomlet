@@ -45,7 +45,7 @@ internal static class JomlDateTimeUtils
             return TomlLocalTime.Parse(input);
 
         if (!hasHour)
-            return TomlLocalDate.Parse(input);
+            return JomlLocalDate.Parse(input);
 
         if (!hasTimezone)
             return TomlLocalDateTime.Parse(input);

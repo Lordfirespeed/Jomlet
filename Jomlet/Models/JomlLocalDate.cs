@@ -3,11 +3,11 @@ using System.Xml;
 
 namespace Tomlet.Models;
 
-public class TomlLocalDate : TomlValue, ITomlValueWithDateTime
+public class JomlLocalDate : TomlValue, ITomlValueWithDateTime
 {
     private readonly DateTime _value;
 
-    public TomlLocalDate(DateTime value)
+    public JomlLocalDate(DateTime value)
     {
         _value = value;
     }
@@ -16,12 +16,12 @@ public class TomlLocalDate : TomlValue, ITomlValueWithDateTime
         
     public override string StringValue => XmlConvert.ToString(Value, XmlDateTimeSerializationMode.Unspecified); //XmlConvert specifies RFC 3339
 
-    public static TomlLocalDate? Parse(string input)
+    public static JomlLocalDate? Parse(string input)
     {
         if (!DateTime.TryParse(input, out var dt))
             return null;
 
-        return new TomlLocalDate(dt);
+        return new JomlLocalDate(dt);
     }
         
     public override string SerializedValue => StringValue;
