@@ -11,7 +11,7 @@ using Tomlet.Models;
 
 namespace Tomlet;
 
-public class TomlParser
+public class JomlParser
 {
     private static readonly char[] TrueChars = {'t', 'r', 'u', 'e'};
     private static readonly char[] FalseChars = {'f', 'a', 'l', 's', 'e'};
@@ -26,7 +26,7 @@ public class TomlParser
     public static TomlDocument ParseFile(string filePath)
     {
         var fileContent = File.ReadAllText(filePath);
-        TomlParser parser = new();
+        JomlParser parser = new();
         return parser.Parse(fileContent);
     }
 

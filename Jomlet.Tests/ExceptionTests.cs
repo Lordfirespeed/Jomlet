@@ -8,7 +8,7 @@ namespace Tomlet.Tests;
 
 public class ExceptionTests
 {
-    private TomlDocument GetDocument(string resource) => new TomlParser().Parse(resource);
+    private TomlDocument GetDocument(string resource) => new JomlParser().Parse(resource);
     
     private static void AssertThrows<T>(Action what) where T: Exception
     {

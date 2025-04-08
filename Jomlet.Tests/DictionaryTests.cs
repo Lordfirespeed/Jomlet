@@ -10,7 +10,7 @@ public class DictionaryTests
 {
     private TomlDocument GetDocument(string resource)
     {
-        var parser = new TomlParser();
+        var parser = new JomlParser();
         return parser.Parse(resource);
     }
     

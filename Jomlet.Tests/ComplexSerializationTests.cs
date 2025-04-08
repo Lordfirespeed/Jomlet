@@ -68,7 +68,7 @@ namespace Tomlet.Tests
             
             _testOutputHelper.WriteLine("Got TOML string:\n" + tomlString);
 
-            var doc = new TomlParser().Parse(tomlString);
+            var doc = new JomlParser().Parse(tomlString);
             
             Assert.False(doc.ContainsKey("SC2"));
             Assert.False(doc.ContainsKey("TestString"));
@@ -91,7 +91,7 @@ namespace Tomlet.Tests
 
             _testOutputHelper.WriteLine("Got TOML string:\n" + tomlString);
 
-            var doc = new TomlParser().Parse(tomlString);
+            var doc = new JomlParser().Parse(tomlString);
 
             Assert.False(doc.ContainsKey("MyString"));
 

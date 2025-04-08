@@ -35,7 +35,7 @@ public static class JomletMain
         public static object To(Type what, string tomlString, TomlSerializerOptions? options = null)
 #endif
     {
-        var parser = new TomlParser();
+        var parser = new JomlParser();
         var tomlDocument = parser.Parse(tomlString);
 
         return To(what, tomlDocument, options);

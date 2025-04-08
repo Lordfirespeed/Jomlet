@@ -31,7 +31,7 @@ public class SerializationWithAttributesTests
 
         //_testOutputHelper.WriteLine("Got TOML string:\n" + tomlString);
 
-        var doc = new TomlParser().Parse(tomlString);
+        var doc = new JomlParser().Parse(tomlString);
 
         Assert.False(doc.ContainsKey("NonSerializedProperty"));
         Assert.False(doc.ContainsKey("_NonSerializedField"));
