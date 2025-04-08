@@ -4,7 +4,7 @@ using Tomlet.Exceptions;
 
 namespace Tomlet.Models;
 
-public class TomlCommentData
+public class JomlCommentData
 {
     private string? _inlineComment;
 

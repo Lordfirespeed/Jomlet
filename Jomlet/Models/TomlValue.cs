@@ -2,7 +2,7 @@
 
 public abstract class TomlValue
 {
-    public TomlCommentData Comments { get; } = new();
+    public JomlCommentData Comments { get; } = new();
         
     public abstract string StringValue
     {

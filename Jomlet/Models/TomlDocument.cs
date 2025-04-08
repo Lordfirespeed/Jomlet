@@ -29,7 +29,7 @@ public class TomlDocument : TomlTable
 
         if (TrailingComment != null)
         {
-            var comment = new TomlCommentData {PrecedingComment = TrailingComment};
+            var comment = new JomlCommentData {PrecedingComment = TrailingComment};
             sb.Append('\n');
             sb.Append(comment.FormatPrecedingComment());
         }
