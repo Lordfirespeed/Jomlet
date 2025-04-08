@@ -2,19 +2,19 @@
 
 namespace Jomlet.Tests.TestModelClasses;
 
-[TomlDoNotInlineObject]
+[JomlDoNotInlineObject]
 public class TomlClassWithNestedArray
 {
     public ClassWithArray Root;
     
-    [TomlDoNotInlineObject]
+    [JomlDoNotInlineObject]
     public class ClassWithArray
     {
         public string SomeValue;
 
         public ArrayItem[] Array;
         
-        [TomlDoNotInlineObject]
+        [JomlDoNotInlineObject]
         public class ArrayItem
         {
             public string A;
