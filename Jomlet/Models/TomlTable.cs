@@ -26,7 +26,7 @@ public class TomlTable : TomlValue, IEnumerable<KeyValuePair<string, TomlValue>>
     public bool ShouldBeSerializedInline => !ForceNoInline && Entries.Count < 4
                                                            && Entries.All(e => !e.Key.Contains(" ")
                                                                                && e.Value.Comments.ThereAreNoComments
-                                                                               && (e.Value is TomlArray arr ? arr.IsSimpleArray : e.Value is not TomlTable));
+                                                                               && (e.Value is JomlArray arr ? arr.IsSimpleArray : e.Value is not TomlTable));
 
     public override string SerializedValue
     {
@@ -62,7 +62,7 @@ public class TomlTable : TomlValue, IEnumerable<KeyValuePair<string, TomlValue>>
         //Three passes: Simple key-value pairs including inline arrays and tables, sub-tables, then sub-table-arrays.
         foreach (var (subKey, value) in Entries)
         {
-            if (value is TomlTable { ShouldBeSerializedInline: false } or TomlArray { CanBeSerializedInline: false })
+            if (value is TomlTable { ShouldBeSerializedInline: false } or JomlArray { CanBeSerializedInline: false })
                 continue;
 
             WriteValueToStringBuilder(keyName, subKey, builder);
@@ -78,7 +78,7 @@ public class TomlTable : TomlValue, IEnumerable<KeyValuePair<string, TomlValue>>
 
         foreach (var (subKey, value) in Entries)
         {
-            if (value is not TomlArray { CanBeSerializedInline: false })
+            if (value is not JomlArray { CanBeSerializedInline: false })
                 continue;
 
             WriteValueToStringBuilder(keyName, subKey, builder);
@@ -107,13 +107,13 @@ public class TomlTable : TomlValue, IEnumerable<KeyValuePair<string, TomlValue>>
 
         switch (value)
         {
-            case TomlArray { CanBeSerializedInline: false } subArray:
+            case JomlArray { CanBeSerializedInline: false } subArray:
                 if (!hadBlankLine)
                     builder.Append('\n');
 
                 builder.Append(subArray.SerializeTableArray(fullSubKey)); //No need to append newline as SerializeTableArray always ensure it ends with 2
                 return; //Return because we don't do newline or handle inline comment here.
-            case TomlArray subArray:
+            case JomlArray subArray:
                 builder.Append(subKey).Append(" = ").Append(subArray.SerializedValue);
                 break;
             case TomlTable { ShouldBeSerializedInline: true } subTable:
@@ -437,15 +437,15 @@ public class TomlTable : TomlValue, IEnumerable<KeyValuePair<string, TomlValue>>
     /// <returns>The TOML array associated with the key.</returns>
     /// <exception cref="TomlTypeMismatchException">If the value associated with this key is not an array.</exception>
     /// <exception cref="TomlNoSuchValueException">If the key is not present in the table.</exception>
-    public TomlArray GetArray(string key)
+    public JomlArray GetArray(string key)
     {
         if (key == null)
             throw new ArgumentNullException("key");
 
         var value = GetValue(JomlUtils.AddCorrectQuotes(key));
 
-        if (value is not TomlArray arr)
-            throw new TomlTypeMismatchException(typeof(TomlArray), value.GetType(), typeof(TomlArray));
+        if (value is not JomlArray arr)
+            throw new TomlTypeMismatchException(typeof(JomlArray), value.GetType(), typeof(JomlArray));
 
         return arr;
     }

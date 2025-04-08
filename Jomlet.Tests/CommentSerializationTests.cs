@@ -72,7 +72,7 @@ key = ""value"" # Inline comment on value";
         tomlString.Comments.InlineComment = "Inline comment on value";
         table.PutValue("key", tomlString);
 
-        var tableArray = new TomlArray {table};
+        var tableArray = new JomlArray {table};
         tableArray.Comments.PrecedingComment = "This is a preceding comment on the table-array itself";
 
         doc.PutValue("table-array", tableArray);
@@ -91,7 +91,7 @@ key = ""value"" # Inline comment on value".Trim();
     public void CommentsOnPrimitiveArraysWork()
     {
         var doc = TomlDocument.CreateEmpty();
-        var tomlNumbers = new TomlArray {1, 2, 3};
+        var tomlNumbers = new JomlArray {1, 2, 3};
         doc.PutValue("numbers", tomlNumbers);
 
         tomlNumbers[0].Comments.PrecedingComment = "This is a preceding comment on the first value of the array";

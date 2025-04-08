@@ -232,7 +232,7 @@ public static class JomlSerializationMethods
             if (o is not IEnumerable arr)
                 throw new Exception("How did ArraySerializer end up getting a non-array?");
 
-            var ret = new TomlArray();
+            var ret = new JomlArray();
             foreach (var entry in arr)
             {
                 ret.Add(entry);
@@ -289,8 +289,8 @@ public static class JomlSerializationMethods
 #endif
         value =>
         {
-            if (value is not TomlArray tomlArray)
-                throw new TomlTypeMismatchException(typeof(TomlArray), value.GetType(), elementType.MakeArrayType());
+            if (value is not JomlArray tomlArray)
+                throw new TomlTypeMismatchException(typeof(JomlArray), value.GetType(), elementType.MakeArrayType());
 
             var ret = Array.CreateInstance(elementType, tomlArray.Count);
             var deserializer = GetDeserializer(elementType, options);
@@ -315,8 +315,8 @@ public static class JomlSerializationMethods
 
         return value =>
         {
-            if (value is not TomlArray tomlArray)
-                throw new TomlTypeMismatchException(typeof(TomlArray), value.GetType(), listType);
+            if (value is not JomlArray tomlArray)
+                throw new TomlTypeMismatchException(typeof(JomlArray), value.GetType(), listType);
 
             var ret = Activator.CreateInstance(listType)!;
             var deserializer = GetDeserializer(elementType, options);

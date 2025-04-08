@@ -708,7 +708,7 @@ public class JomlParser
         return new TomlString(content.ToString());
     }
 
-    private TomlArray ReadArray(JomletStringReader reader)
+    private JomlArray ReadArray(JomletStringReader reader)
     {
         //Consume the opening bracket
         if (!reader.ExpectAndConsume('['))
@@ -717,7 +717,7 @@ public class JomlParser
         //Move to the first value
         _lineNumber += reader.SkipAnyCommentNewlineWhitespaceEtc();
 
-        var result = new TomlArray();
+        var result = new JomlArray();
 
         while (reader.TryPeek(out _))
         {
@@ -889,7 +889,7 @@ public class JomlParser
         return table;
     }
 
-    private TomlArray ReadTableArrayStatement(JomletStringReader reader, TomlDocument document)
+    private JomlArray ReadTableArrayStatement(JomletStringReader reader, TomlDocument document)
     {
         //Consume the (second) opening bracket
         if (!reader.ExpectAndConsume('['))
@@ -912,11 +912,11 @@ public class JomlParser
         }
 
         //Find existing array or make new one
-        TomlArray array;
+        JomlArray array;
         if (parentTable.ContainsKey(relativeKey))
         {
             var value = parentTable.GetValue(relativeKey);
-            if (value is TomlArray arr)
+            if (value is JomlArray arr)
                 array = arr;
             else
                 throw new TomlTableArrayAlreadyExistsAsNonArrayException(_lineNumber, arrayName);
@@ -928,7 +928,7 @@ public class JomlParser
         }
         else
         {
-            array = new TomlArray {IsLockedToBeTableArray = true};
+            array = new JomlArray {IsLockedToBeTableArray = true};
             //Insert into parent table
             parentTable.ParserPutValue(relativeKey, array, _lineNumber);
         }
@@ -958,14 +958,14 @@ public class JomlParser
             {
                 parent = subTable;
             }
-            else if (value is TomlArray array)
+            else if (value is JomlArray array)
             {
                 parent = (TomlTable) array.Last();
             }
             else
             {
                 // Note: Expects either TomlArray or TomlTable
-                throw new TomlTypeMismatchException(typeof(TomlArray), value.GetType(), typeof(TomlArray));
+                throw new TomlTypeMismatchException(typeof(JomlArray), value.GetType(), typeof(JomlArray));
             }
 
             relativeName = relativeName.Substring(rootTableName.Length + 1);

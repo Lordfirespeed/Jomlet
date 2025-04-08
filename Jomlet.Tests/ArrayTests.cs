@@ -19,7 +19,7 @@ namespace Tomlet.Tests
 
             Assert.Equal(3, document.Entries.Count);
 
-            var tomlArrays = document.Entries.Values.Select(Assert.IsType<TomlArray>).ToList();
+            var tomlArrays = document.Entries.Values.Select(Assert.IsType<JomlArray>).ToList();
 
             Assert.Equal(3, tomlArrays[0].Count);
             Assert.Equal(3, tomlArrays[1].Count);
@@ -33,19 +33,19 @@ namespace Tomlet.Tests
 
             Assert.Equal(2, document.Entries.Count);
 
-            var tomlArrays = document.Entries.Values.Select(Assert.IsType<TomlArray>).ToList();
+            var tomlArrays = document.Entries.Values.Select(Assert.IsType<JomlArray>).ToList();
 
             //Check nested_arrays_of_ints contains two values
             Assert.Equal(2, tomlArrays[0].Count);
 
             //And that those values are also arrays and that there's 2 and 3 values within the nested arrays, respectively.
-            Assert.Equal(new[] {2, 3}, tomlArrays[0].Select(Assert.IsType<TomlArray>).Select(arr => arr.ArrayValues.Count));
+            Assert.Equal(new[] {2, 3}, tomlArrays[0].Select(Assert.IsType<JomlArray>).Select(arr => arr.ArrayValues.Count));
 
             //Check nested_mixed_array contains two values
             Assert.Equal(2, tomlArrays[1].Count);
 
             //And that those values are also arrays and that there's 2 and 3 values within the nested arrays, respectively.
-            Assert.Equal(new[] {2, 3}, tomlArrays[0].Select(Assert.IsType<TomlArray>).Select(arr => arr.ArrayValues.Count));
+            Assert.Equal(new[] {2, 3}, tomlArrays[0].Select(Assert.IsType<JomlArray>).Select(arr => arr.ArrayValues.Count));
         }
 
         [Fact]
@@ -54,7 +54,7 @@ namespace Tomlet.Tests
             var document = GetDocument(TestResources.ArrayWithTrailingCommaTestInput);
 
             Assert.Single(document.Entries.Values,
-                value => Assert.IsType<TomlArray>(value).Count == 2);
+                value => Assert.IsType<JomlArray>(value).Count == 2);
         }
 
         [Fact]

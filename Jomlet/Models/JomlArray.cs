@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Tomlet.Models;
 
-public class TomlArray : TomlValue, IEnumerable<TomlValue>
+public class JomlArray : TomlValue, IEnumerable<TomlValue>
 {
     public readonly List<TomlValue> ArrayValues = new();
     internal bool IsLockedToBeTableArray;
@@ -32,7 +32,7 @@ public class TomlArray : TomlValue, IEnumerable<TomlValue>
     /// <summary>
     /// Returns true if this is not a table-array, there are not any sub-arrays or tables, and none of the entries contain comments.
     /// </summary>
-    public bool IsSimpleArray => !IsLockedToBeTableArray && !ArrayValues.Any(o => o is TomlArray or TomlTable || !o.Comments.ThereAreNoComments);
+    public bool IsSimpleArray => !IsLockedToBeTableArray && !ArrayValues.Any(o => o is JomlArray or TomlTable || !o.Comments.ThereAreNoComments);
 
     // ReSharper disable once UnusedMember.Global
     public TomlValue this[int index] => ArrayValues[index];

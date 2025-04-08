@@ -19,7 +19,7 @@ namespace Tomlet.Tests
 
             Assert.Single(document.Entries.Keys, keyName => keyName == "products");
 
-            var products = Assert.IsType<TomlArray>(document.GetValue("products"));
+            var products = Assert.IsType<JomlArray>(document.GetValue("products"));
             Assert.Equal(3, products.Count);
 
             var product1 = Assert.IsType<TomlTable>(products[0]);
@@ -52,7 +52,7 @@ namespace Tomlet.Tests
 
             var physical = Assert.IsType<TomlTable>(firstFruit.GetValue("physical"));
             var jam = Assert.IsType<TomlTable>(firstFruit.GetValue("jam"));
-            var varieties = Assert.IsType<TomlArray>(firstFruit.GetValue("varieties"));
+            var varieties = Assert.IsType<JomlArray>(firstFruit.GetValue("varieties"));
             
             Assert.Equal("red", physical.GetString("color"));
             Assert.Equal("round", physical.GetString("shape"));
@@ -70,7 +70,7 @@ namespace Tomlet.Tests
 
             physical = Assert.IsType<TomlTable>(secondFruit.GetValue("physical"));
             var newtonian = Assert.IsType<TomlTable>(physical.GetValue("newtonian"));
-            varieties = Assert.IsType<TomlArray>(secondFruit.GetValue("varieties"));
+            varieties = Assert.IsType<JomlArray>(secondFruit.GetValue("varieties"));
 
             Assert.Equal("yellow", physical.GetString("color"));
             Assert.Equal(118, newtonian.GetInteger("weight"));
