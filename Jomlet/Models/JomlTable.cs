@@ -171,7 +171,7 @@ public class JomlTable : JomlValue, IEnumerable<KeyValuePair<string, JomlValue>>
     internal void ParserPutValue(string key, JomlValue value, int lineNumber)
     {
         if (Locked)
-            throw new TomlTableLockedException(lineNumber, key);
+            throw new JomlTableLockedException(lineNumber, key);
 
         InternalPutValue(key, value, lineNumber, true);
     }
@@ -239,7 +239,7 @@ public class JomlTable : JomlValue, IEnumerable<KeyValuePair<string, JomlValue>>
             {
                 //No - throw an exception
                 if (lineNumber.HasValue)
-                    throw new TomlDottedKeyParserException(lineNumber.Value, ourKeyName);
+                    throw new JomlDottedKeyParserException(lineNumber.Value, ourKeyName);
 
                 throw new TomlDottedKeyException(ourKeyName);
             }
@@ -256,7 +256,7 @@ public class JomlTable : JomlValue, IEnumerable<KeyValuePair<string, JomlValue>>
         key = DeQuoteKey(key);
 
         if (Entries.ContainsKey(key) && lineNumber.HasValue)
-            throw new TomlKeyRedefinitionException(lineNumber.Value, key);
+            throw new JomlKeyRedefinitionException(lineNumber.Value, key);
 
         Entries[key] = value;
     }

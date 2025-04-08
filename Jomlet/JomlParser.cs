@@ -56,7 +56,7 @@ public class JomlParser
 
                     //Table or table-array?
                     if (!reader.TryPeek(out var potentialSecondBracket))
-                        throw new TomlEndOfFileException(_lineNumber);
+                        throw new JomlEndOfFileException(_lineNumber);
 
                     JomlValue valueFromSquareBracket;
                     if (potentialSecondBracket != '[')
@@ -89,7 +89,7 @@ public class JomlParser
                 reader.SkipPotentialCarriageReturn();
                 if (!reader.ExpectAndConsume('\n') && reader.TryPeek(out var shouldHaveBeenLf))
                     //Not EOF and found a non-newline char
-                    throw new TomlMissingNewlineException(_lineNumber, (char) shouldHaveBeenLf);
+                    throw new JomlMissingNewlineException(_lineNumber, (char) shouldHaveBeenLf);
 
                 _lineNumber++; //We've consumed a newline, move to the next line number.
             }
@@ -100,7 +100,7 @@ public class JomlParser
         }
         catch (Exception e) when (e is not TomlException)
         {
-            throw new TomlInternalException(_lineNumber, e);
+            throw new JomlInternalException(_lineNumber, e);
         }
     }
 
@@ -114,9 +114,9 @@ public class JomlParser
         if (!reader.ExpectAndConsume('='))
         {
             if (reader.TryPeek(out var shouldHaveBeenEquals))
-                throw new TomlMissingEqualsException(_lineNumber, (char) shouldHaveBeenEquals);
+                throw new JomlMissingEqualsException(_lineNumber, (char) shouldHaveBeenEquals);
 
-            throw new TomlEndOfFileException(_lineNumber);
+            throw new JomlEndOfFileException(_lineNumber);
         }
 
         reader.SkipWhitespace();
@@ -133,7 +133,7 @@ public class JomlParser
             return "";
 
         if (nextChar.IsEquals())
-            throw new NoTomlKeyException(_lineNumber);
+            throw new NoJomlKeyException(_lineNumber);
 
         //Read a key
         reader.SkipWhitespace();
@@ -150,7 +150,7 @@ public class JomlParser
                 //Check for third quote => invalid key
                 //Else => empty key
                 if (reader.TryPeek(out var maybeThirdDoubleQuote) && maybeThirdDoubleQuote.IsDoubleQuote())
-                    throw new TomlTripleQuotedKeyException(_lineNumber);
+                    throw new JomlTripleQuotedKeyException(_lineNumber);
 
                 return string.Empty;
             }
@@ -159,7 +159,7 @@ public class JomlParser
             key = '"' + ReadSingleLineBasicString(reader, false).StringValue + '"';
 
             if (!reader.ExpectAndConsume('"'))
-                throw new UnterminatedTomlKeyException(_lineNumber);
+                throw new UnterminatedJomlKeyException(_lineNumber);
         }
         else if (nextChar.IsSingleQuote())
         {
@@ -168,7 +168,7 @@ public class JomlParser
             //Read single-quoted key
             key = "'" + ReadSingleLineLiteralString(reader, false).StringValue + "'";
             if (!reader.ExpectAndConsume('\''))
-                throw new UnterminatedTomlKeyException(_lineNumber);
+                throw new UnterminatedJomlKeyException(_lineNumber);
         }
         else
             //Read unquoted key
@@ -191,7 +191,7 @@ public class JomlParser
                 return string.Join(".", parts.ToArray());
 
             if (nextChar.IsPeriod())
-                throw new TomlDoubleDottedKeyException(_lineNumber);
+                throw new JomlDoubleDottedKeyException(_lineNumber);
 
             var thisPart = new StringBuilder();
             //Part loop
@@ -232,20 +232,20 @@ public class JomlParser
 
                 if (numLeadingWhitespace > 0)
                     //Whitespace is not allowed outside of the area immediately around a period in a dotted key
-                    throw new TomlWhitespaceInKeyException(_lineNumber);
+                    throw new JomlWhitespaceInKeyException(_lineNumber);
 
                 //Append this char to the part
                 thisPart.Append((char) reader.Read());
             }
         }
 
-        throw new TomlEndOfFileException(_lineNumber);
+        throw new JomlEndOfFileException(_lineNumber);
     }
 
     private JomlValue ReadValue(JomletStringReader reader)
     {
         if (!reader.TryPeek(out var startOfValue))
-            throw new TomlEndOfFileException(_lineNumber);
+            throw new JomlEndOfFileException(_lineNumber);
 
         JomlValue value;
         switch (startOfValue)
@@ -284,7 +284,7 @@ public class JomlParser
                     }
                     else
                     {
-                        throw new TomlStringException(_lineNumber);
+                        throw new JomlStringException(_lineNumber);
                     }
                 }
 
@@ -312,13 +312,13 @@ public class JomlParser
                     .ToLowerInvariant().Trim();
 
                 if (stringValue.Contains(':') || stringValue.Contains('t') || stringValue.Contains(' ') || stringValue.Contains('z'))
-                    value = JomlDateTimeUtils.ParseDateString(stringValue, _lineNumber) ?? throw new InvalidTomlDateTimeException(_lineNumber, stringValue);
+                    value = JomlDateTimeUtils.ParseDateString(stringValue, _lineNumber) ?? throw new InvalidJomlDateTimeException(_lineNumber, stringValue);
                 else if (stringValue.Contains('.') || (stringValue.Contains('e') && !stringValue.StartsWith("0x")) || stringValue.Contains('n') || stringValue.Contains('i'))
                     //Try parse as a double, then fall back to a date/time.
-                    value = JomlDouble.Parse(stringValue) ?? JomlDateTimeUtils.ParseDateString(stringValue, _lineNumber) ?? throw new InvalidTomlNumberException(_lineNumber, stringValue);
+                    value = JomlDouble.Parse(stringValue) ?? JomlDateTimeUtils.ParseDateString(stringValue, _lineNumber) ?? throw new InvalidJomlNumberException(_lineNumber, stringValue);
                 else
                     //Try parse as a long, then fall back to a date/time.
-                    value = JomlLong.Parse(stringValue) ?? JomlDateTimeUtils.ParseDateString(stringValue, _lineNumber) ?? throw new InvalidTomlNumberException(_lineNumber, stringValue);
+                    value = JomlLong.Parse(stringValue) ?? JomlDateTimeUtils.ParseDateString(stringValue, _lineNumber) ?? throw new InvalidJomlNumberException(_lineNumber, stringValue);
 
                 break;
             case 't':
@@ -327,7 +327,7 @@ public class JomlParser
                 var charsRead = reader.ReadChars(4);
 
                 if (!TrueChars.SequenceEqual(charsRead))
-                    throw new TomlInvalidValueException(_lineNumber, (char) startOfValue);
+                    throw new JomlInvalidValueException(_lineNumber, (char) startOfValue);
 
                 value = JomlBoolean.True;
                 break;
@@ -338,13 +338,13 @@ public class JomlParser
                 var charsRead = reader.ReadChars(5);
 
                 if (!FalseChars.SequenceEqual(charsRead))
-                    throw new TomlInvalidValueException(_lineNumber, (char) startOfValue);
+                    throw new JomlInvalidValueException(_lineNumber, (char) startOfValue);
 
                 value = JomlBoolean.False;
                 break;
             }
             default:
-                throw new TomlInvalidValueException(_lineNumber, (char) startOfValue);
+                throw new JomlInvalidValueException(_lineNumber, (char) startOfValue);
         }
 
         reader.SkipWhitespace();
@@ -407,7 +407,7 @@ public class JomlParser
             }
 
             if (nextChar.IsNewline())
-                throw new UnterminatedTomlStringException(_lineNumber);
+                throw new UnterminatedJomlStringException(_lineNumber);
 
             content.Append((char) nextChar);
         }
@@ -415,7 +415,7 @@ public class JomlParser
         if (consumeClosingQuote)
         {
             if (!reader.ExpectAndConsume('"'))
-                throw new UnterminatedTomlStringException(_lineNumber);
+                throw new UnterminatedJomlStringException(_lineNumber);
         }
 
         return new JomlString(content.ToString());
@@ -424,7 +424,7 @@ public class JomlParser
     private string DecipherUnicodeEscapeSequence(string unicodeString, bool fourDigitMode)
     {
         if (unicodeString.Any(c => !c.IsHexDigit()))
-            throw new InvalidTomlEscapeException(_lineNumber, $"\\{(fourDigitMode ? 'u' : 'U')}{unicodeString}");
+            throw new InvalidJomlEscapeException(_lineNumber, $"\\{(fourDigitMode ? 'u' : 'U')}{unicodeString}");
 
         if (fourDigitMode)
         {
@@ -476,7 +476,7 @@ public class JomlParser
             default:
                 if (allowNewline && escapedChar.IsNewline())
                     return null;
-                throw new InvalidTomlEscapeException(_lineNumber, $"\\{escapedChar}");
+                throw new InvalidJomlEscapeException(_lineNumber, $"\\{escapedChar}");
         }
 
         return toAppend;
@@ -492,10 +492,10 @@ public class JomlParser
 
         if (!reader.TryPeek(out var terminatingChar))
             //Unexpected EOF
-            throw new TomlEndOfFileException(_lineNumber);
+            throw new JomlEndOfFileException(_lineNumber);
 
         if (!terminatingChar.IsSingleQuote())
-            throw new UnterminatedTomlStringException(_lineNumber);
+            throw new UnterminatedJomlStringException(_lineNumber);
 
         if (consumeClosingQuote)
             reader.Read(); //Consume terminating quote.
@@ -571,7 +571,7 @@ public class JomlParser
                 break;
 
             //We have a sixth. This is a syntax error.
-            throw new TripleQuoteInTomlMultilineLiteralException(_lineNumber);
+            throw new TripleQuoteInJomlMultilineLiteralException(_lineNumber);
         }
 
         return new JomlString(content.ToString());
@@ -702,7 +702,7 @@ public class JomlParser
                 break;
 
             //We have a sixth. This is a syntax error.
-            throw new TripleQuoteInTomlMultilineSimpleStringException(_lineNumber);
+            throw new TripleQuoteInJomlMultilineSimpleStringException(_lineNumber);
         }
 
         return new JomlString(content.ToString());
@@ -725,7 +725,7 @@ public class JomlParser
             _lineNumber += reader.SkipAnyCommentNewlineWhitespaceEtc();
 
             if (!reader.TryPeek(out var nextChar))
-                throw new TomlEndOfFileException(_lineNumber);
+                throw new JomlEndOfFileException(_lineNumber);
 
             //Check for end of array here (helps with trailing commas, which are legal)
             if (nextChar.IsEndOfArrayChar())
@@ -738,13 +738,13 @@ public class JomlParser
             _lineNumber += reader.SkipAnyNewlineOrWhitespace();
 
             if (!reader.TryPeek(out var postValueChar))
-                throw new TomlEndOfFileException(_lineNumber);
+                throw new JomlEndOfFileException(_lineNumber);
 
             if (postValueChar.IsEndOfArrayChar())
                 break; //end of array
 
             if (!postValueChar.IsComma())
-                throw new TomlArraySyntaxException(_lineNumber, (char) postValueChar);
+                throw new JomlArraySyntaxException(_lineNumber, (char) postValueChar);
 
             reader.ExpectAndConsume(','); //We've already verified we have one.
         }
@@ -771,7 +771,7 @@ public class JomlParser
             reader.SkipWhitespace();
 
             if (!reader.TryPeek(out var nextChar))
-                throw new TomlEndOfFileException(_lineNumber);
+                throw new JomlEndOfFileException(_lineNumber);
 
             //Note that this is only needed when we first enter the loop, in case of an empty inline table
             if (nextChar.IsEndOfInlineObjectChar())
@@ -779,7 +779,7 @@ public class JomlParser
 
             //Newlines are not permitted
             if (nextChar.IsNewline())
-                throw new NewLineInTomlInlineTableException(_lineNumber);
+                throw new NewLineInJomlInlineTableException(_lineNumber);
 
             //Note that unlike in the above case, we do not check for the end of the value here. Trailing commas aren't permitted
             //and so all cases where the table ends should be handled at the end of this look
@@ -790,14 +790,14 @@ public class JomlParser
                 //Insert into the table
                 result.ParserPutValue(key, value, _lineNumber);
             }
-            catch (TomlException ex) when (ex is TomlMissingEqualsException or NoTomlKeyException or TomlWhitespaceInKeyException)
+            catch (TomlException ex) when (ex is JomlMissingEqualsException or NoJomlKeyException or JomlWhitespaceInKeyException)
             {
                 //Wrap missing keys or equals signs in a parent exception.
-                throw new InvalidTomlInlineTableException(_lineNumber, ex);
+                throw new InvalidJomlInlineTableException(_lineNumber, ex);
             }
 
             if (!reader.TryPeek(out var postValueChar))
-                throw new TomlEndOfFileException(_lineNumber);
+                throw new JomlEndOfFileException(_lineNumber);
 
             if (reader.ExpectAndConsume(','))
                 continue; //Comma, we have more.
@@ -806,12 +806,12 @@ public class JomlParser
             reader.SkipWhitespace();
 
             if (!reader.TryPeek(out postValueChar))
-                throw new TomlEndOfFileException(_lineNumber);
+                throw new JomlEndOfFileException(_lineNumber);
 
             if (postValueChar.IsEndOfInlineObjectChar())
                 break; //end of table
 
-            throw new TomlInlineTableSeparatorException(_lineNumber, (char) postValueChar);
+            throw new JomlInlineTableSeparatorException(_lineNumber, (char) postValueChar);
         }
 
         reader.ExpectAndConsume('}');
@@ -842,13 +842,13 @@ public class JomlParser
                     if (table.Defined)
                     {
                         // The table was not one created automatically
-                        throw new TomlTableRedefinitionException(_lineNumber, currentTableKey);
+                        throw new JomlTableRedefinitionException(_lineNumber, currentTableKey);
                     }
                 }
                 catch (InvalidCastException)
                 {
                     //The cast failed, we are re-defining a non-table.
-                    throw new TomlKeyRedefinitionException(_lineNumber, currentTableKey);
+                    throw new JomlKeyRedefinitionException(_lineNumber, currentTableKey);
                 }
             }
             else
@@ -862,24 +862,24 @@ public class JomlParser
             //Re-throw with correct line number and exception type.
             //To be clear - here we're re-defining a NON-TABLE key as a table, so this is a dotted key exception
             //while the one above is a TableRedefinition exception because it's re-defining a key which is already a table.
-            throw new TomlDottedKeyParserException(_lineNumber, e.Key);
+            throw new JomlDottedKeyParserException(_lineNumber, e.Key);
         }
 
         if (!reader.TryPeek(out _))
-            throw new TomlEndOfFileException(_lineNumber);
+            throw new JomlEndOfFileException(_lineNumber);
 
         if (!reader.ExpectAndConsume(']'))
-            throw new UnterminatedTomlTableNameException(_lineNumber);
+            throw new UnterminatedJomlTableNameException(_lineNumber);
 
         reader.SkipWhitespace();
         table.Comments.InlineComment = ReadAnyPotentialInlineComment(reader);
         reader.SkipPotentialCarriageReturn();
 
         if (!reader.TryPeek(out var shouldBeNewline))
-            throw new TomlEndOfFileException(_lineNumber);
+            throw new JomlEndOfFileException(_lineNumber);
 
         if (!shouldBeNewline.IsNewline())
-            throw new TomlMissingNewlineException(_lineNumber, (char) shouldBeNewline);
+            throw new JomlMissingNewlineException(_lineNumber, (char) shouldBeNewline);
 
         _currentTable = table;
 
@@ -899,7 +899,7 @@ public class JomlParser
         var arrayName = reader.ReadWhile(c => !c.IsEndOfArrayChar() && !c.IsNewline());
 
         if (!reader.ExpectAndConsume(']') || !reader.ExpectAndConsume(']'))
-            throw new UnterminatedTomlTableArrayException(_lineNumber);
+            throw new UnterminatedJomlTableArrayException(_lineNumber);
 
         JomlTable parentTable = document;
         var relativeKey = arrayName;
@@ -908,7 +908,7 @@ public class JomlParser
         if (parentTable == document)
         {
             if (relativeKey.Contains('.'))
-                throw new MissingIntermediateInTomlTableArraySpecException(_lineNumber, relativeKey);
+                throw new MissingIntermediateInJomlTableArraySpecException(_lineNumber, relativeKey);
         }
 
         //Find existing array or make new one
@@ -919,11 +919,11 @@ public class JomlParser
             if (value is JomlArray arr)
                 array = arr;
             else
-                throw new TomlTableArrayAlreadyExistsAsNonArrayException(_lineNumber, arrayName);
+                throw new JomlTableArrayAlreadyExistsAsNonArrayException(_lineNumber, arrayName);
 
             if (!array.IsLockedToBeTableArray)
             {
-                throw new TomlNonTableArrayUsedAsTableArrayException(_lineNumber, arrayName);
+                throw new JomlNonTableArrayUsedAsTableArrayException(_lineNumber, arrayName);
             }
         }
         else

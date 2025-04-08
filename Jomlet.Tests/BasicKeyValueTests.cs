@@ -57,7 +57,7 @@ namespace Tomlet.Tests
         [Fact]
         public void AKeyWithNoValueShouldThrowAnException()
         {
-            Assert.Throws<TomlInvalidValueException>(() =>
+            Assert.Throws<JomlInvalidValueException>(() =>
             {
                 try
                 {
@@ -74,7 +74,7 @@ namespace Tomlet.Tests
         [Fact]
         public void MultiplePairsOnOneLineThrowsAnException()
         {
-            Assert.Throws<TomlMissingNewlineException>(() =>
+            Assert.Throws<JomlMissingNewlineException>(() =>
             {
                 try
                 {
@@ -132,7 +132,7 @@ namespace Tomlet.Tests
         [Fact]
         public void MissingAKeyNameThrowsAnException()
         {
-            Assert.Throws<NoTomlKeyException>(() =>
+            Assert.Throws<NoJomlKeyException>(() =>
             {
                 try
                 {

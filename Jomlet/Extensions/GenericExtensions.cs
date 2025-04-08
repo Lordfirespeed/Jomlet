@@ -153,7 +153,7 @@ internal static class GenericExtensions
     internal static void EnsureLegalChar(this int c, int currentLineNum)
     {
         if (IllegalChars.Contains(c))
-            throw new TomlUnescapedUnicodeControlCharException(currentLineNum, c);
+            throw new JomlUnescapedUnicodeControlCharException(currentLineNum, c);
     }
 
     /// <summary>

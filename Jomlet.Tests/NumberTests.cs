@@ -159,14 +159,14 @@ namespace Tomlet.Tests
         [Fact]
         public void IncorrectUnderscoresThrowAnException()
         {
-            Assert.Throws<InvalidTomlNumberException>(() => GetDocument("key = 1__2"));
-            Assert.Throws<InvalidTomlNumberException>(() => GetDocument("key = 0x_12"));
-            Assert.Throws<InvalidTomlNumberException>(() => GetDocument("key = 12_"));
+            Assert.Throws<InvalidJomlNumberException>(() => GetDocument("key = 1__2"));
+            Assert.Throws<InvalidJomlNumberException>(() => GetDocument("key = 0x_12"));
+            Assert.Throws<InvalidJomlNumberException>(() => GetDocument("key = 12_"));
             
             
-            Assert.Throws<InvalidTomlNumberException>(() => GetDocument("key = 1__2.0"));
-            Assert.Throws<InvalidTomlNumberException>(() => GetDocument("key = 0x_12.0"));
-            Assert.Throws<InvalidTomlNumberException>(() => GetDocument("key = 12.0_"));
+            Assert.Throws<InvalidJomlNumberException>(() => GetDocument("key = 1__2.0"));
+            Assert.Throws<InvalidJomlNumberException>(() => GetDocument("key = 0x_12.0"));
+            Assert.Throws<InvalidJomlNumberException>(() => GetDocument("key = 12.0_"));
         }
     }
 }

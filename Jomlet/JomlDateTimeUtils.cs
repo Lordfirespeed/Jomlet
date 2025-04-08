@@ -33,13 +33,13 @@ internal static class JomlDateTimeUtils
         var hasTimezone = !match.Groups[9].Value.IsNullOrWhiteSpace();
 
         if (hasYear && hasHour && !hasSeparator)
-            throw new TomlDateTimeMissingSeparatorException(lineNumber);
+            throw new JomlDateTimeMissingSeparatorException(lineNumber);
 
         if (hasSeparator && (!hasHour || !hasYear))
-            throw new TomlDateTimeUnnecessarySeparatorException(lineNumber);
+            throw new JomlDateTimeUnnecessarySeparatorException(lineNumber);
 
         if (hasTimezone && (!hasHour || !hasYear))
-            throw new TimeOffsetOnTomlDateOrTimeException(lineNumber, match.Groups[9].Value);
+            throw new TimeOffsetOnJomlDateOrTimeException(lineNumber, match.Groups[9].Value);
 
         if (!hasYear)
             return JomlLocalTime.Parse(input);

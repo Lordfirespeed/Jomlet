@@ -44,51 +44,51 @@ public class ExceptionTests
 
     [Fact]
     public void InvalidInlineTablesThrow() => 
-        AssertThrows<InvalidTomlInlineTableException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlBadInlineTableExample));
+        AssertThrows<InvalidJomlInlineTableException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlBadInlineTableExample));
 
     [Fact]
     public void InvalidEscapesThrow() =>
-        AssertThrows<InvalidTomlEscapeException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlBadEscapeExample));
+        AssertThrows<InvalidJomlEscapeException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlBadEscapeExample));
     
     [Fact]
     public void InvalidNumbersThrow() => 
-        AssertThrows<InvalidTomlNumberException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlBadNumberExample));
+        AssertThrows<InvalidJomlNumberException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlBadNumberExample));
     
     [Fact]
     public void InvalidDatesThrow() =>
-        AssertThrows<InvalidTomlDateTimeException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlBadDateExample));
+        AssertThrows<InvalidJomlDateTimeException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlBadDateExample));
     
     [Fact]
     public void TruncatedFilesThrow() =>
-        AssertThrows<TomlEndOfFileException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlTruncatedFileExample));
+        AssertThrows<JomlEndOfFileException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlTruncatedFileExample));
 
     [Fact]
     public void UndefinedTableArraysThrow() => 
-        AssertThrows<MissingIntermediateInTomlTableArraySpecException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlTableArrayWithMissingIntermediateExample));
+        AssertThrows<MissingIntermediateInJomlTableArraySpecException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlTableArrayWithMissingIntermediateExample));
     
     [Fact]
     public void MissingKeysThrow() =>
-        AssertThrows<NoTomlKeyException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlMissingKeyExample));
+        AssertThrows<NoJomlKeyException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlMissingKeyExample));
     
     [Fact]
     public void TimesWithOffsetsButNoDateThrow() =>
-        AssertThrows<TimeOffsetOnTomlDateOrTimeException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlLocalTimeWithOffsetExample));
+        AssertThrows<TimeOffsetOnJomlDateOrTimeException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlLocalTimeWithOffsetExample));
     
     [Fact]
     public void IncorrectlyFormattedArraysThrow() =>
-        AssertThrows<TomlArraySyntaxException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlBadArrayExample));
+        AssertThrows<JomlArraySyntaxException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlBadArrayExample));
     
     [Fact]
     public void DateTimesWithNoSeparatorThrow() =>
-        AssertThrows<TomlDateTimeMissingSeparatorException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlDateTimeWithNoSeparatorExample));
+        AssertThrows<JomlDateTimeMissingSeparatorException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlDateTimeWithNoSeparatorExample));
     
     [Fact]
     public void DatesWithUnnecessarySeparatorThrow() =>
-        AssertThrows<TomlDateTimeUnnecessarySeparatorException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlUnnecessaryDateTimeSeparatorExample));
+        AssertThrows<JomlDateTimeUnnecessarySeparatorException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlUnnecessaryDateTimeSeparatorExample));
     
     [Fact]
     public void ImplyingAValueIsATableViaDottedKeyInADocumentWhenItIsNotThrows() =>
-        AssertThrows<TomlDottedKeyParserException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlBadDottedKeyExample));
+        AssertThrows<JomlDottedKeyParserException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlBadDottedKeyExample));
 
     [Fact]
     public void ImplyingAValueIsATableViaDottedKeyWhenItIsNotThrows()
@@ -103,31 +103,31 @@ public class ExceptionTests
 
     [Fact]
     public void ReDefiningASubTableAsASubTableArrayThrowsAnException() => 
-        AssertThrows<TomlKeyRedefinitionException>(() => GetDocument(DeliberatelyIncorrectTestResources.ReDefiningSubTableAsSubTableArrayTestInput));
+        AssertThrows<JomlKeyRedefinitionException>(() => GetDocument(DeliberatelyIncorrectTestResources.ReDefiningSubTableAsSubTableArrayTestInput));
 
     [Fact]
     public void RedefiningAKeyAsATableNameThrowsAnException() => 
-        AssertThrows<TomlKeyRedefinitionException>(() => GetDocument(DeliberatelyIncorrectTestResources.KeyRedefinitionViaTableTestInput));
+        AssertThrows<JomlKeyRedefinitionException>(() => GetDocument(DeliberatelyIncorrectTestResources.KeyRedefinitionViaTableTestInput));
     
     [Fact]
     public void DefiningATableArrayWithTheSameNameAsATableThrowsAnException() => 
-        AssertThrows<TomlTableArrayAlreadyExistsAsNonArrayException>(() => GetDocument(DeliberatelyIncorrectTestResources.DefiningAsArrayWhenAlreadyTableTestInput));
+        AssertThrows<JomlTableArrayAlreadyExistsAsNonArrayException>(() => GetDocument(DeliberatelyIncorrectTestResources.DefiningAsArrayWhenAlreadyTableTestInput));
 
     [Fact]
     public void ReDefiningAnArrayAsATableArrayThrowsAnException() => 
-        AssertThrows<TomlNonTableArrayUsedAsTableArrayException>(() => GetDocument(DeliberatelyIncorrectTestResources.ReDefiningAnArrayAsATableArrayIsAnErrorTestInput));
+        AssertThrows<JomlNonTableArrayUsedAsTableArrayException>(() => GetDocument(DeliberatelyIncorrectTestResources.ReDefiningAnArrayAsATableArrayIsAnErrorTestInput));
     
     [Fact]
     public void InlineTablesWithNewlinesThrowAnException() => 
-        AssertThrows<NewLineInTomlInlineTableException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlInlineTableWithNewlineExample));
+        AssertThrows<NewLineInJomlInlineTableException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlInlineTableWithNewlineExample));
     
     [Fact]
     public void DoubleDottedKeysThrowAnException() => 
-        AssertThrows<TomlDoubleDottedKeyException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlDoubleDottedKeyExample));
+        AssertThrows<JomlDoubleDottedKeyException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlDoubleDottedKeyExample));
     
     [Fact]
     public void MissingTheCommaInAnInlineTableThrows() => 
-        AssertThrows<TomlInlineTableSeparatorException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlInlineTableWithMissingSeparatorExample));
+        AssertThrows<JomlInlineTableSeparatorException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlInlineTableWithMissingSeparatorExample));
 
     [Fact]
     public void ConvertingAPrimitiveToADocumentThrows() =>
@@ -135,55 +135,55 @@ public class ExceptionTests
     
     [Fact]
     public void BadTomlStringThrows() =>
-        AssertThrows<TomlStringException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlBadStringExample));
+        AssertThrows<JomlStringException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlBadStringExample));
 
     [Fact]
     public void TripleQuotedKeysThrow() => 
-        AssertThrows<TomlTripleQuotedKeyException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlTripleQuotedKeyExample));
+        AssertThrows<JomlTripleQuotedKeyException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlTripleQuotedKeyExample));
     
     [Fact]
     public void WhitespaceInKeyThrows() => 
-        AssertThrows<TomlWhitespaceInKeyException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlWhitespaceInKeyExample));
+        AssertThrows<JomlWhitespaceInKeyException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlWhitespaceInKeyExample));
     
     [Fact]
     public void MissingEqualsSignThrows() => 
-        AssertThrows<TomlMissingEqualsException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlMissingEqualsExample));
+        AssertThrows<JomlMissingEqualsException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlMissingEqualsExample));
     
     [Fact]
     public void TripleSingleQuoteInStringThrows() => 
-        AssertThrows<TripleQuoteInTomlMultilineLiteralException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlTripleSingleQuoteInStringExample));
+        AssertThrows<TripleQuoteInJomlMultilineLiteralException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlTripleSingleQuoteInStringExample));
     
     [Fact]
     public void TripleDoubleQuoteInStringThrows() => 
-        AssertThrows<TripleQuoteInTomlMultilineSimpleStringException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlTripleDoubleQuoteInStringExample));
+        AssertThrows<TripleQuoteInJomlMultilineSimpleStringException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlTripleDoubleQuoteInStringExample));
     
     [Fact]
     public void UnterminatedKeyThrows() => 
-        AssertThrows<UnterminatedTomlKeyException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlUnterminatedQuotedKeyExample));
+        AssertThrows<UnterminatedJomlKeyException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlUnterminatedQuotedKeyExample));
     
     [Fact]
     public void UnterminatedStringThrows() =>
-        AssertThrows<UnterminatedTomlStringException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlUnterminatedStringExample));
+        AssertThrows<UnterminatedJomlStringException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlUnterminatedStringExample));
     
     [Fact]
     public void UnterminatedTableArrayThrows() => 
-        AssertThrows<UnterminatedTomlTableArrayException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlUnterminatedTableArrayExample));
+        AssertThrows<UnterminatedJomlTableArrayException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlUnterminatedTableArrayExample));
     
     [Fact]
     public void UnterminatedTableNameThrows() => 
-        AssertThrows<UnterminatedTomlTableNameException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlUnterminatedTableExample));
+        AssertThrows<UnterminatedJomlTableNameException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlUnterminatedTableExample));
     
     [Fact]
     public void AttemptingToModifyInlineTablesThrowsAnException() => 
-        AssertThrows<TomlTableLockedException>(() => GetDocument(DeliberatelyIncorrectTestResources.InlineTableLockedTestInput));
+        AssertThrows<JomlTableLockedException>(() => GetDocument(DeliberatelyIncorrectTestResources.InlineTableLockedTestInput));
     
     [Fact]
     public void ReDefiningATableThrowsAnException() => 
-        AssertThrows<TomlTableRedefinitionException>(() => GetDocument(DeliberatelyIncorrectTestResources.TableRedefinitionTestInput));
+        AssertThrows<JomlTableRedefinitionException>(() => GetDocument(DeliberatelyIncorrectTestResources.TableRedefinitionTestInput));
     
     [Fact]
     public void UnicodeControlCharsThrowAnException() => 
-        AssertThrows<TomlUnescapedUnicodeControlCharException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlNullBytesExample));
+        AssertThrows<JomlUnescapedUnicodeControlCharException>(() => GetDocument(DeliberatelyIncorrectTestResources.TomlNullBytesExample));
 
     //These are all runtime mistakes on otherwise-valid TOML documents, so they aren't in the DeliberatelyIncorrectTestResources file.
     
