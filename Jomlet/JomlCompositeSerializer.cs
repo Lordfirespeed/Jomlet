@@ -35,7 +35,7 @@ internal static class JomlCompositeSerializer
 
             var fields = type.GetFields(memberFlags);
             var fieldAttribs = fields
-                .ToDictionary(f => f, f => new {inline = GenericExtensions.GetCustomAttribute<TomlInlineCommentAttribute>(f), preceding = GenericExtensions.GetCustomAttribute<TomlPrecedingCommentAttribute>(f), field = GenericExtensions.GetCustomAttribute<TomlFieldAttribute>(f), noInline = GenericExtensions.GetCustomAttribute<JomlDoNotInlineObjectAttribute>(f)});
+                .ToDictionary(f => f, f => new {inline = GenericExtensions.GetCustomAttribute<TomlInlineCommentAttribute>(f), preceding = GenericExtensions.GetCustomAttribute<TomlPrecedingCommentAttribute>(f), field = GenericExtensions.GetCustomAttribute<JomlFieldAttribute>(f), noInline = GenericExtensions.GetCustomAttribute<JomlDoNotInlineObjectAttribute>(f)});
             var props = type.GetProperties(memberFlags)
                 .ToArray();
             var propAttribs = props

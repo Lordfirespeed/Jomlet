@@ -3,11 +3,11 @@
 namespace Jomlet.Attributes;
 
 [AttributeUsage(AttributeTargets.Field)]
-public class TomlFieldAttribute : Attribute
+public class JomlFieldAttribute : Attribute
 {
     private readonly string _mapFrom;
 
-    public TomlFieldAttribute(string mapFrom)
+    public JomlFieldAttribute(string mapFrom)
     {
         _mapFrom = mapFrom;
     }

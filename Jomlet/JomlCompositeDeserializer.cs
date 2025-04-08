@@ -54,7 +54,7 @@ internal static class JomlCompositeDeserializer
             //Ignore NonSerialized and CompilerGenerated fields.
             var fieldsDict = fields
                 .Where(f => !f.IsNotSerialized && GenericExtensions.GetCustomAttribute<CompilerGeneratedAttribute>(f) == null)
-                .Select(f => new KeyValuePair<FieldInfo, TomlFieldAttribute?>(f, GenericExtensions.GetCustomAttribute<TomlFieldAttribute>(f)))
+                .Select(f => new KeyValuePair<FieldInfo, JomlFieldAttribute?>(f, GenericExtensions.GetCustomAttribute<JomlFieldAttribute>(f)))
                 .ToDictionary(tuple => tuple.Key, tuple => tuple.Value);
 
             var props = type.GetProperties(memberFlags);
