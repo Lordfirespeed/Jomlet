@@ -50,6 +50,6 @@ internal static class JomlDateTimeUtils
         if (!hasTimezone)
             return JomlLocalDateTime.Parse(input);
 
-        return TomlOffsetDateTime.Parse(input);
+        return JomlOffsetDateTime.Parse(input);
     }
 }

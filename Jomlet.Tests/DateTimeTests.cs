@@ -25,9 +25,9 @@ namespace Tomlet.Tests
             {
                 if (key == "odt3")
                     //odt3 has .999999 on the end.
-                    Assert.Equal(targetDateTime.AddTicks(9999990), Assert.IsType<TomlOffsetDateTime>(value).Value.ToUniversalTime());
+                    Assert.Equal(targetDateTime.AddTicks(9999990), Assert.IsType<JomlOffsetDateTime>(value).Value.ToUniversalTime());
                 else
-                    Assert.Equal(targetDateTime, Assert.IsType<TomlOffsetDateTime>(value).Value.ToUniversalTime());
+                    Assert.Equal(targetDateTime, Assert.IsType<JomlOffsetDateTime>(value).Value.ToUniversalTime());
             }
         }
 

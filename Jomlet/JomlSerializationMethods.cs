@@ -76,7 +76,7 @@ public static class JomlSerializationMethods
         Register(dt => dt.TimeOfDay == TimeSpan.Zero ? new JomlLocalDate(dt) : new JomlLocalDateTime(dt), value => (value as ITomlValueWithDateTime)?.Value ?? throw new TomlTypeMismatchException(typeof(ITomlValueWithDateTime), value.GetType(), typeof(DateTime)));
 
         //OffsetDateTime
-        Register(odt => new TomlOffsetDateTime(odt), value => (value as TomlOffsetDateTime)?.Value ?? throw new TomlTypeMismatchException(typeof(TomlOffsetDateTime), value.GetType(), typeof(DateTimeOffset)));
+        Register(odt => new JomlOffsetDateTime(odt), value => (value as JomlOffsetDateTime)?.Value ?? throw new TomlTypeMismatchException(typeof(JomlOffsetDateTime), value.GetType(), typeof(DateTimeOffset)));
 
         //LocalTime
         Register(lt => new JomlLocalTime(lt), value => (value as JomlLocalTime)?.Value ?? throw new TomlTypeMismatchException(typeof(JomlLocalTime), value.GetType(), typeof(TimeSpan)));
