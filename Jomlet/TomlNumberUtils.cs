@@ -91,7 +91,7 @@ public static class TomlNumberUtils
 
         //Theoretically we can have hex/octal/binary numbers with floating-point parts. I'm not implementing that.
         //None of the examples use it.
-        if (double.TryParse(input, TomlNumberStyle.FloatingPoint, CultureInfo.InvariantCulture, out var val))
+        if (double.TryParse(input, JomlNumberStyle.FloatingPoint, CultureInfo.InvariantCulture, out var val))
             return val;
 
         return null;
