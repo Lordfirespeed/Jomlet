@@ -6,8 +6,6 @@
 ![Toml Version](https://img.shields.io/badge/TOML%20Version-1.0.0-blue)
 [![Coverage Status](https://coveralls.io/repos/github/Lordfirespeed/Jomlet/badge.svg?branch=main)](https://coveralls.io/github/Lordfirespeed/Jomlet?branch=main)
 
-### I have a [discord server](https://discord.gg/CfPSP5GMMv) for support
-
 Jomlet is a zero-dependency library for the [JOML](https://lordfirespeed.dev/joml) configuration file format.
 
 The entire [TOML 1.0.0 specification](https://toml.io/en/v1.0.0) *was* implemented by [Sam](https://github.com/SamboyCoding/Tomlet), then Joe
