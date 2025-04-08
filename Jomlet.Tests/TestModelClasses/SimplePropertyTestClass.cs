@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 //Class defines Equals but not GetHashCode 
 #pragma warning disable 659 
 
-namespace Tomlet.Tests.TestModelClasses
+namespace Jomlet.Tests.TestModelClasses
 {
     public class SimplePropertyTestClass
     {

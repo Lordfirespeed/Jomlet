@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Tomlet.Exceptions;
+namespace Jomlet.Exceptions;
 
 public abstract class JomlExceptionWithLine : JomlException
 {

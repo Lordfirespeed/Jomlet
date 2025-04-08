@@ -1,4 +1,4 @@
-﻿namespace Tomlet.Models;
+﻿namespace Jomlet.Models;
 
 public abstract class JomlValue
 {

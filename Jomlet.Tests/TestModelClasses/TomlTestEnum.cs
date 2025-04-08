@@ -1,4 +1,4 @@
-﻿namespace Tomlet.Tests;
+﻿namespace Jomlet.Tests.TestModelClasses;
 
 public enum TomlTestEnum
 {

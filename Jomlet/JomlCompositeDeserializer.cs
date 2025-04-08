@@ -4,12 +4,12 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using Tomlet.Attributes;
-using Tomlet.Exceptions;
-using Tomlet.Extensions;
-using Tomlet.Models;
+using Jomlet.Attributes;
+using Jomlet.Exceptions;
+using Jomlet.Extensions;
+using Jomlet.Models;
 
-namespace Tomlet;
+namespace Jomlet;
 
 internal static class JomlCompositeDeserializer
 {

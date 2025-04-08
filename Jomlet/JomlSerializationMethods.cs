@@ -5,11 +5,11 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
-using Tomlet.Exceptions;
-using Tomlet.Extensions;
-using Tomlet.Models;
+using Jomlet.Exceptions;
+using Jomlet.Extensions;
+using Jomlet.Models;
 
-namespace Tomlet;
+namespace Jomlet;
 
 public static class JomlSerializationMethods
 {

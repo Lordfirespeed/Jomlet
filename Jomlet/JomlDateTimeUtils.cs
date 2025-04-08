@@ -1,9 +1,9 @@
 ﻿using System.Text.RegularExpressions;
-using Tomlet.Exceptions;
-using Tomlet.Extensions;
-using Tomlet.Models;
+using Jomlet.Exceptions;
+using Jomlet.Extensions;
+using Jomlet.Models;
 
-namespace Tomlet;
+namespace Jomlet;
 
 internal static class JomlDateTimeUtils
 {

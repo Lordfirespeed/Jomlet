@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Tomlet.Extensions;
+namespace Jomlet.Extensions;
 
 internal static class StringExtensions
 {

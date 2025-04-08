@@ -1,7 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
-using Tomlet.Attributes;
+using Jomlet.Attributes;
 
-namespace Tomlet.Tests.TestModelClasses;
+namespace Jomlet.Tests.TestModelClasses;
 
 [SuppressMessage("ReSharper", "UnassignedField.Global")]
 [SuppressMessage("ReSharper", "InconsistentNaming")]

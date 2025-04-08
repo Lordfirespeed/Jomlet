@@ -1,9 +1,9 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
-using Tomlet.Exceptions;
-using Tomlet.Models;
+using Jomlet.Exceptions;
+using Jomlet.Models;
 
-namespace Tomlet;
+namespace Jomlet;
 
 //Api class, these are supposed to be exposed
 [SuppressMessage("ReSharper", "UnusedMember.Global")]

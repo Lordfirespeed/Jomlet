@@ -1,8 +1,8 @@
 ﻿using System.Linq;
-using Tomlet.Models;
+using Jomlet.Models;
 using Xunit;
 
-namespace Tomlet.Tests
+namespace Jomlet.Tests
 {
     public class ArrayTests
     {

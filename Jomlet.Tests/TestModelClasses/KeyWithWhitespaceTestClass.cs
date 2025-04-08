@@ -1,6 +1,6 @@
-using Tomlet.Attributes;
+using Jomlet.Attributes;
 
-namespace Tomlet.Tests.TestModelClasses;
+namespace Jomlet.Tests.TestModelClasses;
 
 public class KeyWithWhitespaceTestClass
 {

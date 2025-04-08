@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Tomlet.Tests.TestModelClasses;
+namespace Jomlet.Tests.TestModelClasses;
 
 public class Subname
 {

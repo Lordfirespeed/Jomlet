@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace Tomlet.Models;
+namespace Jomlet.Models;
 
 public class JomlDouble : JomlValue
 {

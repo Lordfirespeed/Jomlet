@@ -4,10 +4,9 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
-using Tomlet.Exceptions;
-using Tomlet.Extensions;
+using Jomlet.Exceptions;
 
-namespace Tomlet.Models;
+namespace Jomlet.Models;
 
 [SuppressMessage("ReSharper", "UnusedMember.Global")]
 public class JomlTable : JomlValue, IEnumerable<KeyValuePair<string, JomlValue>>

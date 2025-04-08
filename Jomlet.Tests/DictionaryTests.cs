@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Tomlet.Models;
-using Tomlet.Tests.TestModelClasses;
+using Jomlet.Models;
+using Jomlet.Tests.TestModelClasses;
 using Xunit;
 
-namespace Tomlet.Tests;
+namespace Jomlet.Tests;
 
 public class DictionaryTests
 {

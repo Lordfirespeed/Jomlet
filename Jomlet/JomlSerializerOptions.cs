@@ -1,4 +1,4 @@
-﻿namespace Tomlet;
+﻿namespace Jomlet;
 
 public class JomlSerializerOptions
 {

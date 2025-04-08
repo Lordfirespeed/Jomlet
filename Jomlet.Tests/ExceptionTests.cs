@@ -1,10 +1,10 @@
 using System;
-using Tomlet.Exceptions;
-using Tomlet.Models;
-using Tomlet.Tests.TestModelClasses;
+using Jomlet.Exceptions;
+using Jomlet.Models;
+using Jomlet.Tests.TestModelClasses;
 using Xunit;
 
-namespace Tomlet.Tests;
+namespace Jomlet.Tests;
 
 public class ExceptionTests
 {

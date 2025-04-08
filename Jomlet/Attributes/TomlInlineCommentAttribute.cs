@@ -1,6 +1,6 @@
 using System;
 
-namespace Tomlet.Attributes;
+namespace Jomlet.Attributes;
 
 [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
 public class TomlInlineCommentAttribute : Attribute

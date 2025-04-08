@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Tomlet.Tests {
+namespace Jomlet.Tests {
     using System;
     
     

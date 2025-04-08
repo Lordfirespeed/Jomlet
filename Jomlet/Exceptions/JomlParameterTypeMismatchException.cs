@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace Tomlet.Exceptions;
+namespace Jomlet.Exceptions;
 
 public class JomlParameterTypeMismatchException : JomlTypeMismatchException
 {

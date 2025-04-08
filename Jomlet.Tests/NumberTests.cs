@@ -1,8 +1,8 @@
-﻿using Tomlet.Exceptions;
-using Tomlet.Models;
+﻿using Jomlet.Exceptions;
+using Jomlet.Models;
 using Xunit;
 
-namespace Tomlet.Tests
+namespace Jomlet.Tests
 {
     public class NumberTests
     {

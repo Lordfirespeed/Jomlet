@@ -1,6 +1,6 @@
 using System;
 
-namespace Tomlet;
+namespace Jomlet;
 
 public class JomletStringReader : IDisposable
 {

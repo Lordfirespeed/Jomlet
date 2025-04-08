@@ -1,6 +1,6 @@
-﻿using Tomlet.Exceptions;
+﻿using Jomlet.Exceptions;
 
-namespace Tomlet;
+namespace Jomlet;
 
 internal static class JomlUtils
 {

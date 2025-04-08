@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using Tomlet.Extensions;
+using Jomlet.Extensions;
 
-namespace Tomlet.Models;
+namespace Jomlet.Models;
 
 public class JomlString : JomlValue
 {

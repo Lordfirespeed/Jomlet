@@ -1,4 +1,4 @@
-﻿namespace Tomlet.Models;
+﻿namespace Jomlet.Models;
 
 public class JomlBoolean : JomlValue
 {

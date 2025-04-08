@@ -5,7 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 
-namespace Tomlet.Models;
+namespace Jomlet.Models;
 
 public class JomlArray : JomlValue, IEnumerable<JomlValue>
 {

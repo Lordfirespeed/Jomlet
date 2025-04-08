@@ -1,8 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Tomlet.Tests.TestModelClasses;
+using Jomlet.Tests.TestModelClasses;
 
-namespace Tomlet.Tests.TestDataGenerators;
+namespace Jomlet.Tests.TestDataGenerators;
 
 public class EnumerableDeserializerDataGenerator : IEnumerable<object[]>
 {

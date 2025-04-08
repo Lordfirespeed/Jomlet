@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Tomlet.Models;
+namespace Jomlet.Models;
 
 public class JomlLocalTime : JomlValue
 {

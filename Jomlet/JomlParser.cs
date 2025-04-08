@@ -4,12 +4,12 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
-using Tomlet.Attributes;
-using Tomlet.Exceptions;
-using Tomlet.Extensions;
-using Tomlet.Models;
+using Jomlet.Attributes;
+using Jomlet.Exceptions;
+using Jomlet.Extensions;
+using Jomlet.Models;
 
-namespace Tomlet;
+namespace Jomlet;
 
 public class JomlParser
 {

@@ -1,4 +1,4 @@
-﻿namespace Tomlet.Exceptions;
+﻿namespace Jomlet.Exceptions;
 
 public class InvalidJomlNumberException : JomlExceptionWithLine
 {

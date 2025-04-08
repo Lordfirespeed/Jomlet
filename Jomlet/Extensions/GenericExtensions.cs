@@ -4,9 +4,9 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
-using Tomlet.Exceptions;
+using Jomlet.Exceptions;
 
-namespace Tomlet.Extensions;
+namespace Jomlet.Extensions;
 
 internal static class GenericExtensions
 {

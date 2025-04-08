@@ -1,10 +1,10 @@
 ﻿using System;
-using Tomlet.Tests.TestDataGenerators;
-using Tomlet.Tests.TestModelClasses;
+using Jomlet.Tests.TestDataGenerators;
+using Jomlet.Tests.TestModelClasses;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Tomlet.Tests
+namespace Jomlet.Tests
 {
     public class ComplexSerializationTests
     {

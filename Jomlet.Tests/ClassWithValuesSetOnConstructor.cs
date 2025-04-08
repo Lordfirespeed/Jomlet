@@ -1,4 +1,4 @@
-﻿namespace Tomlet.Tests;
+﻿namespace Jomlet.Tests;
 
 public class ClassWithValuesSetOnConstructor
 {

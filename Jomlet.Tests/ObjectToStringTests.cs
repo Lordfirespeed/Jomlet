@@ -1,8 +1,8 @@
 ﻿using System;
-using Tomlet.Tests.TestModelClasses;
+using Jomlet.Tests.TestModelClasses;
 using Xunit;
 
-namespace Tomlet.Tests
+namespace Jomlet.Tests
 {
     public class ObjectToStringTests
     {

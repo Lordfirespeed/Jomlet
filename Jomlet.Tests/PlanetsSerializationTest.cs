@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Xunit;
 
-namespace Tomlet.Tests;
+namespace Jomlet.Tests;
 
 public class PlanetsSerializationTest
 {

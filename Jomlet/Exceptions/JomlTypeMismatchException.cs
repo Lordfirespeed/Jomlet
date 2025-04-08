@@ -1,7 +1,7 @@
 ﻿using System;
-using Tomlet.Models;
+using Jomlet.Models;
 
-namespace Tomlet.Exceptions;
+namespace Jomlet.Exceptions;
 
 public class JomlTypeMismatchException : JomlException
 {

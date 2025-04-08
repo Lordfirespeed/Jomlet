@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using Tomlet.Tests.TestModelClasses;
+using Jomlet.Tests.TestModelClasses;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Tomlet.Tests;
+namespace Jomlet.Tests;
 
 public class EnumTests
 {

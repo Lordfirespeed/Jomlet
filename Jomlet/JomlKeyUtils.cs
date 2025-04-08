@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Tomlet;
+namespace Jomlet;
 
 internal static class JomlKeyUtils
 {

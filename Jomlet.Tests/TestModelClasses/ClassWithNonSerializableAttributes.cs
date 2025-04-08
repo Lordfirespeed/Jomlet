@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tomlet.Attributes;
+﻿using Jomlet.Attributes;
 
-namespace Tomlet.Tests.TestModelClasses
+namespace Jomlet.Tests.TestModelClasses
 {
     public class ClassWithNonSerializableAttributes
     {

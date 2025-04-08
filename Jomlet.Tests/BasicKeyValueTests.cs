@@ -1,11 +1,11 @@
 using System;
 using System.Linq;
-using Tomlet.Exceptions;
-using Tomlet.Models;
+using Jomlet.Exceptions;
+using Jomlet.Models;
 using Xunit;
 using Xunit.Abstractions;
 
-namespace Tomlet.Tests
+namespace Jomlet.Tests
 {
     public class BasicKeyValueTests
     {

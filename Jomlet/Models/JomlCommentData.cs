@@ -1,8 +1,8 @@
 using System;
 using System.Text;
-using Tomlet.Exceptions;
+using Jomlet.Exceptions;
 
-namespace Tomlet.Models;
+namespace Jomlet.Models;
 
 public class JomlCommentData
 {

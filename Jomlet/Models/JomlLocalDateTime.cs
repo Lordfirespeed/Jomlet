@@ -1,8 +1,7 @@
-﻿
-using System;
+﻿using System;
 using System.Xml;
 
-namespace Tomlet.Models;
+namespace Jomlet.Models;
 
 public class JomlLocalDateTime : JomlValue, IJomlValueWithDateTime
 {

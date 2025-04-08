@@ -1,5 +1,5 @@
 ﻿using System;
 
-namespace Tomlet.Tests.TestModelClasses;
+namespace Jomlet.Tests.TestModelClasses;
 
 public record SimpleTestRecord(string MyString, float MyFloat, bool MyBool, DateTime MyDateTime);

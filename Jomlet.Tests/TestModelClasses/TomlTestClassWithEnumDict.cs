@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using Tomlet.Tests.TestModelClasses;
 
-namespace Tomlet.Tests;
+namespace Jomlet.Tests.TestModelClasses;
 
 public class TomlTestClassWithEnumDict
 {

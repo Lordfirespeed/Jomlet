@@ -1,18 +1,13 @@
-using Newtonsoft.Json.Serialization;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using Tomlet.Attributes;
-using Tomlet.Models;
-using Tomlet.Tests.TestModelClasses;
+using Jomlet.Attributes;
+using Jomlet.Tests.TestModelClasses;
 using Xunit;
-using Xunit.Abstractions;
-using Xunit.Sdk;
 
-namespace Tomlet.Tests;
+namespace Jomlet.Tests;
 
 public class SerializationWithAttributesTests
 {

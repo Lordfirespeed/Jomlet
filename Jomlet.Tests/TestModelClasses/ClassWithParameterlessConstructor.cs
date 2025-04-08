@@ -1,4 +1,4 @@
-﻿namespace Tomlet.Tests.TestModelClasses;
+﻿namespace Jomlet.Tests.TestModelClasses;
 
 public class ClassWithParameterlessConstructor : ClassWithMultipleParameterizedConstructors
 {

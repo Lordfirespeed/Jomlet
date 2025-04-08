@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
-using Tomlet.Extensions;
+using Jomlet.Extensions;
 
-namespace Tomlet;
+namespace Jomlet;
 
 public static class JomlNumberUtils
 {

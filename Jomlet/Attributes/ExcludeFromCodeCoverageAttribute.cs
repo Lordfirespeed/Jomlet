@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Tomlet.Attributes;
+namespace Jomlet.Attributes;
 
 internal class ExcludeFromCodeCoverageAttribute : Attribute
 {
