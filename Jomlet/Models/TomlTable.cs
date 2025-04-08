@@ -150,8 +150,8 @@ public class TomlTable : TomlValue, IEnumerable<KeyValuePair<string, TomlValue>>
         if (IsValidKey(key))
             return key;
                     
-        key = TomlUtils.EscapeStringValue(key);
-        return TomlUtils.AddCorrectQuotes(key);
+        key = JomlUtils.EscapeStringValue(key);
+        return JomlUtils.AddCorrectQuotes(key);
     }
 
     private static bool IsValidKey(string key)
@@ -185,7 +185,7 @@ public class TomlTable : TomlValue, IEnumerable<KeyValuePair<string, TomlValue>>
             throw new ArgumentNullException(nameof(value));
 
         if (quote)
-            key = TomlUtils.AddCorrectQuotes(key);
+            key = JomlUtils.AddCorrectQuotes(key);
         InternalPutValue(key, value, null, false);
     }
 
@@ -342,7 +342,7 @@ public class TomlTable : TomlValue, IEnumerable<KeyValuePair<string, TomlValue>>
         if (key == null)
             throw new ArgumentNullException("key");
 
-        var value = GetValue(TomlUtils.AddCorrectQuotes(key));
+        var value = GetValue(JomlUtils.AddCorrectQuotes(key));
 
         if (value is not TomlString str)
             throw new TomlTypeMismatchException(typeof(TomlString), value.GetType(), typeof(string));
@@ -362,7 +362,7 @@ public class TomlTable : TomlValue, IEnumerable<KeyValuePair<string, TomlValue>>
         if (key == null)
             throw new ArgumentNullException("key");
 
-        var value = GetValue(TomlUtils.AddCorrectQuotes(key));
+        var value = GetValue(JomlUtils.AddCorrectQuotes(key));
 
         if (value is not TomlLong lng)
             throw new TomlTypeMismatchException(typeof(TomlLong), value.GetType(), typeof(int));
@@ -382,7 +382,7 @@ public class TomlTable : TomlValue, IEnumerable<KeyValuePair<string, TomlValue>>
         if (key == null)
             throw new ArgumentNullException("key");
 
-        var value = GetValue(TomlUtils.AddCorrectQuotes(key));
+        var value = GetValue(JomlUtils.AddCorrectQuotes(key));
 
         if (value is not TomlLong lng)
             throw new TomlTypeMismatchException(typeof(TomlLong), value.GetType(), typeof(int));
@@ -402,7 +402,7 @@ public class TomlTable : TomlValue, IEnumerable<KeyValuePair<string, TomlValue>>
         if (key == null)
             throw new ArgumentNullException("key");
 
-        var value = GetValue(TomlUtils.AddCorrectQuotes(key));
+        var value = GetValue(JomlUtils.AddCorrectQuotes(key));
 
         if (value is not TomlDouble dbl)
             throw new TomlTypeMismatchException(typeof(TomlDouble), value.GetType(), typeof(float));
@@ -422,7 +422,7 @@ public class TomlTable : TomlValue, IEnumerable<KeyValuePair<string, TomlValue>>
         if (key == null)
             throw new ArgumentNullException("key");
 
-        var value = GetValue(TomlUtils.AddCorrectQuotes(key));
+        var value = GetValue(JomlUtils.AddCorrectQuotes(key));
 
         if (value is not TomlBoolean b)
             throw new TomlTypeMismatchException(typeof(TomlBoolean), value.GetType(), typeof(bool));
@@ -442,7 +442,7 @@ public class TomlTable : TomlValue, IEnumerable<KeyValuePair<string, TomlValue>>
         if (key == null)
             throw new ArgumentNullException("key");
 
-        var value = GetValue(TomlUtils.AddCorrectQuotes(key));
+        var value = GetValue(JomlUtils.AddCorrectQuotes(key));
 
         if (value is not TomlArray arr)
             throw new TomlTypeMismatchException(typeof(TomlArray), value.GetType(), typeof(TomlArray));
@@ -462,7 +462,7 @@ public class TomlTable : TomlValue, IEnumerable<KeyValuePair<string, TomlValue>>
         if (key == null)
             throw new ArgumentNullException("key");
 
-        var value = GetValue(TomlUtils.AddCorrectQuotes(key));
+        var value = GetValue(JomlUtils.AddCorrectQuotes(key));
 
         if (value is not TomlTable tbl)
             throw new TomlTypeMismatchException(typeof(TomlTable), value.GetType(), typeof(TomlTable));

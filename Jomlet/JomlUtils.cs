@@ -2,7 +2,7 @@
 
 namespace Tomlet;
 
-internal static class TomlUtils
+internal static class JomlUtils
 {
     public static string EscapeStringValue(string key)
     {

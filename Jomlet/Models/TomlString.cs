@@ -56,7 +56,7 @@ public class TomlString : TomlValue
         }
     }
         
-    internal string StandardStringSerializedForm => $"\"{TomlUtils.EscapeStringValue(Value)}\"";
+    internal string StandardStringSerializedForm => $"\"{JomlUtils.EscapeStringValue(Value)}\"";
     internal string LiteralStringSerializedForm => $"'{Value}'";
     internal string MultiLineLiteralStringSerializedForm => $"'''\n{Value}'''";
 }
