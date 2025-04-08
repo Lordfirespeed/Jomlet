@@ -77,12 +77,12 @@ public class SerializationWithAttributesTests
         {
             var type = instance.GetType();
             var fields = type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-            var fieldsD = fields.Where(f => !(f.IsNotSerialized || f.GetCustomAttribute<TomlNonSerializedAttribute>() != null)
+            var fieldsD = fields.Where(f => !(f.IsNotSerialized || f.GetCustomAttribute<JomlNonSerializedAttribute>() != null)
                 && f.GetCustomAttribute<CompilerGeneratedAttribute>() == null
                 && !f.Name.Contains('<')).ToDictionary(f=>f.Name, f=>f.GetValue(instance).ToString());
 
             var props = type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
-                .Where(p => p.GetCustomAttribute<TomlNonSerializedAttribute>() == null)
+                .Where(p => p.GetCustomAttribute<JomlNonSerializedAttribute>() == null)
                 .ToDictionary(p => p.Name, p => p.GetValue(instance).ToString());
 
             return props.Concat(fieldsD)

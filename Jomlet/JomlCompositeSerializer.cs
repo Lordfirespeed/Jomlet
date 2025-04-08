@@ -44,12 +44,12 @@ internal static class JomlCompositeSerializer
             var isForcedNoInline = GenericExtensions.GetCustomAttribute<JomlDoNotInlineObjectAttribute>(type) != null;
 
             //Ignore NonSerialized and CompilerGenerated fields.
-            fields = fields.Where(f => !(f.IsNotSerialized || GenericExtensions.GetCustomAttribute<TomlNonSerializedAttribute>(f) != null)
+            fields = fields.Where(f => !(f.IsNotSerialized || GenericExtensions.GetCustomAttribute<JomlNonSerializedAttribute>(f) != null)
                 && GenericExtensions.GetCustomAttribute<CompilerGeneratedAttribute>(f) == null 
                 && !f.Name.Contains('<')).ToArray();
 
             //Ignore TomlNonSerializedAttribute Decorated Properties
-            props = props.Where(p => GenericExtensions.GetCustomAttribute<TomlNonSerializedAttribute>(p) == null).ToArray();
+            props = props.Where(p => GenericExtensions.GetCustomAttribute<JomlNonSerializedAttribute>(p) == null).ToArray();
 
             if (fields.Length + props.Length == 0)
                 return _ => new JomlTable();

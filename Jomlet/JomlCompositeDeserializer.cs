@@ -61,7 +61,7 @@ internal static class JomlCompositeDeserializer
 
             //Ignore TomlNonSerializedAttribute Decorated Properties
             var propsDict = props
-                .Where(p => p.GetSetMethod(true) != null && GenericExtensions.GetCustomAttribute<TomlNonSerializedAttribute>(p) == null)
+                .Where(p => p.GetSetMethod(true) != null && GenericExtensions.GetCustomAttribute<JomlNonSerializedAttribute>(p) == null)
                 .Select(p => new KeyValuePair<PropertyInfo, JomlPropertyAttribute?>(p, GenericExtensions.GetCustomAttribute<JomlPropertyAttribute>(p)))
                 .ToDictionary(tuple => tuple.Key, tuple => tuple.Value);
 

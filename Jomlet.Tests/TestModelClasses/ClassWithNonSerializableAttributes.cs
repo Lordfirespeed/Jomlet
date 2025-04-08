@@ -8,12 +8,12 @@ namespace Jomlet.Tests.TestModelClasses
 
         public int SerializedInt { get; set; }
 
-        [TomlNonSerialized]
+        [JomlNonSerialized]
         public string NonSerializedProperty { get; set; }
 
         private string _SerializedField = "Serialized Field";
 
-        [TomlNonSerialized]
+        [JomlNonSerialized]
         private string _NonSerializedField = "Non-Serialized private field";
 
     }
