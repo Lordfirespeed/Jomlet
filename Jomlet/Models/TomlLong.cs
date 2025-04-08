@@ -11,7 +11,7 @@ public class TomlLong : TomlValue
         
     internal static TomlLong? Parse(string valueInToml)
     {
-        var nullableDouble = TomlNumberUtils.GetLongValue(valueInToml);
+        var nullableDouble = JomlNumberUtils.GetLongValue(valueInToml);
 
         if (!nullableDouble.HasValue)
             return null;

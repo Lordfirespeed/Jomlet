@@ -13,7 +13,7 @@ public class TomlDouble : TomlValue
 
     internal static TomlDouble? Parse(string valueInToml)
     {
-        var nullableDouble = TomlNumberUtils.GetDoubleValue(valueInToml);
+        var nullableDouble = JomlNumberUtils.GetDoubleValue(valueInToml);
 
         if (!nullableDouble.HasValue)
             return null;

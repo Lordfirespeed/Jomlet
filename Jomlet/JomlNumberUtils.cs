@@ -5,7 +5,7 @@ using Tomlet.Extensions;
 
 namespace Tomlet;
 
-public static class TomlNumberUtils
+public static class JomlNumberUtils
 {
     public static long? GetLongValue(string input)
     {
