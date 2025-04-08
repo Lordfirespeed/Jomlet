@@ -16,6 +16,7 @@
         <PackageId>Lordfirespeed.Jomlet</PackageId>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageProjectUrl>https://github.com/Lordfirespeed/Jomlet</PackageProjectUrl>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>joml</PackageTags>
         <Platforms>AnyCPU</Platforms>
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
@@ -31,6 +32,10 @@
         
         <DefineConstants Condition="'$(TargetFramework)' != 'netframework3.5' And '$(TargetFramework)' != 'netstandard2.0'">MODERN_DOTNET</DefineConstants>
     </PropertyGroup>
+    
+    <ItemGroup>
+        <None Include="$(ProjectDir)../README_trimmed_for_nuget.md" Pack="true" PackagePath="/README.md"/>
+    </ItemGroup>
 
     <ItemGroup>
         <PackageReference Include="jnm2.ReferenceAssemblies.net35" Version="1.0.1">

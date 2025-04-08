@@ -9,6 +9,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- (trimmed) README is automatically included in `.nupkg` 
+
 ## [1.0.0] - 2025-04-08
 
 ### Added
