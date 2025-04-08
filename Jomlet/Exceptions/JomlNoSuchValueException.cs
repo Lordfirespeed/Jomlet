@@ -1,10 +1,10 @@
 ﻿namespace Tomlet.Exceptions;
 
-public class TomlNoSuchValueException : TomlException
+public class JomlNoSuchValueException : JomlException
 {
     private readonly string _key;
 
-    public TomlNoSuchValueException(string key)
+    public JomlNoSuchValueException(string key)
     {
         _key = key;
     }

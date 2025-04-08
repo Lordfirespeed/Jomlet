@@ -2,12 +2,12 @@
 
 namespace Tomlet.Exceptions;
 
-public class TomlEnumParseException : TomlException
+public class JomlEnumParseException : JomlException
 {
     private string _valueName;
     private Type _enumType;
 
-    public TomlEnumParseException(string valueName, Type enumType)
+    public JomlEnumParseException(string valueName, Type enumType)
     {
         _valueName = valueName;
         _enumType = enumType;

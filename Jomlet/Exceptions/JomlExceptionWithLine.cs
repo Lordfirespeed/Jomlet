@@ -2,7 +2,7 @@
 
 namespace Tomlet.Exceptions;
 
-public abstract class JomlExceptionWithLine : TomlException
+public abstract class JomlExceptionWithLine : JomlException
 {
     protected int LineNumber;
 

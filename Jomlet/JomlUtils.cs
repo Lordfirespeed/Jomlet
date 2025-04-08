@@ -16,7 +16,7 @@ internal static class JomlUtils
     public static string AddCorrectQuotes(string key)
     {
         if (key.Contains("'") && key.Contains("\""))
-            throw new InvalidTomlKeyException(key);
+            throw new InvalidJomlKeyException(key);
 
         if (key.Contains("\""))
             return $"'{key}'";

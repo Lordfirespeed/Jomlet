@@ -22,7 +22,7 @@ public class JomlCommentData
             }
             
             if (value.Contains("\n") || value.Contains("\r"))
-                throw new TomlNewlineInInlineCommentException();
+                throw new JomlNewlineInInlineCommentException();
             
             _inlineComment = value;
         }

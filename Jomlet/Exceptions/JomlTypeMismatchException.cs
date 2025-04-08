@@ -3,7 +3,7 @@ using Tomlet.Models;
 
 namespace Tomlet.Exceptions;
 
-public class TomlTypeMismatchException : TomlException
+public class JomlTypeMismatchException : JomlException
 {
     protected readonly string ExpectedTypeName;
     protected readonly string ActualTypeName;
@@ -11,7 +11,7 @@ public class TomlTypeMismatchException : TomlException
     protected internal readonly Type ActualType;
     private readonly Type _context;
 
-    public TomlTypeMismatchException(Type expected, Type actual, Type context)
+    public JomlTypeMismatchException(Type expected, Type actual, Type context)
     {
         ExpectedTypeName = typeof(JomlValue).IsAssignableFrom(expected) ? expected.Name.Replace("Toml", "") : expected.Name;
         ActualTypeName = typeof(JomlValue).IsAssignableFrom(actual) ? actual.Name.Replace("Toml", "") : actual.Name;

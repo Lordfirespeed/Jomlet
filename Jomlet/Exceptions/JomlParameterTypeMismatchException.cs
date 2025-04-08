@@ -3,12 +3,12 @@ using System.Reflection;
 
 namespace Tomlet.Exceptions;
 
-public class TomlParameterTypeMismatchException : TomlTypeMismatchException
+public class JomlParameterTypeMismatchException : JomlTypeMismatchException
 {
     private readonly Type _typeBeingInstantiated;
     private readonly ParameterInfo _paramBeingDeserialized;
 
-    public TomlParameterTypeMismatchException(Type typeBeingInstantiated, ParameterInfo paramBeingDeserialized, TomlTypeMismatchException cause) : base(cause.ExpectedType, cause.ActualType, paramBeingDeserialized.ParameterType)
+    public JomlParameterTypeMismatchException(Type typeBeingInstantiated, ParameterInfo paramBeingDeserialized, JomlTypeMismatchException cause) : base(cause.ExpectedType, cause.ActualType, paramBeingDeserialized.ParameterType)
     {
         _typeBeingInstantiated = typeBeingInstantiated;
         _paramBeingDeserialized = paramBeingDeserialized;

@@ -2,11 +2,11 @@
 
 namespace Tomlet.Exceptions;
 
-public class TomlPrimitiveToDocumentException : TomlException
+public class JomlPrimitiveToDocumentException : JomlException
 {
     private Type primitiveType;
         
-    public TomlPrimitiveToDocumentException(Type primitiveType)
+    public JomlPrimitiveToDocumentException(Type primitiveType)
     {
         this.primitiveType = primitiveType;
     }

@@ -40,46 +40,46 @@ public static class JomlSerializationMethods
         Register(s => new JomlString(s!), value => (value as JomlString)?.Value ?? value.StringValue);
 
         //Bool
-        Register(JomlBoolean.ValueOf, value => (value as JomlBoolean)?.Value ?? throw new TomlTypeMismatchException(typeof(JomlBoolean), value.GetType(), typeof(bool)));
+        Register(JomlBoolean.ValueOf, value => (value as JomlBoolean)?.Value ?? throw new JomlTypeMismatchException(typeof(JomlBoolean), value.GetType(), typeof(bool)));
 
         //Byte
-        Register(i => new JomlLong(i), value => (byte)((value as JomlLong)?.Value ?? throw new TomlTypeMismatchException(typeof(JomlLong), value.GetType(), typeof(byte))));
+        Register(i => new JomlLong(i), value => (byte)((value as JomlLong)?.Value ?? throw new JomlTypeMismatchException(typeof(JomlLong), value.GetType(), typeof(byte))));
 
         //SByte
-        Register(i => new JomlLong(i), value => (sbyte)((value as JomlLong)?.Value ?? throw new TomlTypeMismatchException(typeof(JomlLong), value.GetType(), typeof(sbyte))));
+        Register(i => new JomlLong(i), value => (sbyte)((value as JomlLong)?.Value ?? throw new JomlTypeMismatchException(typeof(JomlLong), value.GetType(), typeof(sbyte))));
 
         //UShort
-        Register(i => new JomlLong(i), value => (ushort)((value as JomlLong)?.Value ?? throw new TomlTypeMismatchException(typeof(JomlLong), value.GetType(), typeof(ushort))));
+        Register(i => new JomlLong(i), value => (ushort)((value as JomlLong)?.Value ?? throw new JomlTypeMismatchException(typeof(JomlLong), value.GetType(), typeof(ushort))));
 
         //Short
-        Register(i => new JomlLong(i), value => (short)((value as JomlLong)?.Value ?? throw new TomlTypeMismatchException(typeof(JomlLong), value.GetType(), typeof(short))));
+        Register(i => new JomlLong(i), value => (short)((value as JomlLong)?.Value ?? throw new JomlTypeMismatchException(typeof(JomlLong), value.GetType(), typeof(short))));
 
         //UInt
-        Register(i => new JomlLong(i), value => (uint)((value as JomlLong)?.Value ?? throw new TomlTypeMismatchException(typeof(JomlLong), value.GetType(), typeof(uint))));
+        Register(i => new JomlLong(i), value => (uint)((value as JomlLong)?.Value ?? throw new JomlTypeMismatchException(typeof(JomlLong), value.GetType(), typeof(uint))));
 
         //Int
-        Register(i => new JomlLong(i), value => (int)((value as JomlLong)?.Value ?? throw new TomlTypeMismatchException(typeof(JomlLong), value.GetType(), typeof(int))));
+        Register(i => new JomlLong(i), value => (int)((value as JomlLong)?.Value ?? throw new JomlTypeMismatchException(typeof(JomlLong), value.GetType(), typeof(int))));
 
         //ULong
-        Register(l => new JomlLong((long)l), value => (ulong)((value as JomlLong)?.Value ?? throw new TomlTypeMismatchException(typeof(JomlLong), value.GetType(), typeof(ulong))));
+        Register(l => new JomlLong((long)l), value => (ulong)((value as JomlLong)?.Value ?? throw new JomlTypeMismatchException(typeof(JomlLong), value.GetType(), typeof(ulong))));
 
         //Long
-        Register(l => new JomlLong(l), value => (value as JomlLong)?.Value ?? throw new TomlTypeMismatchException(typeof(JomlLong), value.GetType(), typeof(long)));
+        Register(l => new JomlLong(l), value => (value as JomlLong)?.Value ?? throw new JomlTypeMismatchException(typeof(JomlLong), value.GetType(), typeof(long)));
 
         //Double
-        Register(d => new JomlDouble(d), value => (value as JomlDouble)?.Value ?? (value as JomlLong)?.Value ?? throw new TomlTypeMismatchException(typeof(JomlDouble), value.GetType(), typeof(double)));
+        Register(d => new JomlDouble(d), value => (value as JomlDouble)?.Value ?? (value as JomlLong)?.Value ?? throw new JomlTypeMismatchException(typeof(JomlDouble), value.GetType(), typeof(double)));
 
         //Float
-        Register(f => new JomlDouble(f), value => (float)((value as JomlDouble)?.Value ?? (value as JomlLong)?.Value ?? throw new TomlTypeMismatchException(typeof(JomlDouble), value.GetType(), typeof(float))));
+        Register(f => new JomlDouble(f), value => (float)((value as JomlDouble)?.Value ?? (value as JomlLong)?.Value ?? throw new JomlTypeMismatchException(typeof(JomlDouble), value.GetType(), typeof(float))));
 
         //LocalDate(Time)
-        Register(dt => dt.TimeOfDay == TimeSpan.Zero ? new JomlLocalDate(dt) : new JomlLocalDateTime(dt), value => (value as IJomlValueWithDateTime)?.Value ?? throw new TomlTypeMismatchException(typeof(IJomlValueWithDateTime), value.GetType(), typeof(DateTime)));
+        Register(dt => dt.TimeOfDay == TimeSpan.Zero ? new JomlLocalDate(dt) : new JomlLocalDateTime(dt), value => (value as IJomlValueWithDateTime)?.Value ?? throw new JomlTypeMismatchException(typeof(IJomlValueWithDateTime), value.GetType(), typeof(DateTime)));
 
         //OffsetDateTime
-        Register(odt => new JomlOffsetDateTime(odt), value => (value as JomlOffsetDateTime)?.Value ?? throw new TomlTypeMismatchException(typeof(JomlOffsetDateTime), value.GetType(), typeof(DateTimeOffset)));
+        Register(odt => new JomlOffsetDateTime(odt), value => (value as JomlOffsetDateTime)?.Value ?? throw new JomlTypeMismatchException(typeof(JomlOffsetDateTime), value.GetType(), typeof(DateTimeOffset)));
 
         //LocalTime
-        Register(lt => new JomlLocalTime(lt), value => (value as JomlLocalTime)?.Value ?? throw new TomlTypeMismatchException(typeof(JomlLocalTime), value.GetType(), typeof(TimeSpan)));
+        Register(lt => new JomlLocalTime(lt), value => (value as JomlLocalTime)?.Value ?? throw new JomlTypeMismatchException(typeof(JomlLocalTime), value.GetType(), typeof(TimeSpan)));
     }
 
     /// <summary>
@@ -290,7 +290,7 @@ public static class JomlSerializationMethods
         value =>
         {
             if (value is not JomlArray tomlArray)
-                throw new TomlTypeMismatchException(typeof(JomlArray), value.GetType(), elementType.MakeArrayType());
+                throw new JomlTypeMismatchException(typeof(JomlArray), value.GetType(), elementType.MakeArrayType());
 
             var ret = Array.CreateInstance(elementType, tomlArray.Count);
             var deserializer = GetDeserializer(elementType, options);
@@ -316,7 +316,7 @@ public static class JomlSerializationMethods
         return value =>
         {
             if (value is not JomlArray tomlArray)
-                throw new TomlTypeMismatchException(typeof(JomlArray), value.GetType(), listType);
+                throw new JomlTypeMismatchException(typeof(JomlArray), value.GetType(), listType);
 
             var ret = Activator.CreateInstance(listType)!;
             var deserializer = GetDeserializer(elementType, options);
@@ -365,7 +365,7 @@ public static class JomlSerializationMethods
         return value =>
         {
             if (value is not JomlTable table)
-                throw new TomlTypeMismatchException(typeof(JomlTable), value.GetType(), typeof(Dictionary<string, T>));
+                throw new JomlTypeMismatchException(typeof(JomlTable), value.GetType(), typeof(Dictionary<string, T>));
 
             return table.Entries.ToDictionary(entry => entry.Key, entry => (T)deserializer(entry.Value));
         };
@@ -386,7 +386,7 @@ public static class JomlSerializationMethods
         return value =>
         {
             if (value is not JomlTable table)
-                throw new TomlTypeMismatchException(typeof(JomlTable), value.GetType(), typeof(Dictionary<TKey, TValue>));
+                throw new JomlTypeMismatchException(typeof(JomlTable), value.GetType(), typeof(Dictionary<TKey, TValue>));
 
             return table.Entries.ToDictionary(
                 entry =>
@@ -405,7 +405,7 @@ public static class JomlSerializationMethods
                         if (options.IgnoreInvalidEnumValues)
                             return (TKey)Enum.GetValues(type).GetValue(0)!;
 
-                        throw new TomlEnumParseException(entry.Key, typeof(TKey));
+                        throw new JomlEnumParseException(entry.Key, typeof(TKey));
                     }
                 },
                 entry => (TValue)valueDeserializer(entry.Value)
@@ -528,7 +528,7 @@ public static class JomlSerializationMethods
         RegisterDeserializer(value =>
         {
             if (value is not JomlTable table)
-                throw new TomlTypeMismatchException(typeof(JomlTable), value.GetType(), typeof(Dictionary<string, T>));
+                throw new JomlTypeMismatchException(typeof(JomlTable), value.GetType(), typeof(Dictionary<string, T>));
 
             return table.Entries
                 .Select(kvp => new KeyValuePair<string, T>(kvp.Key, deserializer.Invoke(kvp.Value)))

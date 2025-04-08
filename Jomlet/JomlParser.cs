@@ -98,7 +98,7 @@ public class JomlParser
 
             return document;
         }
-        catch (Exception e) when (e is not TomlException)
+        catch (Exception e) when (e is not JomlException)
         {
             throw new JomlInternalException(_lineNumber, e);
         }
@@ -790,7 +790,7 @@ public class JomlParser
                 //Insert into the table
                 result.ParserPutValue(key, value, _lineNumber);
             }
-            catch (TomlException ex) when (ex is JomlMissingEqualsException or NoJomlKeyException or JomlWhitespaceInKeyException)
+            catch (JomlException ex) when (ex is JomlMissingEqualsException or NoJomlKeyException or JomlWhitespaceInKeyException)
             {
                 //Wrap missing keys or equals signs in a parent exception.
                 throw new InvalidJomlInlineTableException(_lineNumber, ex);
@@ -857,7 +857,7 @@ public class JomlParser
                 parent.ParserPutValue(relativeKey, table, _lineNumber);
             }
         }
-        catch (TomlContainsDottedKeyNonTableException e)
+        catch (JomlContainsDottedKeyNonTableException e)
         {
             //Re-throw with correct line number and exception type.
             //To be clear - here we're re-defining a NON-TABLE key as a table, so this is a dotted key exception
@@ -965,7 +965,7 @@ public class JomlParser
             else
             {
                 // Note: Expects either TomlArray or TomlTable
-                throw new TomlTypeMismatchException(typeof(JomlArray), value.GetType(), typeof(JomlArray));
+                throw new JomlTypeMismatchException(typeof(JomlArray), value.GetType(), typeof(JomlArray));
             }
 
             relativeName = relativeName.Substring(rootTableName.Length + 1);

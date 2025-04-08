@@ -2,7 +2,7 @@
 
 public class InvalidJomlInlineTableException : JomlExceptionWithLine
 {
-    public InvalidJomlInlineTableException(int lineNumber, TomlException cause) : base(lineNumber, cause)
+    public InvalidJomlInlineTableException(int lineNumber, JomlException cause) : base(lineNumber, cause)
     {
     }
 

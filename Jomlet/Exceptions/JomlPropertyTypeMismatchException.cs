@@ -3,12 +3,12 @@ using System.Reflection;
 
 namespace Tomlet.Exceptions;
 
-public class TomlPropertyTypeMismatchException : TomlTypeMismatchException
+public class JomlPropertyTypeMismatchException : JomlTypeMismatchException
 {
     private readonly Type _typeBeingInstantiated;
     private readonly PropertyInfo _propBeingDeserialized;
 
-    public TomlPropertyTypeMismatchException(Type typeBeingInstantiated, PropertyInfo propBeingDeserialized, TomlTypeMismatchException cause) : base(cause.ExpectedType, cause.ActualType, propBeingDeserialized.PropertyType)
+    public JomlPropertyTypeMismatchException(Type typeBeingInstantiated, PropertyInfo propBeingDeserialized, JomlTypeMismatchException cause) : base(cause.ExpectedType, cause.ActualType, propBeingDeserialized.PropertyType)
     {
         _typeBeingInstantiated = typeBeingInstantiated;
         _propBeingDeserialized = propBeingDeserialized;

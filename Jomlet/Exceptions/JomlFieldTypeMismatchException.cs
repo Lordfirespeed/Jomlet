@@ -3,12 +3,12 @@ using System.Reflection;
 
 namespace Tomlet.Exceptions;
 
-public class TomlFieldTypeMismatchException : TomlTypeMismatchException
+public class JomlFieldTypeMismatchException : JomlTypeMismatchException
 {
     private readonly Type _typeBeingInstantiated;
     private readonly FieldInfo _fieldBeingDeserialized;
 
-    public TomlFieldTypeMismatchException(Type typeBeingInstantiated, FieldInfo fieldBeingDeserialized, TomlTypeMismatchException cause) : base(cause.ExpectedType, cause.ActualType, fieldBeingDeserialized.FieldType)
+    public JomlFieldTypeMismatchException(Type typeBeingInstantiated, FieldInfo fieldBeingDeserialized, JomlTypeMismatchException cause) : base(cause.ExpectedType, cause.ActualType, fieldBeingDeserialized.FieldType)
     {
         _typeBeingInstantiated = typeBeingInstantiated;
         _fieldBeingDeserialized = fieldBeingDeserialized;

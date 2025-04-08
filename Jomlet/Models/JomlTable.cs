@@ -241,7 +241,7 @@ public class JomlTable : JomlValue, IEnumerable<KeyValuePair<string, JomlValue>>
                 if (lineNumber.HasValue)
                     throw new JomlDottedKeyParserException(lineNumber.Value, ourKeyName);
 
-                throw new TomlDottedKeyException(ourKeyName);
+                throw new JomlDottedKeyException(ourKeyName);
             }
 
             //Yes, get the sub-table to handle the rest of the key
@@ -278,7 +278,7 @@ public class JomlTable : JomlValue, IEnumerable<KeyValuePair<string, JomlValue>>
         if (existingKey is JomlTable table)
             return table.ContainsKey(restOfKey);
 
-        throw new TomlContainsDottedKeyNonTableException(key);
+        throw new JomlContainsDottedKeyNonTableException(key);
     }
 
 #if MODERN_DOTNET
@@ -306,14 +306,14 @@ public class JomlTable : JomlValue, IEnumerable<KeyValuePair<string, JomlValue>>
     /// </summary>
     /// <param name="key">The key to look up.</param>
     /// <returns>An instance of <see cref="JomlValue"/> associated with this key.</returns>
-    /// <exception cref="TomlNoSuchValueException">If the key is not present in the table.</exception>
+    /// <exception cref="JomlNoSuchValueException">If the key is not present in the table.</exception>
     public JomlValue GetValue(string key)
     {
         if (key == null)
             throw new ArgumentNullException("key");
 
         if (!ContainsKey(key))
-            throw new TomlNoSuchValueException(key);
+            throw new JomlNoSuchValueException(key);
 
         JomlKeyUtils.GetTopLevelAndSubKeys(key, out var ourKeyName, out var restOfKey);
 
@@ -322,7 +322,7 @@ public class JomlTable : JomlValue, IEnumerable<KeyValuePair<string, JomlValue>>
             return Entries[DeQuoteKey(key)];
 
         if (!Entries.TryGetValue(ourKeyName, out var existingKey))
-            throw new TomlNoSuchValueException(key); //Should already be handled by ContainsKey test
+            throw new JomlNoSuchValueException(key); //Should already be handled by ContainsKey test
 
         if (existingKey is JomlTable table)
             return table.GetValue(restOfKey);
@@ -335,8 +335,8 @@ public class JomlTable : JomlValue, IEnumerable<KeyValuePair<string, JomlValue>>
     /// </summary>
     /// <param name="key">The key to look up.</param>
     /// <returns>The string value associated with the key.</returns>
-    /// <exception cref="TomlTypeMismatchException">If the value associated with this key is not a string.</exception>
-    /// <exception cref="TomlNoSuchValueException">If the key is not present in the table.</exception>
+    /// <exception cref="JomlTypeMismatchException">If the value associated with this key is not a string.</exception>
+    /// <exception cref="JomlNoSuchValueException">If the key is not present in the table.</exception>
     public string GetString(string key)
     {
         if (key == null)
@@ -345,7 +345,7 @@ public class JomlTable : JomlValue, IEnumerable<KeyValuePair<string, JomlValue>>
         var value = GetValue(JomlUtils.AddCorrectQuotes(key));
 
         if (value is not JomlString str)
-            throw new TomlTypeMismatchException(typeof(JomlString), value.GetType(), typeof(string));
+            throw new JomlTypeMismatchException(typeof(JomlString), value.GetType(), typeof(string));
 
         return str.Value;
     }
@@ -355,8 +355,8 @@ public class JomlTable : JomlValue, IEnumerable<KeyValuePair<string, JomlValue>>
     /// </summary>
     /// <param name="key">The key to look up.</param>
     /// <returns>The integer value associated with the key.</returns>
-    /// <exception cref="TomlTypeMismatchException">If the value associated with this key is not an integer type.</exception>
-    /// <exception cref="TomlNoSuchValueException">If the key is not present in the table.</exception>
+    /// <exception cref="JomlTypeMismatchException">If the value associated with this key is not an integer type.</exception>
+    /// <exception cref="JomlNoSuchValueException">If the key is not present in the table.</exception>
     public int GetInteger(string key)
     {
         if (key == null)
@@ -365,7 +365,7 @@ public class JomlTable : JomlValue, IEnumerable<KeyValuePair<string, JomlValue>>
         var value = GetValue(JomlUtils.AddCorrectQuotes(key));
 
         if (value is not JomlLong lng)
-            throw new TomlTypeMismatchException(typeof(JomlLong), value.GetType(), typeof(int));
+            throw new JomlTypeMismatchException(typeof(JomlLong), value.GetType(), typeof(int));
 
         return (int)lng.Value;
     }
@@ -375,8 +375,8 @@ public class JomlTable : JomlValue, IEnumerable<KeyValuePair<string, JomlValue>>
     /// </summary>
     /// <param name="key">The key to look up.</param>
     /// <returns>The long/64-bit integer value associated with the key.</returns>
-    /// <exception cref="TomlTypeMismatchException">If the value associated with this key is not an integer type.</exception>
-    /// <exception cref="TomlNoSuchValueException">If the key is not present in the table.</exception>
+    /// <exception cref="JomlTypeMismatchException">If the value associated with this key is not an integer type.</exception>
+    /// <exception cref="JomlNoSuchValueException">If the key is not present in the table.</exception>
     public long GetLong(string key)
     {
         if (key == null)
@@ -385,7 +385,7 @@ public class JomlTable : JomlValue, IEnumerable<KeyValuePair<string, JomlValue>>
         var value = GetValue(JomlUtils.AddCorrectQuotes(key));
 
         if (value is not JomlLong lng)
-            throw new TomlTypeMismatchException(typeof(JomlLong), value.GetType(), typeof(int));
+            throw new JomlTypeMismatchException(typeof(JomlLong), value.GetType(), typeof(int));
 
         return lng.Value;
     }
@@ -395,8 +395,8 @@ public class JomlTable : JomlValue, IEnumerable<KeyValuePair<string, JomlValue>>
     /// </summary>
     /// <param name="key">The key to look up.</param>
     /// <returns>The float value associated with the key.</returns>
-    /// <exception cref="TomlTypeMismatchException">If the value associated with this key is not a floating-point type.</exception>
-    /// <exception cref="TomlNoSuchValueException">If the key is not present in the table.</exception>
+    /// <exception cref="JomlTypeMismatchException">If the value associated with this key is not a floating-point type.</exception>
+    /// <exception cref="JomlNoSuchValueException">If the key is not present in the table.</exception>
     public float GetFloat(string key)
     {
         if (key == null)
@@ -405,7 +405,7 @@ public class JomlTable : JomlValue, IEnumerable<KeyValuePair<string, JomlValue>>
         var value = GetValue(JomlUtils.AddCorrectQuotes(key));
 
         if (value is not JomlDouble dbl)
-            throw new TomlTypeMismatchException(typeof(JomlDouble), value.GetType(), typeof(float));
+            throw new JomlTypeMismatchException(typeof(JomlDouble), value.GetType(), typeof(float));
 
         return (float)dbl.Value;
     }
@@ -415,8 +415,8 @@ public class JomlTable : JomlValue, IEnumerable<KeyValuePair<string, JomlValue>>
     /// </summary>
     /// <param name="key">The key to look up.</param>
     /// <returns>The boolean value associated with the key.</returns>
-    /// <exception cref="TomlTypeMismatchException">If the value associated with this key is not a boolean.</exception>
-    /// <exception cref="TomlNoSuchValueException">If the key is not present in the table.</exception>
+    /// <exception cref="JomlTypeMismatchException">If the value associated with this key is not a boolean.</exception>
+    /// <exception cref="JomlNoSuchValueException">If the key is not present in the table.</exception>
     public bool GetBoolean(string key)
     {
         if (key == null)
@@ -425,7 +425,7 @@ public class JomlTable : JomlValue, IEnumerable<KeyValuePair<string, JomlValue>>
         var value = GetValue(JomlUtils.AddCorrectQuotes(key));
 
         if (value is not JomlBoolean b)
-            throw new TomlTypeMismatchException(typeof(JomlBoolean), value.GetType(), typeof(bool));
+            throw new JomlTypeMismatchException(typeof(JomlBoolean), value.GetType(), typeof(bool));
 
         return b.Value;
     }
@@ -435,8 +435,8 @@ public class JomlTable : JomlValue, IEnumerable<KeyValuePair<string, JomlValue>>
     /// </summary>
     /// <param name="key">The key to look up.</param>
     /// <returns>The TOML array associated with the key.</returns>
-    /// <exception cref="TomlTypeMismatchException">If the value associated with this key is not an array.</exception>
-    /// <exception cref="TomlNoSuchValueException">If the key is not present in the table.</exception>
+    /// <exception cref="JomlTypeMismatchException">If the value associated with this key is not an array.</exception>
+    /// <exception cref="JomlNoSuchValueException">If the key is not present in the table.</exception>
     public JomlArray GetArray(string key)
     {
         if (key == null)
@@ -445,7 +445,7 @@ public class JomlTable : JomlValue, IEnumerable<KeyValuePair<string, JomlValue>>
         var value = GetValue(JomlUtils.AddCorrectQuotes(key));
 
         if (value is not JomlArray arr)
-            throw new TomlTypeMismatchException(typeof(JomlArray), value.GetType(), typeof(JomlArray));
+            throw new JomlTypeMismatchException(typeof(JomlArray), value.GetType(), typeof(JomlArray));
 
         return arr;
     }
@@ -455,8 +455,8 @@ public class JomlTable : JomlValue, IEnumerable<KeyValuePair<string, JomlValue>>
     /// </summary>
     /// <param name="key">The key to look up.</param>
     /// <returns>The TOML table associated with the key.</returns>
-    /// <exception cref="TomlTypeMismatchException">If the value associated with this key is not a table.</exception>
-    /// <exception cref="TomlNoSuchValueException">If the key is not present in the table.</exception>
+    /// <exception cref="JomlTypeMismatchException">If the value associated with this key is not a table.</exception>
+    /// <exception cref="JomlNoSuchValueException">If the key is not present in the table.</exception>
     public JomlTable GetSubTable(string key)
     {
         if (key == null)
@@ -465,7 +465,7 @@ public class JomlTable : JomlValue, IEnumerable<KeyValuePair<string, JomlValue>>
         var value = GetValue(JomlUtils.AddCorrectQuotes(key));
 
         if (value is not JomlTable tbl)
-            throw new TomlTypeMismatchException(typeof(JomlTable), value.GetType(), typeof(JomlTable));
+            throw new JomlTypeMismatchException(typeof(JomlTable), value.GetType(), typeof(JomlTable));
 
         return tbl;
     }

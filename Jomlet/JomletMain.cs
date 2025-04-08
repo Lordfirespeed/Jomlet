@@ -139,7 +139,7 @@ public static class JomletMain
         {
             JomlDocument doc => doc,
             JomlTable table => new JomlDocument(table),
-            _ => throw new TomlPrimitiveToDocumentException(type)
+            _ => throw new JomlPrimitiveToDocumentException(type)
         };
     }
 

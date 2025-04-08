@@ -37,7 +37,7 @@ internal static class JomlCompositeDeserializer
                     if(options.IgnoreInvalidEnumValues)
                         return Enum.GetValues(type).GetValue(0)!;
                     
-                    throw new TomlEnumParseException(enumName, type);
+                    throw new JomlEnumParseException(enumName, type);
                 }
             };
         }
@@ -71,7 +71,7 @@ internal static class JomlCompositeDeserializer
             deserializer = value =>
             {
                 if (value is not JomlTable table)
-                    throw new TomlTypeMismatchException(typeof(JomlTable), value.GetType(), type);
+                    throw new JomlTypeMismatchException(typeof(JomlTable), value.GetType(), type);
 
                 var instance = CreateInstance(type, value, options, out var assignedMembers);
 
@@ -89,9 +89,9 @@ internal static class JomlCompositeDeserializer
                     {
                         fieldValue = JomlSerializationMethods.GetDeserializer(field.FieldType, options).Invoke(entry);
                     }
-                    catch (TomlTypeMismatchException e)
+                    catch (JomlTypeMismatchException e)
                     {
-                        throw new TomlFieldTypeMismatchException(type, field, e);
+                        throw new JomlFieldTypeMismatchException(type, field, e);
                     }
 
                     field.SetValue(instance, fieldValue);
@@ -112,9 +112,9 @@ internal static class JomlCompositeDeserializer
                     {
                         propValue = JomlSerializationMethods.GetDeserializer(prop.PropertyType, options).Invoke(entry);
                     }
-                    catch (TomlTypeMismatchException e)
+                    catch (JomlTypeMismatchException e)
                     {
-                        throw new TomlPropertyTypeMismatchException(type, prop, e);
+                        throw new JomlPropertyTypeMismatchException(type, prop, e);
                     }
 
                     prop.SetValue(instance, propValue, null);
@@ -138,11 +138,11 @@ internal static class JomlCompositeDeserializer
 #endif
     {
         if (jomlValue is not JomlTable table)
-            throw new TomlTypeMismatchException(typeof(JomlTable), jomlValue.GetType(), type);
+            throw new JomlTypeMismatchException(typeof(JomlTable), jomlValue.GetType(), type);
         
         if (!type.TryGetBestMatchConstructor(out var constructor))
         {
-            throw new TomlInstantiationException();
+            throw new JomlInstantiationException();
         }
 
         var parameters = constructor!.GetParameters();
@@ -166,9 +166,9 @@ internal static class JomlCompositeDeserializer
             {
                 argument = JomlSerializationMethods.GetDeserializer(parameter.ParameterType, options).Invoke(entry);
             }
-            catch (TomlTypeMismatchException e)
+            catch (JomlTypeMismatchException e)
             {
-                throw new TomlParameterTypeMismatchException(parameter.ParameterType, parameter, e);
+                throw new JomlParameterTypeMismatchException(parameter.ParameterType, parameter, e);
             }
 
             arguments[i] = argument;

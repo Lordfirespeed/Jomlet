@@ -1,10 +1,10 @@
 ﻿namespace Tomlet.Exceptions;
 
-public class TomlDottedKeyException : TomlException
+public class JomlDottedKeyException : JomlException
 {
     private readonly string _key;
 
-    public TomlDottedKeyException(string key)
+    public JomlDottedKeyException(string key)
     {
         _key = key;
     }

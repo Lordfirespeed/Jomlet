@@ -94,12 +94,12 @@ public class ExceptionTests
     public void ImplyingAValueIsATableViaDottedKeyWhenItIsNotThrows()
     {
         var doc = GetDocument(TestResources.ArrayOfEmptyStringTestInput);
-        AssertThrows<TomlDottedKeyException>(() => doc.Put("Array.a", "foo"));
+        AssertThrows<JomlDottedKeyException>(() => doc.Put("Array.a", "foo"));
     }
     
     [Fact]
     public void BadEnumValueThrows() =>
-        AssertThrows<TomlEnumParseException>(() => JomletMain.To<TomlTestClassWithEnum>(DeliberatelyIncorrectTestResources.TomlBadEnumExample));
+        AssertThrows<JomlEnumParseException>(() => JomletMain.To<TomlTestClassWithEnum>(DeliberatelyIncorrectTestResources.TomlBadEnumExample));
 
     [Fact]
     public void ReDefiningASubTableAsASubTableArrayThrowsAnException() => 
@@ -131,7 +131,7 @@ public class ExceptionTests
 
     [Fact]
     public void ConvertingAPrimitiveToADocumentThrows() =>
-        AssertThrows<TomlPrimitiveToDocumentException>(() => JomletMain.DocumentFrom("hello"));
+        AssertThrows<JomlPrimitiveToDocumentException>(() => JomletMain.DocumentFrom("hello"));
     
     [Fact]
     public void BadTomlStringThrows() =>
@@ -189,35 +189,35 @@ public class ExceptionTests
     
     [Fact]
     public void UnInstantiableObjectsThrow() => 
-        AssertThrows<TomlInstantiationException>(() => JomletMain.To<IConvertible>(""));
+        AssertThrows<JomlInstantiationException>(() => JomletMain.To<IConvertible>(""));
 
     [Fact]
     public void MultipleParameterizedConstructorsThrow() =>
-        AssertThrows<TomlInstantiationException>(() => JomletMain.To<ClassWithMultipleParameterizedConstructors>(""));
+        AssertThrows<JomlInstantiationException>(() => JomletMain.To<ClassWithMultipleParameterizedConstructors>(""));
     
     [Fact]
     public void AbstractClassDeserializationThrows() =>
-        AssertThrows<TomlInstantiationException>(() => JomletMain.To<AbstractClass>(""));
+        AssertThrows<JomlInstantiationException>(() => JomletMain.To<AbstractClass>(""));
     
     [Fact]
     public void MismatchingTypesInPrimitiveMappingThrows() => 
-        AssertThrows<TomlTypeMismatchException>(() => JomletMain.To<float>(GetDocument("MyFloat = \"hello\"").GetValue("MyFloat")));
+        AssertThrows<JomlTypeMismatchException>(() => JomletMain.To<float>(GetDocument("MyFloat = \"hello\"").GetValue("MyFloat")));
 
     [Fact]
     public void GettingAValueWhichDoesntExistThrows() =>
-        AssertThrows<TomlNoSuchValueException>(() => GetDocument("MyString = \"hello\"").GetValue("MyFloat"));
+        AssertThrows<JomlNoSuchValueException>(() => GetDocument("MyString = \"hello\"").GetValue("MyFloat"));
     
     [Fact]
     public void MismatchingTypesInDeserializationThrow() => 
-        AssertThrows<TomlPropertyTypeMismatchException>(() => JomletMain.To<SimplePropertyTestClass>("MyFloat = \"hello\""));
+        AssertThrows<JomlPropertyTypeMismatchException>(() => JomletMain.To<SimplePropertyTestClass>("MyFloat = \"hello\""));
 
     [Fact]
     public void AskingATableForTheValueAssociatedWithAnInvalidKeyThrows() =>
-        AssertThrows<InvalidTomlKeyException>(() => GetDocument("").GetBoolean("\"I am invalid'"));
+        AssertThrows<InvalidJomlKeyException>(() => GetDocument("").GetBoolean("\"I am invalid'"));
     
     [Fact]
     public void SettingAnInlineCommentToIncludeANewlineThrows() => 
-        AssertThrows<TomlNewlineInInlineCommentException>(() => JomlDocument.CreateEmpty().Comments.InlineComment = "hello\nworld");
+        AssertThrows<JomlNewlineInInlineCommentException>(() => JomlDocument.CreateEmpty().Comments.InlineComment = "hello\nworld");
 
     [Fact]
     public void BadKeysThrow()
@@ -225,6 +225,6 @@ public class ExceptionTests
         var doc = GetDocument("");
         
         //A key with both quotes
-        AssertThrows<InvalidTomlKeyException>(() => doc.GetLong("\"hello'"));
+        AssertThrows<InvalidJomlKeyException>(() => doc.GetLong("\"hello'"));
     }
 }
