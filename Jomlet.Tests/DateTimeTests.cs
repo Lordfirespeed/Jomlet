@@ -41,13 +41,13 @@ namespace Tomlet.Tests
             //Check ldt1
             Assert.Equal(
                 new DateTime(1979, 5, 27, 07, 32, 00, DateTimeKind.Unspecified),
-                Assert.IsType<TomlLocalDateTime>(document.Entries.Values.First()).Value
+                Assert.IsType<JomlLocalDateTime>(document.Entries.Values.First()).Value
             );
 
             //Check ldt2
             Assert.Equal(
                 new DateTime(1979, 5, 27, 0, 32, 00, DateTimeKind.Unspecified).AddTicks(9999990),
-                Assert.IsType<TomlLocalDateTime>(document.Entries.Values.Last()).Value
+                Assert.IsType<JomlLocalDateTime>(document.Entries.Values.Last()).Value
             );
         }
 
