@@ -102,7 +102,7 @@ namespace Tomlet.Tests
         [Fact]
         public void ShouldOverrideDefaultConstructorsValues()
         {
-            var options = new TomlSerializerOptions { OverrideConstructorValues = true };
+            var options = new JomlSerializerOptions { OverrideConstructorValues = true };
             var type = JomletMain.To<ClassWithValuesSetOnConstructor>(TestResources.SimplePrimitiveDeserializationTestInput, options);
             
             Assert.Equal("Hello, world!", type.MyString);
@@ -111,7 +111,7 @@ namespace Tomlet.Tests
         [Fact]
         public void ShouldNotOverrideDefaultConstructorsValues()
         {
-            var options = new TomlSerializerOptions { OverrideConstructorValues = false };
+            var options = new JomlSerializerOptions { OverrideConstructorValues = false };
             var type = JomletMain.To<ClassWithValuesSetOnConstructor>(TestResources.SimplePrimitiveDeserializationTestInput, options);
             
             Assert.Equal("Modified on constructor!", type.MyString);

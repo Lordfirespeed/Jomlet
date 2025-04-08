@@ -1,8 +1,8 @@
 ﻿namespace Tomlet;
 
-public class TomlSerializerOptions
+public class JomlSerializerOptions
 {
-    public static TomlSerializerOptions Default = new();
+    public static JomlSerializerOptions Default = new();
     
     /// <summary>
     /// When set to false (default) the deserializer will skip assigning fields that have constructor params of the same name.

@@ -23,9 +23,9 @@ public static class JomlSerializationMethods
     private static MethodInfo _genericNullableSerializerMethod = typeof(JomlSerializationMethods).GetMethod(nameof(GenericNullableSerializer), BindingFlags.Static | BindingFlags.NonPublic)!;
 
     public delegate T Deserialize<out T>(TomlValue value);
-    public delegate T ComplexDeserialize<out T>(TomlValue value, TomlSerializerOptions options);
+    public delegate T ComplexDeserialize<out T>(TomlValue value, JomlSerializerOptions options);
     public delegate TomlValue? Serialize<in T>(T? t);
-    public delegate TomlValue? ComplexSerialize<in T>(T? t, TomlSerializerOptions options);
+    public delegate TomlValue? ComplexSerialize<in T>(T? t, JomlSerializerOptions options);
 
     private static readonly Dictionary<Type, Delegate> Deserializers = new();
     private static readonly Dictionary<Type, Delegate> Serializers = new();
@@ -90,12 +90,12 @@ public static class JomlSerializationMethods
     /// <returns>The default reflection-based serializer for the given type.</returns>
     /// <exception cref="ArgumentException">Thrown if <paramref name="type"/> is a primitive type.</exception>
 #if MODERN_DOTNET
-    public static Serialize<object> GetDefaultSerializerForType([DynamicallyAccessedMembers(MainDeserializerAccessedMemberTypes)] Type type, TomlSerializerOptions? options = null)
+    public static Serialize<object> GetDefaultSerializerForType([DynamicallyAccessedMembers(MainDeserializerAccessedMemberTypes)] Type type, JomlSerializerOptions? options = null)
 #else
-    public static Serialize<object> GetDefaultSerializerForType(Type type, TomlSerializerOptions? options = null)
+    public static Serialize<object> GetDefaultSerializerForType(Type type, JomlSerializerOptions? options = null)
 #endif
     {
-        options ??= TomlSerializerOptions.Default;
+        options ??= JomlSerializerOptions.Default;
         if(type.IsPrimitive)
             throw new ArgumentException("Can't use reflection-based serializer for primitive types.", nameof(type));
             
@@ -110,12 +110,12 @@ public static class JomlSerializationMethods
     /// <returns>The default reflection-based deserializer for the given type.</returns>
     /// <exception cref="ArgumentException">Thrown if <paramref name="type"/> is a primitive type.</exception>
 #if MODERN_DOTNET
-    public static Deserialize<object> GetDefaultDeserializerForType([DynamicallyAccessedMembers(MainDeserializerAccessedMemberTypes)] Type type, TomlSerializerOptions? options = null)
+    public static Deserialize<object> GetDefaultDeserializerForType([DynamicallyAccessedMembers(MainDeserializerAccessedMemberTypes)] Type type, JomlSerializerOptions? options = null)
 #else
-    public static Deserialize<object> GetDefaultDeserializerForType(Type type, TomlSerializerOptions? options = null)
+    public static Deserialize<object> GetDefaultDeserializerForType(Type type, JomlSerializerOptions? options = null)
 #endif
     {
-        options ??= TomlSerializerOptions.Default;
+        options ??= JomlSerializerOptions.Default;
         if(type.IsPrimitive)
             throw new ArgumentException("Can't use reflection-based deserializer for primitive types.", nameof(type));
             
@@ -126,12 +126,12 @@ public static class JomlSerializationMethods
 #if NET7_0_OR_GREATER
     [RequiresDynamicCode("The native code for underlying implementations of serialize helper methods may not be available for a given type.")]
 #endif // NET7_0_OR_GREATER
-    internal static Serialize<object> GetSerializer([DynamicallyAccessedMembers(MainDeserializerAccessedMemberTypes)] Type t, TomlSerializerOptions? options)
+    internal static Serialize<object> GetSerializer([DynamicallyAccessedMembers(MainDeserializerAccessedMemberTypes)] Type t, JomlSerializerOptions? options)
 #else
-        internal static Serialize<object> GetSerializer(Type t, TomlSerializerOptions? options)
+        internal static Serialize<object> GetSerializer(Type t, JomlSerializerOptions? options)
 #endif
     {
-        options ??= TomlSerializerOptions.Default;
+        options ??= JomlSerializerOptions.Default;
             
         if (Serializers.TryGetValue(t, out var value))
             return (Serialize<object>)value;
@@ -176,12 +176,12 @@ public static class JomlSerializationMethods
 #if NET7_0_OR_GREATER        
     [RequiresDynamicCode("The native code for underlying implementations of deserialize helper methods may not be available for a given type.")]
 #endif // NET7_0_OR_GREATER
-    internal static Deserialize<object> GetDeserializer([DynamicallyAccessedMembers(MainDeserializerAccessedMemberTypes)] Type t, TomlSerializerOptions? options)
+    internal static Deserialize<object> GetDeserializer([DynamicallyAccessedMembers(MainDeserializerAccessedMemberTypes)] Type t, JomlSerializerOptions? options)
 #else
-        internal static Deserialize<object> GetDeserializer(Type t, TomlSerializerOptions? options)
+        internal static Deserialize<object> GetDeserializer(Type t, JomlSerializerOptions? options)
 #endif
     {
-        options ??= TomlSerializerOptions.Default;
+        options ??= JomlSerializerOptions.Default;
             
         if (Deserializers.TryGetValue(t, out var value))
             return (Deserialize<object>)value;
@@ -246,9 +246,9 @@ public static class JomlSerializationMethods
 #if NET7_0_OR_GREATER
     [RequiresDynamicCode("The native code for underlying implementations of serialize helper methods may not be available for a given type.")]
 #endif // NET7_0_OR_GREATER
-    private static Serialize<object> DictionarySerializerFor([DynamicallyAccessedMembers(MainDeserializerAccessedMemberTypes)] Type dictType, TomlSerializerOptions options)
+    private static Serialize<object> DictionarySerializerFor([DynamicallyAccessedMembers(MainDeserializerAccessedMemberTypes)] Type dictType, JomlSerializerOptions options)
 #else
-        private static Serialize<object> DictionarySerializerFor(Type dictType, TomlSerializerOptions options)
+        private static Serialize<object> DictionarySerializerFor(Type dictType, JomlSerializerOptions options)
 #endif
     {
         var serializer = _genericDictionarySerializerMethod.MakeGenericMethod(dictType.GetGenericArguments());
@@ -265,9 +265,9 @@ public static class JomlSerializationMethods
 #if NET7_0_OR_GREATER
     [RequiresDynamicCode("The native code for underlying implementations of serialize helper methods may not be available for a given type.")]
 #endif // NET7_0_OR_GREATER
-    private static Serialize<object> NullableSerializerFor([DynamicallyAccessedMembers(MainDeserializerAccessedMemberTypes)] Type nullableType, TomlSerializerOptions options)
+    private static Serialize<object> NullableSerializerFor([DynamicallyAccessedMembers(MainDeserializerAccessedMemberTypes)] Type nullableType, JomlSerializerOptions options)
 #else
-        private static Serialize<object> NullableSerializerFor(Type nullableType, TomlSerializerOptions options)
+        private static Serialize<object> NullableSerializerFor(Type nullableType, JomlSerializerOptions options)
 #endif
     {
         var serializer = _genericNullableSerializerMethod.MakeGenericMethod(nullableType.GetGenericArguments());
@@ -283,9 +283,9 @@ public static class JomlSerializationMethods
 #if NET7_0_OR_GREATER
     [RequiresDynamicCode("The native code for underlying implementations of deserialize helper methods may not be available for a given type.")]
 #endif // NET7_0_OR_GREATER
-    private static Deserialize<object> ArrayDeserializerFor([DynamicallyAccessedMembers(MainDeserializerAccessedMemberTypes)] Type elementType, TomlSerializerOptions options) =>
+    private static Deserialize<object> ArrayDeserializerFor([DynamicallyAccessedMembers(MainDeserializerAccessedMemberTypes)] Type elementType, JomlSerializerOptions options) =>
 #else
-        private static Deserialize<object> ArrayDeserializerFor(Type elementType, TomlSerializerOptions options) =>
+        private static Deserialize<object> ArrayDeserializerFor(Type elementType, JomlSerializerOptions options) =>
 #endif
         value =>
         {
@@ -305,9 +305,9 @@ public static class JomlSerializationMethods
 
 #if MODERN_DOTNET
     [UnconditionalSuppressMessage("AOT", "IL3050:Calling members annotated with 'RequiresDynamicCodeAttribute' may break functionality when AOT compiling.", Justification = "The element type must have been used somewhere in the consuming code in order for this method to be called, so the dynamic code requirement is already satisfied.")]
-    private static Deserialize<object> ListDeserializerFor([DynamicallyAccessedMembers(MainDeserializerAccessedMemberTypes)] Type elementType, TomlSerializerOptions options)
+    private static Deserialize<object> ListDeserializerFor([DynamicallyAccessedMembers(MainDeserializerAccessedMemberTypes)] Type elementType, JomlSerializerOptions options)
 #else
-        private static Deserialize<object> ListDeserializerFor(Type elementType, TomlSerializerOptions options)
+        private static Deserialize<object> ListDeserializerFor(Type elementType, JomlSerializerOptions options)
 #endif
     {
         var listType = typeof(List<>).MakeGenericType(elementType);
@@ -335,9 +335,9 @@ public static class JomlSerializationMethods
 #if NET7_0_OR_GREATER        
     [RequiresDynamicCode("The native code for underlying implementations of deserialize helper methods may not be available for a given type.")]
 #endif // NET7_0_OR_GREATER
-    private static Deserialize<object> NullableDeserializerFor([DynamicallyAccessedMembers(MainDeserializerAccessedMemberTypes)] Type nullableType, TomlSerializerOptions options)
+    private static Deserialize<object> NullableDeserializerFor([DynamicallyAccessedMembers(MainDeserializerAccessedMemberTypes)] Type nullableType, JomlSerializerOptions options)
 #else 
-        private static Deserialize<object> NullableDeserializerFor(Type nullableType, TomlSerializerOptions options)
+        private static Deserialize<object> NullableDeserializerFor(Type nullableType, JomlSerializerOptions options)
 #endif
     {
         var elementType = nullableType.GetGenericArguments()[0];
@@ -355,9 +355,9 @@ public static class JomlSerializationMethods
 #if NET7_0_OR_GREATER
     [RequiresDynamicCode("The native code for underlying implementations of deserialize helper methods may not be available for a given type.")]
 #endif // NET7_0_OR_GREATER
-    private static Deserialize<Dictionary<string, T>> StringKeyedDictionaryDeserializerFor<[DynamicallyAccessedMembers(MainDeserializerAccessedMemberTypes)] T>(TomlSerializerOptions options)
+    private static Deserialize<Dictionary<string, T>> StringKeyedDictionaryDeserializerFor<[DynamicallyAccessedMembers(MainDeserializerAccessedMemberTypes)] T>(JomlSerializerOptions options)
 #else
-        private static Deserialize<Dictionary<string, T>> StringKeyedDictionaryDeserializerFor<T>(TomlSerializerOptions options)
+        private static Deserialize<Dictionary<string, T>> StringKeyedDictionaryDeserializerFor<T>(JomlSerializerOptions options)
 #endif
     {
         var deserializer = GetDeserializer(typeof(T), options);
@@ -376,9 +376,9 @@ public static class JomlSerializationMethods
 #if NET7_0_OR_GREATER
     [RequiresDynamicCode("The native code for underlying implementations of deserialize helper methods may not be available for a given type.")]
 #endif // NET7_0_OR_GREATER
-    private static Deserialize<Dictionary<TKey, TValue>> PrimitiveKeyedDictionaryDeserializerFor<TKey, [DynamicallyAccessedMembers(MainDeserializerAccessedMemberTypes)] TValue>(TomlSerializerOptions options) where TKey : unmanaged, IConvertible
+    private static Deserialize<Dictionary<TKey, TValue>> PrimitiveKeyedDictionaryDeserializerFor<TKey, [DynamicallyAccessedMembers(MainDeserializerAccessedMemberTypes)] TValue>(JomlSerializerOptions options) where TKey : unmanaged, IConvertible
 #else
-        private static Deserialize<Dictionary<TKey, TValue>> PrimitiveKeyedDictionaryDeserializerFor<TKey, TValue>(TomlSerializerOptions options) where TKey : unmanaged, IConvertible
+        private static Deserialize<Dictionary<TKey, TValue>> PrimitiveKeyedDictionaryDeserializerFor<TKey, TValue>(JomlSerializerOptions options) where TKey : unmanaged, IConvertible
 #endif
     {
         var valueDeserializer = GetDeserializer(typeof(TValue), options);
@@ -417,9 +417,9 @@ public static class JomlSerializationMethods
 #if NET7_0_OR_GREATER
     [RequiresDynamicCode("The native code for underlying implementations of serialize helper methods may not be available for a given type.")]
 #endif // NET7_0_OR_GREATER
-    private static TomlValue? GenericNullableSerializer<[DynamicallyAccessedMembers(MainDeserializerAccessedMemberTypes)] T>(T? nullable, TomlSerializerOptions options) where T : struct
+    private static TomlValue? GenericNullableSerializer<[DynamicallyAccessedMembers(MainDeserializerAccessedMemberTypes)] T>(T? nullable, JomlSerializerOptions options) where T : struct
 #else
-        private static TomlValue? GenericNullableSerializer<T>(T? nullable, TomlSerializerOptions options) where T : struct
+        private static TomlValue? GenericNullableSerializer<T>(T? nullable, JomlSerializerOptions options) where T : struct
 #endif
     {
         var elementSerializer = GetSerializer(typeof(T), options);
@@ -434,9 +434,9 @@ public static class JomlSerializationMethods
 #if NET7_0_OR_GREATER
     [RequiresDynamicCode("The native code for underlying implementations of serialize helper methods may not be available for a given type.")]
 #endif // NET7_0_OR_GREATER
-    private static TomlValue GenericDictionarySerializer<TKey, [DynamicallyAccessedMembers(MainDeserializerAccessedMemberTypes)] TValue>(Dictionary<TKey, TValue> dict, TomlSerializerOptions options) where TKey : notnull
+    private static TomlValue GenericDictionarySerializer<TKey, [DynamicallyAccessedMembers(MainDeserializerAccessedMemberTypes)] TValue>(Dictionary<TKey, TValue> dict, JomlSerializerOptions options) where TKey : notnull
 #else
-        private static TomlValue GenericDictionarySerializer<TKey, TValue>(Dictionary<TKey, TValue> dict, TomlSerializerOptions options) where TKey : notnull
+        private static TomlValue GenericDictionarySerializer<TKey, TValue>(Dictionary<TKey, TValue> dict, JomlSerializerOptions options) where TKey : notnull
 #endif
     {
         var valueSerializer = GetSerializer(typeof(TValue), options);

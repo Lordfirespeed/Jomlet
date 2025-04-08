@@ -15,9 +15,9 @@ internal static class JomlCompositeDeserializer
 {
 #if MODERN_DOTNET
     [UnconditionalSuppressMessage("AOT", "IL2072", Justification = "Any field that is being deserialized to must have been used as a field in the consuming code in order for the code path that queries it to run, so the dynamic code requirement is already satisfied.")]
-    public static JomlSerializationMethods.Deserialize<object> For([DynamicallyAccessedMembers(JomlSerializationMethods.MainDeserializerAccessedMemberTypes)] Type type, TomlSerializerOptions options)
+    public static JomlSerializationMethods.Deserialize<object> For([DynamicallyAccessedMembers(JomlSerializationMethods.MainDeserializerAccessedMemberTypes)] Type type, JomlSerializerOptions options)
 #else
-    public static JomlSerializationMethods.Deserialize<object> For(Type type, TomlSerializerOptions options)
+    public static JomlSerializationMethods.Deserialize<object> For(Type type, JomlSerializerOptions options)
 #endif
     {
         JomlSerializationMethods.Deserialize<object> deserializer;
@@ -132,9 +132,9 @@ internal static class JomlCompositeDeserializer
 
 #if MODERN_DOTNET
     [UnconditionalSuppressMessage("AOT", "IL2072", Justification = "Any constructor parameter must have been used somewhere in the consuming code in order for the code path that queries it to run, so the dynamic code requirement is already satisfied.")]
-    private static object CreateInstance([DynamicallyAccessedMembers(JomlSerializationMethods.MainDeserializerAccessedMemberTypes)] Type type, TomlValue tomlValue, TomlSerializerOptions options, out HashSet<string> assignedMembers)
+    private static object CreateInstance([DynamicallyAccessedMembers(JomlSerializationMethods.MainDeserializerAccessedMemberTypes)] Type type, TomlValue tomlValue, JomlSerializerOptions options, out HashSet<string> assignedMembers)
 #else
-    private static object CreateInstance(Type type, TomlValue tomlValue, TomlSerializerOptions options, out HashSet<string> assignedMembers)
+    private static object CreateInstance(Type type, TomlValue tomlValue, JomlSerializerOptions options, out HashSet<string> assignedMembers)
 #endif
     {
         if (tomlValue is not TomlTable table)
