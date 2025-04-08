@@ -8,7 +8,7 @@ namespace Tomlet.Tests;
 
 public class ExceptionTests
 {
-    private TomlDocument GetDocument(string resource) => new JomlParser().Parse(resource);
+    private JomlDocument GetDocument(string resource) => new JomlParser().Parse(resource);
     
     private static void AssertThrows<T>(Action what) where T: Exception
     {
@@ -217,7 +217,7 @@ public class ExceptionTests
     
     [Fact]
     public void SettingAnInlineCommentToIncludeANewlineThrows() => 
-        AssertThrows<TomlNewlineInInlineCommentException>(() => TomlDocument.CreateEmpty().Comments.InlineComment = "hello\nworld");
+        AssertThrows<TomlNewlineInInlineCommentException>(() => JomlDocument.CreateEmpty().Comments.InlineComment = "hello\nworld");
 
     [Fact]
     public void BadKeysThrow()

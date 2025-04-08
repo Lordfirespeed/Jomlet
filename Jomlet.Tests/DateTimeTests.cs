@@ -7,7 +7,7 @@ namespace Tomlet.Tests
 {
     public class DateTimeTests
     {
-        private TomlDocument GetDocument(string resource)
+        private JomlDocument GetDocument(string resource)
         {
             var parser = new JomlParser();
             return parser.Parse(resource);

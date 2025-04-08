@@ -109,9 +109,9 @@ public static class JomletMain
 #if NET7_0_OR_GREATER
     [RequiresDynamicCode("The native code for underlying implementations of serialize helper methods may not be available for a given type.")]
 #endif // NET7_0_OR_GREATER
-    public static TomlDocument? DocumentFrom<[DynamicallyAccessedMembers(JomlSerializationMethods.MainDeserializerAccessedMemberTypes)] T>(T? t, JomlSerializerOptions? options = null)
+    public static JomlDocument? DocumentFrom<[DynamicallyAccessedMembers(JomlSerializationMethods.MainDeserializerAccessedMemberTypes)] T>(T? t, JomlSerializerOptions? options = null)
 #else
-        public static TomlDocument? DocumentFrom<T>(T? t, JomlSerializerOptions? options = null)
+        public static JomlDocument? DocumentFrom<T>(T? t, JomlSerializerOptions? options = null)
 #endif
     {
         if (t == null)
@@ -125,9 +125,9 @@ public static class JomletMain
 #if NET7_0_OR_GREATER
     [RequiresDynamicCode("The native code for underlying implementations of serialize helper methods may not be available for a given type.")]
 #endif // NET7_0_OR_GREATER
-    public static TomlDocument? DocumentFrom([DynamicallyAccessedMembers(JomlSerializationMethods.MainDeserializerAccessedMemberTypes)] Type type, object? t, JomlSerializerOptions? options = null)
+    public static JomlDocument? DocumentFrom([DynamicallyAccessedMembers(JomlSerializationMethods.MainDeserializerAccessedMemberTypes)] Type type, object? t, JomlSerializerOptions? options = null)
 #else
-        public static TomlDocument? DocumentFrom(Type type, object? t, JomlSerializerOptions? options = null)
+        public static JomlDocument? DocumentFrom(Type type, object? t, JomlSerializerOptions? options = null)
 #endif
     {
         if (t == null)
@@ -137,8 +137,8 @@ public static class JomletMain
 
         return val switch
         {
-            TomlDocument doc => doc,
-            TomlTable table => new TomlDocument(table),
+            JomlDocument doc => doc,
+            TomlTable table => new JomlDocument(table),
             _ => throw new TomlPrimitiveToDocumentException(type)
         };
     }

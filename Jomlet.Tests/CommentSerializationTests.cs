@@ -9,7 +9,7 @@ public class CommentSerializationTests
     [Fact]
     public void CommentsOnSimpleKeyValuePairsWork()
     {
-        var doc = TomlDocument.CreateEmpty();
+        var doc = JomlDocument.CreateEmpty();
         var tomlString = JomletMain.ValueFrom("value");
         tomlString.Comments.InlineComment = "This is an inline comment";
         doc.PutValue("key", tomlString);
@@ -31,7 +31,7 @@ public class CommentSerializationTests
     {
         //Test comments being added to table headers.
         //To force the table to be serialized long form, we add a comment to an element in it
-        var doc = TomlDocument.CreateEmpty();
+        var doc = JomlDocument.CreateEmpty();
         var table = new TomlTable
         {
             Comments =
@@ -59,7 +59,7 @@ key = ""value"" # Inline comment on value";
     {
         //Test comments on table-array headers, and the logic around preceding comments on both the TA and first table
 
-        var doc = TomlDocument.CreateEmpty();
+        var doc = JomlDocument.CreateEmpty();
         var table = new TomlTable
         {
             Comments =
@@ -90,7 +90,7 @@ key = ""value"" # Inline comment on value".Trim();
     [Fact]
     public void CommentsOnPrimitiveArraysWork()
     {
-        var doc = TomlDocument.CreateEmpty();
+        var doc = JomlDocument.CreateEmpty();
         var tomlNumbers = new JomlArray {1, 2, 3};
         doc.PutValue("numbers", tomlNumbers);
 

@@ -6,7 +6,7 @@ namespace Tomlet.Tests
 {
     public class TableTests
     {
-        private TomlDocument GetDocument(string resource)
+        private JomlDocument GetDocument(string resource)
         {
             var parser = new JomlParser();
             return parser.Parse(resource);

@@ -90,7 +90,7 @@ namespace Tomlet.Tests
         [Fact]
         public void AttemptingToDeserializeADocumentWithAnIncorrectlyTypedFieldThrows()
         {
-            var document = TomlDocument.CreateEmpty();
+            var document = JomlDocument.CreateEmpty();
             document.Put("MyFloat", "Not a float");
 
             var ex = Assert.Throws<TomlFieldTypeMismatchException>(() => JomletMain.To<SimplePrimitiveTestClass>(document));

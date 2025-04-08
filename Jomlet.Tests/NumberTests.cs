@@ -6,7 +6,7 @@ namespace Tomlet.Tests
 {
     public class NumberTests
     {
-        private TomlDocument GetDocument(string resource)
+        private JomlDocument GetDocument(string resource)
         {
             var parser = new JomlParser();
             return parser.Parse(resource);
@@ -143,7 +143,7 @@ namespace Tomlet.Tests
         [Fact]
         public void SpecialFloatConstantsSerializeWithTheCorrectValue()
         {
-            var document = TomlDocument.CreateEmpty();
+            var document = JomlDocument.CreateEmpty();
             var originalFloat = float.NaN;
             document.Put("float", originalFloat);
 

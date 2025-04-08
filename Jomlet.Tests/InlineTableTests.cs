@@ -7,7 +7,7 @@ namespace Tomlet.Tests
 {
     public class InlineTableTests
     {
-        private TomlDocument GetDocument(string resource)
+        private JomlDocument GetDocument(string resource)
         {
             var parser = new JomlParser();
             return parser.Parse(resource);
@@ -31,7 +31,7 @@ namespace Tomlet.Tests
         {
             //Serializing these inline means we have to duplicate all the key quoting shenanigans, it's easier just to not inline them
             var obj = new KeyWithWhitespaceTestClass() {KeyWithWhitespace = "hello"};
-            var document = TomlDocument.CreateEmpty();
+            var document = JomlDocument.CreateEmpty();
             document.Put("myTable", obj);
 
             var tomlString = document.SerializedValue;

@@ -2,19 +2,19 @@
 
 namespace Tomlet.Models;
 
-public class TomlDocument : TomlTable
+public class JomlDocument : TomlTable
 {
     // ReSharper disable once UnusedMember.Global
-    public static TomlDocument CreateEmpty() => new();
+    public static JomlDocument CreateEmpty() => new();
 
     public string? TrailingComment { get; set; }
 
-    internal TomlDocument()
+    internal JomlDocument()
     {
         //Non-public ctor.
     }
 
-    internal TomlDocument(TomlTable from)
+    internal JomlDocument(TomlTable from)
     {
         foreach (var key in from.Keys)
         {

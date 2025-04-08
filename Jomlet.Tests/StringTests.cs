@@ -6,7 +6,7 @@ namespace Tomlet.Tests
 {
     public class StringTests
     {
-        private TomlDocument GetDocument(string resource)
+        private JomlDocument GetDocument(string resource)
         {
             var parser = new JomlParser();
             return parser.Parse(resource);
@@ -180,7 +180,7 @@ namespace Tomlet.Tests
         public void SerializingPathStringsPrefersLiterals()
         {
             var myString = @"C:\my\cool\path\to\something";
-            var document = TomlDocument.CreateEmpty();
+            var document = JomlDocument.CreateEmpty();
             document.Put("myString", myString);
             
             Assert.Equal($"myString = '{myString}'", document.SerializedValue.Trim());

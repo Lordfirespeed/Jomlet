@@ -23,18 +23,18 @@ public class JomlParser
 
     // ReSharper disable once UnusedMember.Global
     [ExcludeFromCodeCoverage]
-    public static TomlDocument ParseFile(string filePath)
+    public static JomlDocument ParseFile(string filePath)
     {
         var fileContent = File.ReadAllText(filePath);
         JomlParser parser = new();
         return parser.Parse(fileContent);
     }
 
-    public TomlDocument Parse(string input)
+    public JomlDocument Parse(string input)
     {
         try
         {
-            var document = new TomlDocument();
+            var document = new JomlDocument();
             using var reader = new JomletStringReader(input);
 
             string? lastPrecedingComment = null;
@@ -820,7 +820,7 @@ public class JomlParser
         return result;
     }
 
-    private TomlTable ReadTableStatement(JomletStringReader reader, TomlDocument document)
+    private TomlTable ReadTableStatement(JomletStringReader reader, JomlDocument document)
     {
         //Table name
         var currentTableKey = reader.ReadWhile(c => !c.IsEndOfArrayChar() && !c.IsNewline());
@@ -889,7 +889,7 @@ public class JomlParser
         return table;
     }
 
-    private JomlArray ReadTableArrayStatement(JomletStringReader reader, TomlDocument document)
+    private JomlArray ReadTableArrayStatement(JomletStringReader reader, JomlDocument document)
     {
         //Consume the (second) opening bracket
         if (!reader.ExpectAndConsume('['))
