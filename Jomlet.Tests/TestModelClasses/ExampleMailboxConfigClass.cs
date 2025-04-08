@@ -15,7 +15,7 @@ public class ExampleMailboxConfigClass
     [JomlInlineComment("The password you use to access the mailbox")]
     public string password;
 
-    [TomlPrecedingComment("The rules for the mailbox follow")]
+    [JomlPrecedingComment("The rules for the mailbox follow")]
     public Rule[] rules { get; set; }
 
     public class Rule
