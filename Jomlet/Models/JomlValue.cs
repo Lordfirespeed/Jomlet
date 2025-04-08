@@ -1,6 +1,6 @@
 ﻿namespace Tomlet.Models;
 
-public abstract class TomlValue
+public abstract class JomlValue
 {
     public JomlCommentData Comments { get; } = new();
         

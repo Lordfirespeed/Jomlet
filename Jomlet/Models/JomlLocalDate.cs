@@ -3,7 +3,7 @@ using System.Xml;
 
 namespace Tomlet.Models;
 
-public class JomlLocalDate : TomlValue, ITomlValueWithDateTime
+public class JomlLocalDate : JomlValue, IJomlValueWithDateTime
 {
     private readonly DateTime _value;
 

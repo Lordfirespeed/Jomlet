@@ -2,7 +2,7 @@
 
 namespace Tomlet.Models;
 
-public class JomlDouble : TomlValue
+public class JomlDouble : JomlValue
 {
     private double _value;
 

@@ -45,9 +45,9 @@ public static class JomletMain
 #if NET7_0_OR_GREATER
     [RequiresDynamicCode("The native code for underlying implementations of deserialize helper methods may not be available for a given type.")]
 #endif // NET7_0_OR_GREATER
-    public static T To<[DynamicallyAccessedMembers(JomlSerializationMethods.MainDeserializerAccessedMemberTypes)] T>(TomlValue value, JomlSerializerOptions? options = null)
+    public static T To<[DynamicallyAccessedMembers(JomlSerializationMethods.MainDeserializerAccessedMemberTypes)] T>(JomlValue value, JomlSerializerOptions? options = null)
 #else
-        public static T To<T>(TomlValue value, JomlSerializerOptions? options = null)
+        public static T To<T>(JomlValue value, JomlSerializerOptions? options = null)
 #endif
     {
         return (T)To(typeof(T), value, options);
@@ -57,9 +57,9 @@ public static class JomletMain
 #if NET7_0_OR_GREATER
     [RequiresDynamicCode("The native code for underlying implementations of deserialize helper methods may not be available for a given type.")]
 #endif // NET7_0_OR_GREATER
-    public static object To([DynamicallyAccessedMembers(JomlSerializationMethods.MainDeserializerAccessedMemberTypes)] Type what, TomlValue value, JomlSerializerOptions? options = null)
+    public static object To([DynamicallyAccessedMembers(JomlSerializationMethods.MainDeserializerAccessedMemberTypes)] Type what, JomlValue value, JomlSerializerOptions? options = null)
 #else
-        public static object To(Type what, TomlValue value, JomlSerializerOptions? options = null)
+        public static object To(Type what, JomlValue value, JomlSerializerOptions? options = null)
 #endif
     {
         var deserializer = JomlSerializationMethods.GetDeserializer(what, options);
@@ -73,9 +73,9 @@ public static class JomletMain
 #if NET7_0_OR_GREATER
     [RequiresDynamicCode("The native code for underlying implementations of serialize helper methods may not be available for a given type.")]
 #endif // NET7_0_OR_GREATER
-    public static TomlValue? ValueFrom<[DynamicallyAccessedMembers(JomlSerializationMethods.MainDeserializerAccessedMemberTypes)] T>(T? t, JomlSerializerOptions? options = null)
+    public static JomlValue? ValueFrom<[DynamicallyAccessedMembers(JomlSerializationMethods.MainDeserializerAccessedMemberTypes)] T>(T? t, JomlSerializerOptions? options = null)
 #else
-        public static TomlValue? ValueFrom<T>(T? t, JomlSerializerOptions? options = null)
+        public static JomlValue? ValueFrom<T>(T? t, JomlSerializerOptions? options = null)
 #endif
     {
         if (t == null)
@@ -89,9 +89,9 @@ public static class JomletMain
 #if NET7_0_OR_GREATER
     [RequiresDynamicCode("The native code for underlying implementations of serialize helper methods may not be available for a given type.")]
 #endif // NET7_0_OR_GREATER
-    public static TomlValue? ValueFrom([DynamicallyAccessedMembers(JomlSerializationMethods.MainDeserializerAccessedMemberTypes)] Type type, object? t, JomlSerializerOptions? options = null)
+    public static JomlValue? ValueFrom([DynamicallyAccessedMembers(JomlSerializationMethods.MainDeserializerAccessedMemberTypes)] Type type, object? t, JomlSerializerOptions? options = null)
 #else
-        public static TomlValue? ValueFrom(Type type, object? t, JomlSerializerOptions? options = null)
+        public static JomlValue? ValueFrom(Type type, object? t, JomlSerializerOptions? options = null)
 #endif
     {
         if (t == null)

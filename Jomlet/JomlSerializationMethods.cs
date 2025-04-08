@@ -22,10 +22,10 @@ public static class JomlSerializationMethods
     private static MethodInfo _genericDictionarySerializerMethod = typeof(JomlSerializationMethods).GetMethod(nameof(GenericDictionarySerializer), BindingFlags.Static | BindingFlags.NonPublic)!;
     private static MethodInfo _genericNullableSerializerMethod = typeof(JomlSerializationMethods).GetMethod(nameof(GenericNullableSerializer), BindingFlags.Static | BindingFlags.NonPublic)!;
 
-    public delegate T Deserialize<out T>(TomlValue value);
-    public delegate T ComplexDeserialize<out T>(TomlValue value, JomlSerializerOptions options);
-    public delegate TomlValue? Serialize<in T>(T? t);
-    public delegate TomlValue? ComplexSerialize<in T>(T? t, JomlSerializerOptions options);
+    public delegate T Deserialize<out T>(JomlValue value);
+    public delegate T ComplexDeserialize<out T>(JomlValue value, JomlSerializerOptions options);
+    public delegate JomlValue? Serialize<in T>(T? t);
+    public delegate JomlValue? ComplexSerialize<in T>(T? t, JomlSerializerOptions options);
 
     private static readonly Dictionary<Type, Delegate> Deserializers = new();
     private static readonly Dictionary<Type, Delegate> Serializers = new();
@@ -73,7 +73,7 @@ public static class JomlSerializationMethods
         Register(f => new JomlDouble(f), value => (float)((value as JomlDouble)?.Value ?? (value as JomlLong)?.Value ?? throw new TomlTypeMismatchException(typeof(JomlDouble), value.GetType(), typeof(float))));
 
         //LocalDate(Time)
-        Register(dt => dt.TimeOfDay == TimeSpan.Zero ? new JomlLocalDate(dt) : new JomlLocalDateTime(dt), value => (value as ITomlValueWithDateTime)?.Value ?? throw new TomlTypeMismatchException(typeof(ITomlValueWithDateTime), value.GetType(), typeof(DateTime)));
+        Register(dt => dt.TimeOfDay == TimeSpan.Zero ? new JomlLocalDate(dt) : new JomlLocalDateTime(dt), value => (value as IJomlValueWithDateTime)?.Value ?? throw new TomlTypeMismatchException(typeof(IJomlValueWithDateTime), value.GetType(), typeof(DateTime)));
 
         //OffsetDateTime
         Register(odt => new JomlOffsetDateTime(odt), value => (value as JomlOffsetDateTime)?.Value ?? throw new TomlTypeMismatchException(typeof(JomlOffsetDateTime), value.GetType(), typeof(DateTimeOffset)));
@@ -254,7 +254,7 @@ public static class JomlSerializationMethods
         var serializer = _genericDictionarySerializerMethod.MakeGenericMethod(dictType.GetGenericArguments());
 
         var del = Delegate.CreateDelegate(typeof(ComplexSerialize<>).MakeGenericType(dictType), serializer);
-        var ret = (Serialize<object>)(dict => (TomlValue?)del.DynamicInvoke(dict, options));
+        var ret = (Serialize<object>)(dict => (JomlValue?)del.DynamicInvoke(dict, options));
         Serializers[dictType] = ret;
 
         return ret;
@@ -273,7 +273,7 @@ public static class JomlSerializationMethods
         var serializer = _genericNullableSerializerMethod.MakeGenericMethod(nullableType.GetGenericArguments());
                     
         var del = Delegate.CreateDelegate(typeof(ComplexSerialize<>).MakeGenericType(nullableType), serializer);
-        var ret = (Serialize<object>)(dict => (TomlValue?)del.DynamicInvoke(dict, options));
+        var ret = (Serialize<object>)(dict => (JomlValue?)del.DynamicInvoke(dict, options));
         Serializers[nullableType] = ret;
                     
         return ret;
@@ -417,9 +417,9 @@ public static class JomlSerializationMethods
 #if NET7_0_OR_GREATER
     [RequiresDynamicCode("The native code for underlying implementations of serialize helper methods may not be available for a given type.")]
 #endif // NET7_0_OR_GREATER
-    private static TomlValue? GenericNullableSerializer<[DynamicallyAccessedMembers(MainDeserializerAccessedMemberTypes)] T>(T? nullable, JomlSerializerOptions options) where T : struct
+    private static JomlValue? GenericNullableSerializer<[DynamicallyAccessedMembers(MainDeserializerAccessedMemberTypes)] T>(T? nullable, JomlSerializerOptions options) where T : struct
 #else
-        private static TomlValue? GenericNullableSerializer<T>(T? nullable, JomlSerializerOptions options) where T : struct
+        private static JomlValue? GenericNullableSerializer<T>(T? nullable, JomlSerializerOptions options) where T : struct
 #endif
     {
         var elementSerializer = GetSerializer(typeof(T), options);
@@ -434,9 +434,9 @@ public static class JomlSerializationMethods
 #if NET7_0_OR_GREATER
     [RequiresDynamicCode("The native code for underlying implementations of serialize helper methods may not be available for a given type.")]
 #endif // NET7_0_OR_GREATER
-    private static TomlValue GenericDictionarySerializer<TKey, [DynamicallyAccessedMembers(MainDeserializerAccessedMemberTypes)] TValue>(Dictionary<TKey, TValue> dict, JomlSerializerOptions options) where TKey : notnull
+    private static JomlValue GenericDictionarySerializer<TKey, [DynamicallyAccessedMembers(MainDeserializerAccessedMemberTypes)] TValue>(Dictionary<TKey, TValue> dict, JomlSerializerOptions options) where TKey : notnull
 #else
-        private static TomlValue GenericDictionarySerializer<TKey, TValue>(Dictionary<TKey, TValue> dict, JomlSerializerOptions options) where TKey : notnull
+        private static JomlValue GenericDictionarySerializer<TKey, TValue>(Dictionary<TKey, TValue> dict, JomlSerializerOptions options) where TKey : notnull
 #endif
     {
         var valueSerializer = GetSerializer(typeof(TValue), options);
@@ -487,13 +487,13 @@ public static class JomlSerializationMethods
 
     private static void RegisterDeserializer<T>(Deserialize<T> deserializer)
     {
-        object BoxedDeserializer(TomlValue value) => deserializer.Invoke(value) ?? throw new Exception($"TOML Deserializer returned null for type {nameof(T)}");
+        object BoxedDeserializer(JomlValue value) => deserializer.Invoke(value) ?? throw new Exception($"TOML Deserializer returned null for type {nameof(T)}");
         Deserializers[typeof(T)] = (Deserialize<object>)BoxedDeserializer;
     }
 
     private static void RegisterSerializer<T>(Serialize<T> serializer)
     {
-        TomlValue? ObjectAcceptingSerializer(object value) => serializer.Invoke((T)value);
+        JomlValue? ObjectAcceptingSerializer(object value) => serializer.Invoke((T)value);
         Serializers[typeof(T)] = (Serialize<object>)ObjectAcceptingSerializer!;
     }
 

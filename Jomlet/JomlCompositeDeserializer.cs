@@ -132,13 +132,13 @@ internal static class JomlCompositeDeserializer
 
 #if MODERN_DOTNET
     [UnconditionalSuppressMessage("AOT", "IL2072", Justification = "Any constructor parameter must have been used somewhere in the consuming code in order for the code path that queries it to run, so the dynamic code requirement is already satisfied.")]
-    private static object CreateInstance([DynamicallyAccessedMembers(JomlSerializationMethods.MainDeserializerAccessedMemberTypes)] Type type, TomlValue tomlValue, JomlSerializerOptions options, out HashSet<string> assignedMembers)
+    private static object CreateInstance([DynamicallyAccessedMembers(JomlSerializationMethods.MainDeserializerAccessedMemberTypes)] Type type, JomlValue jomlValue, JomlSerializerOptions options, out HashSet<string> assignedMembers)
 #else
-    private static object CreateInstance(Type type, TomlValue tomlValue, JomlSerializerOptions options, out HashSet<string> assignedMembers)
+    private static object CreateInstance(Type type, JomlValue jomlValue, JomlSerializerOptions options, out HashSet<string> assignedMembers)
 #endif
     {
-        if (tomlValue is not JomlTable table)
-            throw new TomlTypeMismatchException(typeof(JomlTable), tomlValue.GetType(), type);
+        if (jomlValue is not JomlTable table)
+            throw new TomlTypeMismatchException(typeof(JomlTable), jomlValue.GetType(), type);
         
         if (!type.TryGetBestMatchConstructor(out var constructor))
         {

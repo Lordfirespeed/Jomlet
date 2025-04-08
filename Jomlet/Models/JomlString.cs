@@ -4,7 +4,7 @@ using Tomlet.Extensions;
 
 namespace Tomlet.Models;
 
-public class JomlString : TomlValue
+public class JomlString : JomlValue
 {
     public static JomlString Empty => new("");
 

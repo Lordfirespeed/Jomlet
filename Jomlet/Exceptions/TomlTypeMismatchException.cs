@@ -13,8 +13,8 @@ public class TomlTypeMismatchException : TomlException
 
     public TomlTypeMismatchException(Type expected, Type actual, Type context)
     {
-        ExpectedTypeName = typeof(TomlValue).IsAssignableFrom(expected) ? expected.Name.Replace("Toml", "") : expected.Name;
-        ActualTypeName = typeof(TomlValue).IsAssignableFrom(actual) ? actual.Name.Replace("Toml", "") : actual.Name;
+        ExpectedTypeName = typeof(JomlValue).IsAssignableFrom(expected) ? expected.Name.Replace("Toml", "") : expected.Name;
+        ActualTypeName = typeof(JomlValue).IsAssignableFrom(actual) ? actual.Name.Replace("Toml", "") : actual.Name;
         ExpectedType = expected;
         ActualType = actual;
         _context = context;

@@ -12,7 +12,7 @@ internal static class JomlDateTimeUtils
         RegexOptions.Compiled
     );
 
-    internal static TomlValue? ParseDateString(string input, int lineNumber)
+    internal static JomlValue? ParseDateString(string input, int lineNumber)
     {
         //All groups can be empty.
         //Group 1 - Year

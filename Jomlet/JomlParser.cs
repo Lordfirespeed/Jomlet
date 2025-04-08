@@ -58,7 +58,7 @@ public class JomlParser
                     if (!reader.TryPeek(out var potentialSecondBracket))
                         throw new TomlEndOfFileException(_lineNumber);
 
-                    TomlValue valueFromSquareBracket;
+                    JomlValue valueFromSquareBracket;
                     if (potentialSecondBracket != '[')
                         valueFromSquareBracket = ReadTableStatement(reader, document);
                     else
@@ -104,7 +104,7 @@ public class JomlParser
         }
     }
 
-    private void ReadKeyValuePair(JomletStringReader reader, out string key, out TomlValue value)
+    private void ReadKeyValuePair(JomletStringReader reader, out string key, out JomlValue value)
     {
         //Read the key
         key = ReadKey(reader);
@@ -242,12 +242,12 @@ public class JomlParser
         throw new TomlEndOfFileException(_lineNumber);
     }
 
-    private TomlValue ReadValue(JomletStringReader reader)
+    private JomlValue ReadValue(JomletStringReader reader)
     {
         if (!reader.TryPeek(out var startOfValue))
             throw new TomlEndOfFileException(_lineNumber);
 
-        TomlValue value;
+        JomlValue value;
         switch (startOfValue)
         {
             case '[':
@@ -353,7 +353,7 @@ public class JomlParser
         return value;
     }
 
-    private TomlValue ReadSingleLineBasicString(JomletStringReader reader, bool consumeClosingQuote = true)
+    private JomlValue ReadSingleLineBasicString(JomletStringReader reader, bool consumeClosingQuote = true)
     {
         //No simple read here, we have to accomodate escaped double quotes.
         var content = new StringBuilder();
@@ -482,7 +482,7 @@ public class JomlParser
         return toAppend;
     }
 
-    private TomlValue ReadSingleLineLiteralString(JomletStringReader reader, bool consumeClosingQuote = true)
+    private JomlValue ReadSingleLineLiteralString(JomletStringReader reader, bool consumeClosingQuote = true)
     {
         //Literally (hah) just read until a single-quote
         var stringContent = reader.ReadWhile(valueChar => !valueChar.IsSingleQuote() && !valueChar.IsNewline());
@@ -503,7 +503,7 @@ public class JomlParser
         return new JomlString(stringContent);
     }
 
-    private TomlValue ReadMultiLineLiteralString(JomletStringReader reader)
+    private JomlValue ReadMultiLineLiteralString(JomletStringReader reader)
     {
         var content = new StringBuilder();
         //Ignore any first-line newlines
@@ -577,7 +577,7 @@ public class JomlParser
         return new JomlString(content.ToString());
     }
 
-    private TomlValue ReadMultiLineBasicString(JomletStringReader reader)
+    private JomlValue ReadMultiLineBasicString(JomletStringReader reader)
     {
         var content = new StringBuilder();
 

@@ -1,6 +1,6 @@
 ﻿namespace Tomlet.Models;
 
-public class JomlBoolean : TomlValue
+public class JomlBoolean : JomlValue
 {
     public static JomlBoolean True => new(true);
     public static JomlBoolean False => new(false);

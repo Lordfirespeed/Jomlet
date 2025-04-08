@@ -7,9 +7,9 @@ using System.Text;
 
 namespace Tomlet.Models;
 
-public class JomlArray : TomlValue, IEnumerable<TomlValue>
+public class JomlArray : JomlValue, IEnumerable<JomlValue>
 {
-    public readonly List<TomlValue> ArrayValues = new();
+    public readonly List<JomlValue> ArrayValues = new();
     internal bool IsLockedToBeTableArray;
     public override string StringValue => $"Toml Array ({ArrayValues.Count} values)";
 
@@ -19,7 +19,7 @@ public class JomlArray : TomlValue, IEnumerable<TomlValue>
     public void Add<T>(T t) where T: new()
 #endif
     {
-        var tomlValue = t is TomlValue tv ? tv : JomletMain.ValueFrom(t);
+        var tomlValue = t is JomlValue tv ? tv : JomletMain.ValueFrom(t);
         if(tomlValue != null)
             ArrayValues.Add(tomlValue);
     }
@@ -35,7 +35,7 @@ public class JomlArray : TomlValue, IEnumerable<TomlValue>
     public bool IsSimpleArray => !IsLockedToBeTableArray && !ArrayValues.Any(o => o is JomlArray or JomlTable || !o.Comments.ThereAreNoComments);
 
     // ReSharper disable once UnusedMember.Global
-    public TomlValue this[int index] => ArrayValues[index];
+    public JomlValue this[int index] => ArrayValues[index];
 
     public int Count => ArrayValues.Count;
 
@@ -130,7 +130,7 @@ public class JomlArray : TomlValue, IEnumerable<TomlValue>
         return builder.ToString();
     }
 
-    public IEnumerator<TomlValue> GetEnumerator()
+    public IEnumerator<JomlValue> GetEnumerator()
     {
         return ArrayValues.GetEnumerator();
     }

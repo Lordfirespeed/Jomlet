@@ -1,6 +1,6 @@
 ﻿namespace Tomlet.Models;
 
-public class JomlLong : TomlValue
+public class JomlLong : JomlValue
 {
     private long _value;
 

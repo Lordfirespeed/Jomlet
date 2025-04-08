@@ -2,7 +2,7 @@
 
 namespace Tomlet.Models;
 
-public class JomlLocalTime : TomlValue
+public class JomlLocalTime : JomlValue
 {
     private readonly TimeSpan _value;
 

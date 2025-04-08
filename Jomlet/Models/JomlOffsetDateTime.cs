@@ -2,7 +2,7 @@
 
 namespace Tomlet.Models;
 
-public class JomlOffsetDateTime : TomlValue
+public class JomlOffsetDateTime : JomlValue
 {
     private readonly DateTimeOffset _value;
 

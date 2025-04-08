@@ -2,7 +2,7 @@
 
 namespace Tomlet.Models;
 
-public interface ITomlValueWithDateTime
+public interface IJomlValueWithDateTime
 {
     public DateTime Value { get; }
 }

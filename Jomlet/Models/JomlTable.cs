@@ -10,9 +10,9 @@ using Tomlet.Extensions;
 namespace Tomlet.Models;
 
 [SuppressMessage("ReSharper", "UnusedMember.Global")]
-public class JomlTable : TomlValue, IEnumerable<KeyValuePair<string, TomlValue>>
+public class JomlTable : JomlValue, IEnumerable<KeyValuePair<string, JomlValue>>
 {
-    public readonly Dictionary<string, TomlValue> Entries = new();
+    public readonly Dictionary<string, JomlValue> Entries = new();
 
     internal bool Locked;
     internal bool Defined;
@@ -168,7 +168,7 @@ public class JomlTable : TomlValue, IEnumerable<KeyValuePair<string, TomlValue>>
         return true;
     }
 
-    internal void ParserPutValue(string key, TomlValue value, int lineNumber)
+    internal void ParserPutValue(string key, JomlValue value, int lineNumber)
     {
         if (Locked)
             throw new TomlTableLockedException(lineNumber, key);
@@ -176,7 +176,7 @@ public class JomlTable : TomlValue, IEnumerable<KeyValuePair<string, TomlValue>>
         InternalPutValue(key, value, lineNumber, true);
     }
 
-    public void PutValue(string key, TomlValue value, bool quote = false)
+    public void PutValue(string key, JomlValue value, bool quote = false)
     {
         if (key == null)
             throw new ArgumentNullException(nameof(key));
@@ -195,8 +195,8 @@ public class JomlTable : TomlValue, IEnumerable<KeyValuePair<string, TomlValue>>
     public void Put<T>(string key, T t, bool quote = false)
 #endif
     {
-        TomlValue? tomlValue;
-        tomlValue = t is not TomlValue tv ? JomletMain.ValueFrom(t) : tv;
+        JomlValue? tomlValue;
+        tomlValue = t is not JomlValue tv ? JomletMain.ValueFrom(t) : tv;
 
         if (tomlValue == null)
             throw new ArgumentException("Value to insert into TOML table serialized to null.", nameof(t));
@@ -210,7 +210,7 @@ public class JomlTable : TomlValue, IEnumerable<KeyValuePair<string, TomlValue>>
         return !wholeKeyIsQuoted ? key : key.Substring(1, key.Length - 2);
     }
 
-    private void InternalPutValue(string key, TomlValue value, int? lineNumber, bool callParserForm)
+    private void InternalPutValue(string key, JomlValue value, int? lineNumber, bool callParserForm)
     {
         key = key.Trim();
         JomlKeyUtils.GetTopLevelAndSubKeys(key, out var ourKeyName, out var restOfKey);
@@ -282,9 +282,9 @@ public class JomlTable : TomlValue, IEnumerable<KeyValuePair<string, TomlValue>>
     }
 
 #if MODERN_DOTNET
-        public bool TryGetValue(string key, [NotNullWhen(true)] out TomlValue? value)
+        public bool TryGetValue(string key, [NotNullWhen(true)] out JomlValue? value)
 #else
-    public bool TryGetValue(string key, out TomlValue value)
+    public bool TryGetValue(string key, out JomlValue value)
 #endif
     {
         if (ContainsKey(key))
@@ -299,15 +299,15 @@ public class JomlTable : TomlValue, IEnumerable<KeyValuePair<string, TomlValue>>
     }
 
     /// <summary>
-    /// Returns the raw instance of <see cref="TomlValue"/> associated with this key. You must cast to a sub-class and access its value
+    /// Returns the raw instance of <see cref="JomlValue"/> associated with this key. You must cast to a sub-class and access its value
     /// yourself.
     /// Unlike all the specific getters, this Getter respects dotted keys and quotes. You must quote any keys which contain a dot if you want to access the key itself,
     /// not a sub-key.
     /// </summary>
     /// <param name="key">The key to look up.</param>
-    /// <returns>An instance of <see cref="TomlValue"/> associated with this key.</returns>
+    /// <returns>An instance of <see cref="JomlValue"/> associated with this key.</returns>
     /// <exception cref="TomlNoSuchValueException">If the key is not present in the table.</exception>
-    public TomlValue GetValue(string key)
+    public JomlValue GetValue(string key)
     {
         if (key == null)
             throw new ArgumentNullException("key");
@@ -475,7 +475,7 @@ public class JomlTable : TomlValue, IEnumerable<KeyValuePair<string, TomlValue>>
         return GetEnumerator();
     }
 
-    public IEnumerator<KeyValuePair<string, TomlValue>> GetEnumerator()
+    public IEnumerator<KeyValuePair<string, JomlValue>> GetEnumerator()
     {
         return Entries.GetEnumerator();
     }
