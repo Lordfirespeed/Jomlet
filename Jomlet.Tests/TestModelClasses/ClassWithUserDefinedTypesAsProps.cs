@@ -4,41 +4,41 @@ namespace Jomlet.Tests.TestModelClasses;
 
 public class TableA
 {
-    [TomlProperty("IntA")]
+    [JomlProperty("IntA")]
     public int IntA { get; set; }
-    [TomlProperty("StringA")]
+    [JomlProperty("StringA")]
     public string StringA { get; set; }
 }
 
 public class TableB
 {
-    [TomlProperty("IntB")]
+    [JomlProperty("IntB")]
     public int IntB { get; set; }
     
-    [TomlProperty("StringB")]
+    [JomlProperty("StringB")]
     public string StringB { get; set; }
 }
 
 public abstract class Base
 {
-    [TomlProperty("A")]
+    [JomlProperty("A")]
     public TableA A { get; set; }
     
-    [TomlProperty("B")]
+    [JomlProperty("B")]
     public TableB B { get; set; }
     public string Junk;
 }
 
 public class TableC
 {
-    [TomlProperty("IntC")]
+    [JomlProperty("IntC")]
     public int IntC { get; set; }
-    [TomlProperty("StringC")]
+    [JomlProperty("StringC")]
     public string StringC { get; set; }
 }
 
 public class Derived : Base
 {
-    [TomlProperty("C")]
+    [JomlProperty("C")]
     public TableC C { get; set; }
 }

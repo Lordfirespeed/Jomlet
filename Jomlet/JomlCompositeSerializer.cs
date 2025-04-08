@@ -39,7 +39,7 @@ internal static class JomlCompositeSerializer
             var props = type.GetProperties(memberFlags)
                 .ToArray();
             var propAttribs = props
-                .ToDictionary(p => p, p => new {inline = GenericExtensions.GetCustomAttribute<TomlInlineCommentAttribute>(p), preceding = GenericExtensions.GetCustomAttribute<TomlPrecedingCommentAttribute>(p), prop = GenericExtensions.GetCustomAttribute<TomlPropertyAttribute>(p), noInline = GenericExtensions.GetCustomAttribute<TomlDoNotInlineObjectAttribute>(p)});
+                .ToDictionary(p => p, p => new {inline = GenericExtensions.GetCustomAttribute<TomlInlineCommentAttribute>(p), preceding = GenericExtensions.GetCustomAttribute<TomlPrecedingCommentAttribute>(p), prop = GenericExtensions.GetCustomAttribute<JomlPropertyAttribute>(p), noInline = GenericExtensions.GetCustomAttribute<TomlDoNotInlineObjectAttribute>(p)});
 
             var isForcedNoInline = GenericExtensions.GetCustomAttribute<TomlDoNotInlineObjectAttribute>(type) != null;
 

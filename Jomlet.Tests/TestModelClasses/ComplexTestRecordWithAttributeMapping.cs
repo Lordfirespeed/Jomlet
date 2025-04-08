@@ -4,14 +4,14 @@ namespace Jomlet.Tests.TestModelClasses
 {
     public record ComplexTestRecordWithAttributeMapping
     {
-        [TomlProperty("string")]
+        [JomlProperty("string")]
         public string MyString { get; init; }
         public WidgetForThisComplexTestRecordWithAttributeMapping MyWidget { get; init; }
     }
 
     public record WidgetForThisComplexTestRecordWithAttributeMapping
     {
-        [TomlProperty("my_int")]
+        [JomlProperty("my_int")]
         public int MyInt { get; init; }
     }
 }
