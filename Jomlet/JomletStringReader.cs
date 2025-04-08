@@ -2,13 +2,13 @@ using System;
 
 namespace Tomlet;
 
-public class TomletStringReader : IDisposable
+public class JomletStringReader : IDisposable
 {
     private string? _s;
     private int _pos;
     private int _length;
 
-    public TomletStringReader(string s)
+    public JomletStringReader(string s)
     {
         _s = s;
         _length = s.Length;

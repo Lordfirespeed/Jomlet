@@ -35,7 +35,7 @@ public class TomlParser
         try
         {
             var document = new TomlDocument();
-            using var reader = new TomletStringReader(input);
+            using var reader = new JomletStringReader(input);
 
             string? lastPrecedingComment = null;
             while (reader.TryPeek(out _))
@@ -104,7 +104,7 @@ public class TomlParser
         }
     }
 
-    private void ReadKeyValuePair(TomletStringReader reader, out string key, out TomlValue value)
+    private void ReadKeyValuePair(JomletStringReader reader, out string key, out TomlValue value)
     {
         //Read the key
         key = ReadKey(reader);
@@ -125,7 +125,7 @@ public class TomlParser
         value = ReadValue(reader);
     }
 
-    private string ReadKey(TomletStringReader reader)
+    private string ReadKey(JomletStringReader reader)
     {
         reader.SkipWhitespace();
 
@@ -180,7 +180,7 @@ public class TomlParser
         return key;
     }
 
-    private string ReadKeyInternal(TomletStringReader reader, Func<int, bool> charSignalsEndOfKey)
+    private string ReadKeyInternal(JomletStringReader reader, Func<int, bool> charSignalsEndOfKey)
     {
         var parts = new List<string>();
 
@@ -242,7 +242,7 @@ public class TomlParser
         throw new TomlEndOfFileException(_lineNumber);
     }
 
-    private TomlValue ReadValue(TomletStringReader reader)
+    private TomlValue ReadValue(JomletStringReader reader)
     {
         if (!reader.TryPeek(out var startOfValue))
             throw new TomlEndOfFileException(_lineNumber);
@@ -353,7 +353,7 @@ public class TomlParser
         return value;
     }
 
-    private TomlValue ReadSingleLineBasicString(TomletStringReader reader, bool consumeClosingQuote = true)
+    private TomlValue ReadSingleLineBasicString(JomletStringReader reader, bool consumeClosingQuote = true)
     {
         //No simple read here, we have to accomodate escaped double quotes.
         var content = new StringBuilder();
@@ -482,7 +482,7 @@ public class TomlParser
         return toAppend;
     }
 
-    private TomlValue ReadSingleLineLiteralString(TomletStringReader reader, bool consumeClosingQuote = true)
+    private TomlValue ReadSingleLineLiteralString(JomletStringReader reader, bool consumeClosingQuote = true)
     {
         //Literally (hah) just read until a single-quote
         var stringContent = reader.ReadWhile(valueChar => !valueChar.IsSingleQuote() && !valueChar.IsNewline());
@@ -503,7 +503,7 @@ public class TomlParser
         return new TomlString(stringContent);
     }
 
-    private TomlValue ReadMultiLineLiteralString(TomletStringReader reader)
+    private TomlValue ReadMultiLineLiteralString(JomletStringReader reader)
     {
         var content = new StringBuilder();
         //Ignore any first-line newlines
@@ -577,7 +577,7 @@ public class TomlParser
         return new TomlString(content.ToString());
     }
 
-    private TomlValue ReadMultiLineBasicString(TomletStringReader reader)
+    private TomlValue ReadMultiLineBasicString(JomletStringReader reader)
     {
         var content = new StringBuilder();
 
@@ -708,7 +708,7 @@ public class TomlParser
         return new TomlString(content.ToString());
     }
 
-    private TomlArray ReadArray(TomletStringReader reader)
+    private TomlArray ReadArray(JomletStringReader reader)
     {
         //Consume the opening bracket
         if (!reader.ExpectAndConsume('['))
@@ -754,7 +754,7 @@ public class TomlParser
         return result;
     }
 
-    private TomlTable ReadInlineTable(TomletStringReader reader)
+    private TomlTable ReadInlineTable(JomletStringReader reader)
     {
         //Consume the opening brace
         if (!reader.ExpectAndConsume('{'))
@@ -820,7 +820,7 @@ public class TomlParser
         return result;
     }
 
-    private TomlTable ReadTableStatement(TomletStringReader reader, TomlDocument document)
+    private TomlTable ReadTableStatement(JomletStringReader reader, TomlDocument document)
     {
         //Table name
         var currentTableKey = reader.ReadWhile(c => !c.IsEndOfArrayChar() && !c.IsNewline());
@@ -889,7 +889,7 @@ public class TomlParser
         return table;
     }
 
-    private TomlArray ReadTableArrayStatement(TomletStringReader reader, TomlDocument document)
+    private TomlArray ReadTableArrayStatement(JomletStringReader reader, TomlDocument document)
     {
         //Consume the (second) opening bracket
         if (!reader.ExpectAndConsume('['))
@@ -972,7 +972,7 @@ public class TomlParser
         }
     }
 
-    private string? ReadAnyPotentialInlineComment(TomletStringReader reader)
+    private string? ReadAnyPotentialInlineComment(JomletStringReader reader)
     {
         if (!reader.ExpectAndConsume('#'))
             return null; //No comment
@@ -992,7 +992,7 @@ public class TomlParser
 
     }
         
-    private string? ReadAnyPotentialMultilineComment(TomletStringReader reader)
+    private string? ReadAnyPotentialMultilineComment(JomletStringReader reader)
     {
         var ret = new StringBuilder();
         while (reader.ExpectAndConsume('#'))

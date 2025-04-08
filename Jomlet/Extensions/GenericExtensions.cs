@@ -60,33 +60,33 @@ internal static class GenericExtensions
         return upper is >= 'A' and <= 'F';
     }
 
-    internal static bool TryPeek(this TomletStringReader reader, out int nextChar)
+    internal static bool TryPeek(this JomletStringReader reader, out int nextChar)
     {
         nextChar = reader.Peek();
         return nextChar != -1;
     }
 
-    internal static int SkipWhitespace(this TomletStringReader reader) => reader.ReadWhile(c => c.IsWhitespace()).Length;
+    internal static int SkipWhitespace(this JomletStringReader reader) => reader.ReadWhile(c => c.IsWhitespace()).Length;
 
-    internal static void SkipPotentialCarriageReturn(this TomletStringReader reader)
+    internal static void SkipPotentialCarriageReturn(this JomletStringReader reader)
     {
         if (reader.TryPeek(out var nextChar) && nextChar == '\r')
             reader.Read();
     }
 
-    internal static void SkipAnyComment(this TomletStringReader reader)
+    internal static void SkipAnyComment(this JomletStringReader reader)
     {
         //Skip anything up until the \r or \n if we start with a hash.
         if (reader.TryPeek(out var maybeHash) && maybeHash.IsHashSign())
             reader.ReadWhile(commentChar => !commentChar.IsNewline());
     }
 
-    internal static int SkipAnyNewlineOrWhitespace(this TomletStringReader reader)
+    internal static int SkipAnyNewlineOrWhitespace(this JomletStringReader reader)
     {
         return reader.ReadWhile(c => c.IsNewline() || c.IsWhitespace()).Count(c => c == '\n');
     }
 
-    internal static int SkipAnyCommentNewlineWhitespaceEtc(this TomletStringReader reader)
+    internal static int SkipAnyCommentNewlineWhitespaceEtc(this JomletStringReader reader)
     {
         var countRead = 0;
         while (reader.TryPeek(out var nextChar))
@@ -102,9 +102,9 @@ internal static class GenericExtensions
         return countRead;
     }
 
-    internal static int SkipAnyNewline(this TomletStringReader reader) => reader.ReadWhile(c => c.IsNewline()).Count(c => c == '\n');
+    internal static int SkipAnyNewline(this JomletStringReader reader) => reader.ReadWhile(c => c.IsNewline()).Count(c => c == '\n');
 
-    internal static char[] ReadChars(this TomletStringReader reader, int count)
+    internal static char[] ReadChars(this JomletStringReader reader, int count)
     {
         char[] result = new char[count];
         reader.ReadBlock(result, 0, count);
@@ -112,7 +112,7 @@ internal static class GenericExtensions
         return result;
     }
 
-    internal static string ReadWhile(this TomletStringReader reader, Predicate<int> predicate)
+    internal static string ReadWhile(this JomletStringReader reader, Predicate<int> predicate)
     {
         var ret = new StringBuilder();
         //Read up until whitespace or an equals
@@ -124,7 +124,7 @@ internal static class GenericExtensions
         return ret.ToString();
     }
 
-    internal static bool ExpectAndConsume(this TomletStringReader reader, char expectWhat)
+    internal static bool ExpectAndConsume(this JomletStringReader reader, char expectWhat)
     {
         if (!reader.TryPeek(out var nextChar))
             return false;
