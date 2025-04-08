@@ -79,7 +79,7 @@ public static class JomlSerializationMethods
         Register(odt => new TomlOffsetDateTime(odt), value => (value as TomlOffsetDateTime)?.Value ?? throw new TomlTypeMismatchException(typeof(TomlOffsetDateTime), value.GetType(), typeof(DateTimeOffset)));
 
         //LocalTime
-        Register(lt => new TomlLocalTime(lt), value => (value as TomlLocalTime)?.Value ?? throw new TomlTypeMismatchException(typeof(TomlLocalTime), value.GetType(), typeof(TimeSpan)));
+        Register(lt => new JomlLocalTime(lt), value => (value as JomlLocalTime)?.Value ?? throw new TomlTypeMismatchException(typeof(JomlLocalTime), value.GetType(), typeof(TimeSpan)));
     }
 
     /// <summary>

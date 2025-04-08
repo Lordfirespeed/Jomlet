@@ -2,11 +2,11 @@
 
 namespace Tomlet.Models;
 
-public class TomlLocalTime : TomlValue
+public class JomlLocalTime : TomlValue
 {
     private readonly TimeSpan _value;
 
-    public TomlLocalTime(TimeSpan value)
+    public JomlLocalTime(TimeSpan value)
     {
         _value = value;
     }
@@ -15,12 +15,12 @@ public class TomlLocalTime : TomlValue
         
     public override string StringValue => Value.ToString();
 
-    public static TomlLocalTime? Parse(string input)
+    public static JomlLocalTime? Parse(string input)
     {
         if (!TimeSpan.TryParse(input, out var dt))
             return null;
 
-        return new TomlLocalTime(dt);
+        return new JomlLocalTime(dt);
     }
         
     public override string SerializedValue => StringValue;

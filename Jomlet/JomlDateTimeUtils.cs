@@ -42,7 +42,7 @@ internal static class JomlDateTimeUtils
             throw new TimeOffsetOnTomlDateOrTimeException(lineNumber, match.Groups[9].Value);
 
         if (!hasYear)
-            return TomlLocalTime.Parse(input);
+            return JomlLocalTime.Parse(input);
 
         if (!hasHour)
             return JomlLocalDate.Parse(input);

@@ -72,13 +72,13 @@ namespace Tomlet.Tests
             //Check lt1
             Assert.Equal(
                 new TimeSpan(7, 32, 00),
-                Assert.IsType<TomlLocalTime>(document.Entries.Values.First()).Value
+                Assert.IsType<JomlLocalTime>(document.Entries.Values.First()).Value
             );
 
             //Check lt2
             Assert.Equal(
                 new TimeSpan(0, 32, 00).Add(TimeSpan.FromTicks(9999990)),
-                Assert.IsType<TomlLocalTime>(document.Entries.Values.Last()).Value
+                Assert.IsType<JomlLocalTime>(document.Entries.Values.Last()).Value
             );
         }
     }
