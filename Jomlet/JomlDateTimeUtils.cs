@@ -5,7 +5,7 @@ using Tomlet.Models;
 
 namespace Tomlet;
 
-internal static class TomlDateTimeUtils
+internal static class JomlDateTimeUtils
 {
     private static readonly Regex DateTimeRegex = new(
         @"^(?:(\d+)-(0[1-9]|1[012])-(0[1-9]|[12]\d|3[01]))?([\sTt])?(?:([01]\d|2[0-3]):([0-5]\d):([0-5]\d|60)(\.\d+)?((?:[Zz])|(?:[\+|\-](?:[01]\d|2[0-3])(?::[0-6][0-9])?(?::[0-6][0-9])?))?)?$",
