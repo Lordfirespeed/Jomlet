@@ -17,7 +17,7 @@ namespace Tomlet.Tests
                 MyDateTime = new DateTime(1970, 1, 1, 7, 0, 0, DateTimeKind.Utc)
             };
 
-            var serializedForm = TomletMain.TomlStringFrom(testObject);
+            var serializedForm = JomletMain.TomlStringFrom(testObject);
 
             Assert.Equal("MyString = \"Hello, world!\"\nMyFloat = 420.69000244140625\nMyBool = true\nMyDateTime = 1970-01-01T07:00:00", serializedForm.Trim());
         }
@@ -33,9 +33,9 @@ namespace Tomlet.Tests
                 MyDateTime = new DateTime(1970, 1, 1, 7, 0, 0, DateTimeKind.Utc)
             };
             
-            var serializedForm = TomletMain.TomlStringFrom(testObject);
+            var serializedForm = JomletMain.TomlStringFrom(testObject);
 
-            var deserializedAgain = TomletMain.To<SimplePrimitiveTestClass>(serializedForm);
+            var deserializedAgain = JomletMain.To<SimplePrimitiveTestClass>(serializedForm);
 
             Assert.Equal(testObject, deserializedAgain);
         }
@@ -51,7 +51,7 @@ namespace Tomlet.Tests
                 MyDateTime = new DateTime(1970, 1, 1, 7, 0, 0, DateTimeKind.Utc)
             };
 
-            var serializedForm = TomletMain.TomlStringFrom(testObject);
+            var serializedForm = JomletMain.TomlStringFrom(testObject);
 
             Assert.Equal("MyString = \"Hello, world!\"\nMyFloat = 420.69000244140625\nMyBool = true\nMyDateTime = 1970-01-01T07:00:00", serializedForm.Trim());
         }
@@ -67,9 +67,9 @@ namespace Tomlet.Tests
                 MyDateTime = new DateTime(1970, 1, 1, 7, 0, 0, DateTimeKind.Utc)
             };
 
-            var serializedForm = TomletMain.TomlStringFrom(testObject);
+            var serializedForm = JomletMain.TomlStringFrom(testObject);
 
-            var deserializedAgain = TomletMain.To<SimplePropertyTestClass>(serializedForm);
+            var deserializedAgain = JomletMain.To<SimplePropertyTestClass>(serializedForm);
 
             Assert.Equal(testObject, deserializedAgain);
         }
@@ -79,7 +79,7 @@ namespace Tomlet.Tests
         {
             var testObject = new SimpleTestRecord("Hello, world!", 420.69f, true,
                 new DateTime(1970, 1, 1, 7, 0, 0, DateTimeKind.Utc));
-            var serializedForm = TomletMain.TomlStringFrom(testObject);
+            var serializedForm = JomletMain.TomlStringFrom(testObject);
         
             Assert.Equal("MyString = \"Hello, world!\"\nMyFloat = 420.69000244140625\nMyBool = true\nMyDateTime = 1970-01-01T07:00:00", serializedForm.Trim());
         }
@@ -90,9 +90,9 @@ namespace Tomlet.Tests
             var testObject = new SimpleTestRecord("Hello, world!", 420.69f, true,
                 new DateTime(1970, 1, 1, 7, 0, 0, DateTimeKind.Utc));
 
-            var serializedForm = TomletMain.TomlStringFrom(testObject);
+            var serializedForm = JomletMain.TomlStringFrom(testObject);
         
-            var deserializedAgain = TomletMain.To<SimpleTestRecord>(serializedForm);
+            var deserializedAgain = JomletMain.To<SimpleTestRecord>(serializedForm);
         
             Assert.Equal(testObject, deserializedAgain);
         }
@@ -100,7 +100,7 @@ namespace Tomlet.Tests
         [Fact]
         public void SerializingAnEmptyObjectGivesAnEmptyString()
         {
-            var tomlString = TomletMain.TomlStringFrom(new {}).Trim();
+            var tomlString = JomletMain.TomlStringFrom(new {}).Trim();
             
             Assert.Equal(string.Empty, tomlString);
         }
@@ -109,7 +109,7 @@ namespace Tomlet.Tests
         public void AttemptingToDirectlySerializeNullReturnsNull()
         {
             //We need to use a type of T that actually has something to serialize
-            Assert.Null(TomletMain.DocumentFrom(typeof(SimplePrimitiveTestClass), null!, null));
+            Assert.Null(JomletMain.DocumentFrom(typeof(SimplePrimitiveTestClass), null!, null));
         }
     }
 }

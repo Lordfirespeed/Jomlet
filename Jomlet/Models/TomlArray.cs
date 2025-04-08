@@ -19,7 +19,7 @@ public class TomlArray : TomlValue, IEnumerable<TomlValue>
     public void Add<T>(T t) where T: new()
 #endif
     {
-        var tomlValue = t is TomlValue tv ? tv : TomletMain.ValueFrom(t);
+        var tomlValue = t is TomlValue tv ? tv : JomletMain.ValueFrom(t);
         if(tomlValue != null)
             ArrayValues.Add(tomlValue);
     }

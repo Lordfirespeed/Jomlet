@@ -8,7 +8,7 @@ namespace Tomlet.Tests
         [Fact]
         public void DeserializationWorks()
         {
-            var record = TomletMain.To<ComplexTestRecordWithAttributeMapping>(TestResources.ComplexTestRecordForAttributeMapping);
+            var record = JomletMain.To<ComplexTestRecordWithAttributeMapping>(TestResources.ComplexTestRecordForAttributeMapping);
             Assert.Equal("Test", record.MyString);
             Assert.IsType<WidgetForThisComplexTestRecordWithAttributeMapping>(record.MyWidget);
             Assert.Equal(42, record.MyWidget.MyInt);
@@ -18,8 +18,8 @@ namespace Tomlet.Tests
         public void SerializationWorks()
         {
             var testString = TestResources.ComplexTestRecordForAttributeMapping.Trim().Replace("\r\n", "\n");
-            var record = TomletMain.To<ComplexTestRecordWithAttributeMapping>(testString);
-            var serialized = TomletMain.TomlStringFrom(record).Trim();
+            var record = JomletMain.To<ComplexTestRecordWithAttributeMapping>(testString);
+            var serialized = JomletMain.TomlStringFrom(record).Trim();
             Assert.Equal(testString, serialized);
         }
 
@@ -27,7 +27,7 @@ namespace Tomlet.Tests
         public void UserDefinedTypesAsPropertiesWorks()
         {
             var testString = TestResources.UserDefinedTypePropertyTestInput.Trim().Replace("\r\n", "\n");
-            var record = TomletMain.To<Derived>(testString);
+            var record = JomletMain.To<Derived>(testString);
 
             Assert.Equal("Whatever", record.Junk);
             Assert.Equal(42, record.A.IntA);

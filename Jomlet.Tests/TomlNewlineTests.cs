@@ -14,11 +14,11 @@ namespace Tomlet.Tests
                 {key, "Test Value"}
             };
 
-            var tomlDoc = TomletMain.TomlStringFrom(model);
+            var tomlDoc = JomletMain.TomlStringFrom(model);
             
             Assert.Equal("\"Hello\\nWorld\" = \"Test Value\"", tomlDoc.Trim());
 
-            var backToDict = TomletMain.To<Dictionary<string, string>>(tomlDoc);
+            var backToDict = JomletMain.To<Dictionary<string, string>>(tomlDoc);
 
             Assert.Equal(model[key], backToDict[key]);
         }
@@ -32,11 +32,11 @@ namespace Tomlet.Tests
                 {key, "Test\nValue"}
             };
 
-            var tomlDoc = TomletMain.TomlStringFrom(model);
+            var tomlDoc = JomletMain.TomlStringFrom(model);
             
             Assert.Equal("Test = \"Test\\nValue\"", tomlDoc.Trim());
 
-            var backToDict = TomletMain.To<Dictionary<string, string>>(tomlDoc);
+            var backToDict = JomletMain.To<Dictionary<string, string>>(tomlDoc);
 
             Assert.Equal(model[key], backToDict[key]);
         }

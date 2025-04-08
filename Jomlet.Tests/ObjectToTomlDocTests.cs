@@ -18,7 +18,7 @@ namespace Tomlet.Tests
                 MyDateTime = new DateTime(1970, 1, 1, 7, 0, 0, DateTimeKind.Utc)
             };
 
-            var tomlDoc = TomletMain.DocumentFrom(testObject);
+            var tomlDoc = JomletMain.DocumentFrom(testObject);
             
             Assert.Equal(4, tomlDoc.Entries.Count);
             Assert.True(tomlDoc.GetBoolean("MyBool"));
@@ -42,7 +42,7 @@ NotOverwrittenSubclassField = ""this is a non-overwritten field, defined only in
 NotOverwrittenSuperclassField = ""this is a non-overwritten field, defined only in the superclass.""
 ";
 
-            var tomlDoc = TomletMain.DocumentFrom(testObject);
+            var tomlDoc = JomletMain.DocumentFrom(testObject);
 
             Assert.Equal(expectedResult.ReplaceLineEndings(), tomlDoc.SerializedValue.ReplaceLineEndings());
         }
@@ -58,7 +58,7 @@ NotOverwrittenSuperclassField = ""this is a non-overwritten field, defined only 
                 MyDateTime = new DateTime(1970, 1, 1, 7, 0, 0, DateTimeKind.Utc)
             };
 
-            var tomlDoc = TomletMain.DocumentFrom(testObject);
+            var tomlDoc = JomletMain.DocumentFrom(testObject);
 
             Assert.Equal(4, tomlDoc.Entries.Count);
             Assert.True(tomlDoc.GetBoolean("MyBool"));
@@ -73,7 +73,7 @@ NotOverwrittenSuperclassField = ""this is a non-overwritten field, defined only 
             var testObject = new SimpleTestRecord("Hello, world!", 420.69f, true,
                 new DateTime(1970, 1, 1, 7, 0, 0, DateTimeKind.Utc));
 
-            var tomlDoc = TomletMain.DocumentFrom(testObject);
+            var tomlDoc = JomletMain.DocumentFrom(testObject);
         
             Assert.Equal(4, tomlDoc.Entries.Count);
             Assert.True(tomlDoc.GetBoolean("MyBool"));

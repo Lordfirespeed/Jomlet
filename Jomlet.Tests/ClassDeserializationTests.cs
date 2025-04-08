@@ -14,7 +14,7 @@ namespace Tomlet.Tests
         [Fact]
         public void DictionaryDeserializationWorks()
         {
-            var dict = TomletMain.To<Dictionary<string, string>>(TestResources.SimplePrimitiveDeserializationTestInput);
+            var dict = JomletMain.To<Dictionary<string, string>>(TestResources.SimplePrimitiveDeserializationTestInput);
             
             Assert.Equal(4, dict.Count);
             Assert.Equal("Hello, world!", dict["MyString"]);
@@ -26,7 +26,7 @@ namespace Tomlet.Tests
         [Fact]
         public void SimpleCompositeDeserializationWorks()
         {
-            var type = TomletMain.To<SimplePrimitiveTestClass>(TestResources.SimplePrimitiveDeserializationTestInput);
+            var type = JomletMain.To<SimplePrimitiveTestClass>(TestResources.SimplePrimitiveDeserializationTestInput);
             
             Assert.Equal("Hello, world!", type.MyString);
             Assert.True(Math.Abs(690.42 - type.MyFloat) < 0.01);
@@ -37,7 +37,7 @@ namespace Tomlet.Tests
         [Fact]
         public void SimplePropertyDeserializationWorks()
         {
-            var type = TomletMain.To<SimplePropertyTestClass>(TestResources.SimplePrimitiveDeserializationTestInput);
+            var type = JomletMain.To<SimplePropertyTestClass>(TestResources.SimplePrimitiveDeserializationTestInput);
 
             Assert.Equal("Hello, world!", type.MyString);
             Assert.True(Math.Abs(690.42 - type.MyFloat) < 0.01);
@@ -48,7 +48,7 @@ namespace Tomlet.Tests
         [Fact]
         public void SimpleRecordDeserializationWorks()
         {
-            var type = TomletMain.To<SimpleTestRecord>(TestResources.SimplePrimitiveDeserializationTestInput);
+            var type = JomletMain.To<SimpleTestRecord>(TestResources.SimplePrimitiveDeserializationTestInput);
 
             Assert.Equal("Hello, world!", type.MyString);
             Assert.True(Math.Abs(690.42 - type.MyFloat) < 0.01);
@@ -59,7 +59,7 @@ namespace Tomlet.Tests
         [Fact]
         public void ClassWithParameterlessConstructorDeserializationWorks()
         {
-            var type = TomletMain.To<ClassWithParameterlessConstructor>(TestResources.SimplePrimitiveDeserializationTestInput);
+            var type = JomletMain.To<ClassWithParameterlessConstructor>(TestResources.SimplePrimitiveDeserializationTestInput);
             
             Assert.Equal("Hello, world!", type.MyString);
         }
@@ -67,7 +67,7 @@ namespace Tomlet.Tests
         [Fact]
         public void AnArrayOfEmptyStringsCanBeDeserialized()
         {
-            var wrapper = TomletMain.To<StringArrayWrapper>(TestResources.ArrayOfEmptyStringTestInput);
+            var wrapper = JomletMain.To<StringArrayWrapper>(TestResources.ArrayOfEmptyStringTestInput);
             var array = wrapper.Array;
             
             Assert.Equal(5, array.Length);
@@ -78,7 +78,7 @@ namespace Tomlet.Tests
         [ClassData(typeof(EnumerableDeserializerDataGenerator))]
         public void EnumerableCanBeDeserialized(Type wrapperType, string input, int expectedCount, string expectedValue)
         {
-            dynamic wrapper = TomletMain.To(wrapperType, input);
+            dynamic wrapper = JomletMain.To(wrapperType, input);
             var array = (IEnumerable<string>)wrapper.Array;
 
             // ReSharper disable once PossibleMultipleEnumeration
@@ -93,7 +93,7 @@ namespace Tomlet.Tests
             var document = TomlDocument.CreateEmpty();
             document.Put("MyFloat", "Not a float");
 
-            var ex = Assert.Throws<TomlFieldTypeMismatchException>(() => TomletMain.To<SimplePrimitiveTestClass>(document));
+            var ex = Assert.Throws<TomlFieldTypeMismatchException>(() => JomletMain.To<SimplePrimitiveTestClass>(document));
 
             var msg = $"While deserializing an object of type {typeof(SimplePrimitiveTestClass).FullName}, found field MyFloat expecting a type of Double, but value in TOML was of type String";
             Assert.Equal(msg, ex.Message);
@@ -103,7 +103,7 @@ namespace Tomlet.Tests
         public void ShouldOverrideDefaultConstructorsValues()
         {
             var options = new TomlSerializerOptions { OverrideConstructorValues = true };
-            var type = TomletMain.To<ClassWithValuesSetOnConstructor>(TestResources.SimplePrimitiveDeserializationTestInput, options);
+            var type = JomletMain.To<ClassWithValuesSetOnConstructor>(TestResources.SimplePrimitiveDeserializationTestInput, options);
             
             Assert.Equal("Hello, world!", type.MyString);
         }
@@ -112,7 +112,7 @@ namespace Tomlet.Tests
         public void ShouldNotOverrideDefaultConstructorsValues()
         {
             var options = new TomlSerializerOptions { OverrideConstructorValues = false };
-            var type = TomletMain.To<ClassWithValuesSetOnConstructor>(TestResources.SimplePrimitiveDeserializationTestInput, options);
+            var type = JomletMain.To<ClassWithValuesSetOnConstructor>(TestResources.SimplePrimitiveDeserializationTestInput, options);
             
             Assert.Equal("Modified on constructor!", type.MyString);
         }

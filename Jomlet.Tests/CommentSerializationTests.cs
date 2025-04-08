@@ -10,7 +10,7 @@ public class CommentSerializationTests
     public void CommentsOnSimpleKeyValuePairsWork()
     {
         var doc = TomlDocument.CreateEmpty();
-        var tomlString = TomletMain.ValueFrom("value");
+        var tomlString = JomletMain.ValueFrom("value");
         tomlString.Comments.InlineComment = "This is an inline comment";
         doc.PutValue("key", tomlString);
 
@@ -41,7 +41,7 @@ public class CommentSerializationTests
             }
         };
 
-        var tomlString = TomletMain.ValueFrom("value");
+        var tomlString = JomletMain.ValueFrom("value");
         tomlString.Comments.InlineComment = "Inline comment on value";
         table.PutValue("key", tomlString);
         doc.PutValue("table", table);
@@ -68,7 +68,7 @@ key = ""value"" # Inline comment on value";
                 InlineComment = "This is an inline comment on the table"
             }
         };
-        var tomlString = TomletMain.ValueFrom("value");
+        var tomlString = JomletMain.ValueFrom("value");
         tomlString.Comments.InlineComment = "Inline comment on value";
         table.PutValue("key", tomlString);
 
@@ -112,9 +112,9 @@ key = ""value"" # Inline comment on value".Trim();
     [Fact]
     public void CommentAttributesWork()
     {
-        var config = TomletMain.To<ExampleMailboxConfigClass>(TestResources.ExampleMailboxConfigurationTestInput);
+        var config = JomletMain.To<ExampleMailboxConfigClass>(TestResources.ExampleMailboxConfigurationTestInput);
 
-        var doc = TomletMain.DocumentFrom(config);
+        var doc = JomletMain.DocumentFrom(config);
         
         Assert.Equal("The name of the mailbox", doc.GetValue("mailbox").Comments.InlineComment);
         Assert.Equal("Your username for the mailbox", doc.GetValue("username").Comments.InlineComment);

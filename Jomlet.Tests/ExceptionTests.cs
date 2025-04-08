@@ -99,7 +99,7 @@ public class ExceptionTests
     
     [Fact]
     public void BadEnumValueThrows() =>
-        AssertThrows<TomlEnumParseException>(() => TomletMain.To<TomlTestClassWithEnum>(DeliberatelyIncorrectTestResources.TomlBadEnumExample));
+        AssertThrows<TomlEnumParseException>(() => JomletMain.To<TomlTestClassWithEnum>(DeliberatelyIncorrectTestResources.TomlBadEnumExample));
 
     [Fact]
     public void ReDefiningASubTableAsASubTableArrayThrowsAnException() => 
@@ -131,7 +131,7 @@ public class ExceptionTests
 
     [Fact]
     public void ConvertingAPrimitiveToADocumentThrows() =>
-        AssertThrows<TomlPrimitiveToDocumentException>(() => TomletMain.DocumentFrom("hello"));
+        AssertThrows<TomlPrimitiveToDocumentException>(() => JomletMain.DocumentFrom("hello"));
     
     [Fact]
     public void BadTomlStringThrows() =>
@@ -189,19 +189,19 @@ public class ExceptionTests
     
     [Fact]
     public void UnInstantiableObjectsThrow() => 
-        AssertThrows<TomlInstantiationException>(() => TomletMain.To<IConvertible>(""));
+        AssertThrows<TomlInstantiationException>(() => JomletMain.To<IConvertible>(""));
 
     [Fact]
     public void MultipleParameterizedConstructorsThrow() =>
-        AssertThrows<TomlInstantiationException>(() => TomletMain.To<ClassWithMultipleParameterizedConstructors>(""));
+        AssertThrows<TomlInstantiationException>(() => JomletMain.To<ClassWithMultipleParameterizedConstructors>(""));
     
     [Fact]
     public void AbstractClassDeserializationThrows() =>
-        AssertThrows<TomlInstantiationException>(() => TomletMain.To<AbstractClass>(""));
+        AssertThrows<TomlInstantiationException>(() => JomletMain.To<AbstractClass>(""));
     
     [Fact]
     public void MismatchingTypesInPrimitiveMappingThrows() => 
-        AssertThrows<TomlTypeMismatchException>(() => TomletMain.To<float>(GetDocument("MyFloat = \"hello\"").GetValue("MyFloat")));
+        AssertThrows<TomlTypeMismatchException>(() => JomletMain.To<float>(GetDocument("MyFloat = \"hello\"").GetValue("MyFloat")));
 
     [Fact]
     public void GettingAValueWhichDoesntExistThrows() =>
@@ -209,7 +209,7 @@ public class ExceptionTests
     
     [Fact]
     public void MismatchingTypesInDeserializationThrow() => 
-        AssertThrows<TomlPropertyTypeMismatchException>(() => TomletMain.To<SimplePropertyTestClass>("MyFloat = \"hello\""));
+        AssertThrows<TomlPropertyTypeMismatchException>(() => JomletMain.To<SimplePropertyTestClass>("MyFloat = \"hello\""));
 
     [Fact]
     public void AskingATableForTheValueAssociatedWithAnInvalidKeyThrows() =>

@@ -38,11 +38,11 @@ namespace Tomlet.Tests
                 }
             };
 
-            var tomlString = TomletMain.TomlStringFrom(testClass);
+            var tomlString = JomletMain.TomlStringFrom(testClass);
             
             _testOutputHelper.WriteLine("Got TOML string:\n" + tomlString);
             
-            var deserializedAgain = TomletMain.To<ComplexTestClass>(tomlString);
+            var deserializedAgain = JomletMain.To<ComplexTestClass>(tomlString);
             
             Assert.Equal(testClass, deserializedAgain);
         }
@@ -64,7 +64,7 @@ namespace Tomlet.Tests
                 SubClass2 = null
             };
 
-            var tomlString = TomletMain.TomlStringFrom(testClass);
+            var tomlString = JomletMain.TomlStringFrom(testClass);
             
             _testOutputHelper.WriteLine("Got TOML string:\n" + tomlString);
 
@@ -73,7 +73,7 @@ namespace Tomlet.Tests
             Assert.False(doc.ContainsKey("SC2"));
             Assert.False(doc.ContainsKey("TestString"));
             
-            var deserializedAgain = TomletMain.To<ComplexTestClass>(tomlString);
+            var deserializedAgain = JomletMain.To<ComplexTestClass>(tomlString);
             
             Assert.Equal(testClass, deserializedAgain);
         }
@@ -87,7 +87,7 @@ namespace Tomlet.Tests
                 MyBool = true,
             };
 
-            var tomlString = TomletMain.TomlStringFrom(testClass);
+            var tomlString = JomletMain.TomlStringFrom(testClass);
 
             _testOutputHelper.WriteLine("Got TOML string:\n" + tomlString);
 
@@ -95,7 +95,7 @@ namespace Tomlet.Tests
 
             Assert.False(doc.ContainsKey("MyString"));
 
-            var deserializedAgain = TomletMain.To<SimplePropertyTestClass>(tomlString);
+            var deserializedAgain = JomletMain.To<SimplePropertyTestClass>(tomlString);
 
             Assert.Equal(testClass, deserializedAgain);
         }
@@ -112,11 +112,11 @@ namespace Tomlet.Tests
                 },
             };
 
-            var tomlString = TomletMain.TomlStringFrom(testRecord);
+            var tomlString = JomletMain.TomlStringFrom(testRecord);
 
             _testOutputHelper.WriteLine("Got TOML string:\n" + tomlString);
 
-            var deserializedAgain = TomletMain.To<ComplexTestRecord>(tomlString);
+            var deserializedAgain = JomletMain.To<ComplexTestRecord>(tomlString);
 
             Assert.Equal(testRecord, deserializedAgain);
         }
@@ -125,7 +125,7 @@ namespace Tomlet.Tests
         public void DeserializingArraysWorks()
         {
             //Test string taken from a query on discord, that's where the unusual email addresses come from
-            var deserialized = TomletMain.To<ExampleMailboxConfigClass>(TestResources.ExampleMailboxConfigurationTestInput);
+            var deserialized = JomletMain.To<ExampleMailboxConfigClass>(TestResources.ExampleMailboxConfigurationTestInput);
             
             Assert.Equal("whatev@gmail.com", deserialized.mailbox);
             Assert.Equal("no", deserialized.username);
@@ -146,7 +146,7 @@ namespace Tomlet.Tests
 
             var anObjectWithTheObject = new {obj = anObject};
 
-            var tomlString = TomletMain.TomlStringFrom(anObjectWithTheObject);
+            var tomlString = JomletMain.TomlStringFrom(anObjectWithTheObject);
             
             Assert.Equal("obj = { value = 1, str = \"hello\" }", tomlString.Trim());
             
@@ -156,7 +156,7 @@ namespace Tomlet.Tests
         [ClassData(typeof(EnumerableSerializerDataGenerator))]
         public void EnumerableShouldSerialize(StringEnumerableWrapper inputWrapper, string expectedOutput)
         {
-            var tomlString = TomletMain.TomlStringFrom(inputWrapper).Trim();
+            var tomlString = JomletMain.TomlStringFrom(inputWrapper).Trim();
             Assert.Equal(tomlString, expectedOutput);
         }
     }

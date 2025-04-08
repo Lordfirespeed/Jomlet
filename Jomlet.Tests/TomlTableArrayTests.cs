@@ -96,7 +96,7 @@ namespace Tomlet.Tests
                 array
             };
             
-            var tomlString = TomletMain.TomlStringFrom(documentRoot).Trim().ReplaceLineEndings();
+            var tomlString = JomletMain.TomlStringFrom(documentRoot).Trim().ReplaceLineEndings();
 
             var expectedResult = @"
 [[array]]
@@ -135,7 +135,7 @@ value = { a = ""b"", c = ""d"" }
                 }
             };
 
-            var str = TomletMain.TomlStringFrom(item);
+            var str = JomletMain.TomlStringFrom(item);
             
             Assert.Equal(@"[Root]
 SomeValue = ""Hello!""

@@ -36,7 +36,7 @@ namespace Tomlet.Tests
 
             var tomlString = document.SerializedValue;
             var doc = GetDocument(tomlString);
-            var newObj = TomletMain.To<KeyWithWhitespaceTestClass>(doc.GetSubTable("myTable"));
+            var newObj = JomletMain.To<KeyWithWhitespaceTestClass>(doc.GetSubTable("myTable"));
             
             Assert.Equal(obj.KeyWithWhitespace, newObj.KeyWithWhitespace);
         }
@@ -60,7 +60,7 @@ namespace Tomlet.Tests
                 }
             };
 
-            var tomlString = TomletMain.TomlStringFrom(obj).Trim();
+            var tomlString = JomletMain.TomlStringFrom(obj).Trim();
 
             var expectedString = @"
 ShouldBeInlined = { key = ""value"" }

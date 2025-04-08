@@ -19,14 +19,14 @@ public class DictionaryTests
     {
         var doc = GetDocument(TestResources.DictionaryAsFieldTestInput);
 
-        var obj = TomletMain.To<ClassWithDictionary>(doc);
+        var obj = JomletMain.To<ClassWithDictionary>(doc);
         
         Assert.Equal(2, obj.name.Count);
         Assert.True(obj.name.ContainsKey("subname1"));
         Assert.True(obj.name.ContainsKey("subname2"));
 
         //Just make sure this doesn't throw
-        var serialized = TomletMain.TomlStringFrom(obj); 
+        var serialized = JomletMain.TomlStringFrom(obj); 
     }
 
     [Fact]
@@ -48,7 +48,7 @@ public class DictionaryTests
             GenericDictionary = dictionary
         };
         
-        var serialized = TomletMain.TomlStringFrom(obj);
+        var serialized = JomletMain.TomlStringFrom(obj);
         foreach(var (_, expectedValue) in dictionary)
         {
             Assert.Contains(expectedValue, serialized);
@@ -63,9 +63,9 @@ public class DictionaryTests
             primitiveDict[val] = $"Test {i+1}";
         }
 
-        var serialized = TomletMain.TomlStringFrom(primitiveDict);
+        var serialized = JomletMain.TomlStringFrom(primitiveDict);
 
-        var deserialized = TomletMain.To<Dictionary<T, string>>(serialized);
+        var deserialized = JomletMain.To<Dictionary<T, string>>(serialized);
         
         foreach (var (key, value) in primitiveDict) {
             if (!deserialized.ContainsKey(key)) {

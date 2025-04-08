@@ -8,7 +8,7 @@ namespace Tomlet;
 //Api class, these are supposed to be exposed
 [SuppressMessage("ReSharper", "UnusedMember.Global")]
 [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
-public static class TomletMain
+public static class JomletMain
 {
     [Attributes.ExcludeFromCodeCoverage]
     public static void RegisterMapper<T>(TomlSerializationMethods.Serialize<T>? serializer, TomlSerializationMethods.Deserialize<T>? deserializer)

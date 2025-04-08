@@ -27,7 +27,7 @@ public class SerializationWithAttributesTests
             SerializedString = "Serialized Me"
         };
 
-        var tomlString = TomletMain.TomlStringFrom(testClass);
+        var tomlString = JomletMain.TomlStringFrom(testClass);
 
         //_testOutputHelper.WriteLine("Got TOML string:\n" + tomlString);
 
@@ -40,7 +40,7 @@ public class SerializationWithAttributesTests
         Assert.True(doc.ContainsKey("_SerializedField"));
 
         //Deserialize and check again        
-        var deserializedAgain = TomletMain.To<ClassWithNonSerializableAttributes>(tomlString);
+        var deserializedAgain = JomletMain.To<ClassWithNonSerializableAttributes>(tomlString);
 
         Assert.Equal<ClassWithNonSerializableAttributes>(testClass, deserializedAgain, new NonSerializedClassComparer());
     }

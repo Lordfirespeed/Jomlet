@@ -196,7 +196,7 @@ public class TomlTable : TomlValue, IEnumerable<KeyValuePair<string, TomlValue>>
 #endif
     {
         TomlValue? tomlValue;
-        tomlValue = t is not TomlValue tv ? TomletMain.ValueFrom(t) : tv;
+        tomlValue = t is not TomlValue tv ? JomletMain.ValueFrom(t) : tv;
 
         if (tomlValue == null)
             throw new ArgumentException("Value to insert into TOML table serialized to null.", nameof(t));

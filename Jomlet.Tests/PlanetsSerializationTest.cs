@@ -109,10 +109,10 @@ public class PlanetsSerializationTest
 
         milkyWay.Planets.Add(mars);
 
-        var tomlString = TomletMain.TomlStringFrom(milkyWay);
+        var tomlString = JomletMain.TomlStringFrom(milkyWay);
         
         //Convert back to object. This should a) not throw due to broken keys, and b) have the same data.
-        var galaxy = TomletMain.To<Galaxy>(tomlString);
+        var galaxy = JomletMain.To<Galaxy>(tomlString);
         
         Assert.Equal(milkyWay.Planets.Count, galaxy.Planets.Count);
         Assert.Equal(milkyWay.Planets[0].Inhabitants.Count, galaxy.Planets[0].Inhabitants.Count);

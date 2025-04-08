@@ -63,7 +63,7 @@ namespace Tomlet.Tests
             var intArray = new[] {1, 2, 3};
             var toSerialize = new {array = intArray};
 
-            var tomlString = TomletMain.TomlStringFrom(toSerialize);
+            var tomlString = JomletMain.TomlStringFrom(toSerialize);
             
             Assert.Equal("array = [ 1, 2, 3, ]", tomlString.Trim());
         }

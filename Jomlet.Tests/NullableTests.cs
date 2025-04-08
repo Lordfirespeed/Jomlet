@@ -11,8 +11,8 @@ public class NullableTests
         var withValue = new ClassWithNullableValueType() {MyShort = 123};
         var withoutValue = new ClassWithNullableValueType() {MyShort = null};
         
-        var withValueToml = TomletMain.TomlStringFrom(withValue).Trim();
-        var withoutValueToml = TomletMain.TomlStringFrom(withoutValue).Trim();
+        var withValueToml = JomletMain.TomlStringFrom(withValue).Trim();
+        var withoutValueToml = JomletMain.TomlStringFrom(withoutValue).Trim();
         
         Assert.Equal("MyShort = 123", withValueToml);
         Assert.Equal("", withoutValueToml);
@@ -24,8 +24,8 @@ public class NullableTests
         var withValueToml = "MyShort = 123";
         var withoutValueToml = "";
         
-        var withValue = TomletMain.To<ClassWithNullableValueType>(withValueToml);
-        var withoutValue = TomletMain.To<ClassWithNullableValueType>(withoutValueToml);
+        var withValue = JomletMain.To<ClassWithNullableValueType>(withValueToml);
+        var withoutValue = JomletMain.To<ClassWithNullableValueType>(withoutValueToml);
         
         Assert.Equal((short) 123, withValue.MyShort);
         Assert.Null(withoutValue.MyShort);
