@@ -37,7 +37,7 @@ public static class JomlSerializationMethods
         //Register built-in serializers
 
         //String
-        Register(s => new TomlString(s!), value => (value as TomlString)?.Value ?? value.StringValue);
+        Register(s => new JomlString(s!), value => (value as JomlString)?.Value ?? value.StringValue);
 
         //Bool
         Register(JomlBoolean.ValueOf, value => (value as JomlBoolean)?.Value ?? throw new TomlTypeMismatchException(typeof(JomlBoolean), value.GetType(), typeof(bool)));

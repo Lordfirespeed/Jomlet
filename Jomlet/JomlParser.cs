@@ -280,7 +280,7 @@ public class JomlParser
                     }
                     else if (maybeThirdQuote.IsWhitespace() || maybeThirdQuote.IsNewline() || maybeThirdQuote.IsHashSign() || maybeThirdQuote.IsComma() || maybeThirdQuote.IsEndOfArrayChar() || maybeThirdQuote == -1)
                     {
-                        value = TomlString.Empty;
+                        value = JomlString.Empty;
                     }
                     else
                     {
@@ -418,7 +418,7 @@ public class JomlParser
                 throw new UnterminatedTomlStringException(_lineNumber);
         }
 
-        return new TomlString(content.ToString());
+        return new JomlString(content.ToString());
     }
 
     private string DecipherUnicodeEscapeSequence(string unicodeString, bool fourDigitMode)
@@ -500,7 +500,7 @@ public class JomlParser
         if (consumeClosingQuote)
             reader.Read(); //Consume terminating quote.
 
-        return new TomlString(stringContent);
+        return new JomlString(stringContent);
     }
 
     private TomlValue ReadMultiLineLiteralString(JomletStringReader reader)
@@ -574,7 +574,7 @@ public class JomlParser
             throw new TripleQuoteInTomlMultilineLiteralException(_lineNumber);
         }
 
-        return new TomlString(content.ToString());
+        return new JomlString(content.ToString());
     }
 
     private TomlValue ReadMultiLineBasicString(JomletStringReader reader)
@@ -705,7 +705,7 @@ public class JomlParser
             throw new TripleQuoteInTomlMultilineSimpleStringException(_lineNumber);
         }
 
-        return new TomlString(content.ToString());
+        return new JomlString(content.ToString());
     }
 
     private JomlArray ReadArray(JomletStringReader reader)

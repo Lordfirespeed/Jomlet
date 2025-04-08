@@ -19,7 +19,7 @@ namespace Tomlet.Tests
 
             Assert.Single(document.Entries);
             Assert.Equal("str", document.Entries.Keys.First());
-            Assert.Equal("I'm a string. \"You can quote me\". Name\tJosé\nLocation\tSF.", Assert.IsType<TomlString>(document.Entries.Values.First()).Value);
+            Assert.Equal("I'm a string. \"You can quote me\". Name\tJosé\nLocation\tSF.", Assert.IsType<JomlString>(document.Entries.Values.First()).Value);
         }
 
         [Fact]
@@ -29,7 +29,7 @@ namespace Tomlet.Tests
 
             Assert.Single(document.Entries);
             Assert.Equal("str1", document.Entries.Keys.First());
-            Assert.Equal($"Roses are red\nViolets are blue", Assert.IsType<TomlString>(document.Entries.Values.First()).Value.Replace("\r\n", "\n"));
+            Assert.Equal($"Roses are red\nViolets are blue", Assert.IsType<JomlString>(document.Entries.Values.First()).Value.Replace("\r\n", "\n"));
         }
 
         [Fact]
@@ -48,13 +48,13 @@ namespace Tomlet.Tests
             );
 
             Assert.Equal(
-                Assert.IsType<TomlString>(document.Entries["str1"]).Value,
-                Assert.IsType<TomlString>(document.Entries["str2"]).Value
+                Assert.IsType<JomlString>(document.Entries["str1"]).Value,
+                Assert.IsType<JomlString>(document.Entries["str2"]).Value
             );
 
             Assert.Equal(
-                Assert.IsType<TomlString>(document.Entries["str2"]).Value,
-                Assert.IsType<TomlString>(document.Entries["str3"]).Value
+                Assert.IsType<JomlString>(document.Entries["str2"]).Value,
+                Assert.IsType<JomlString>(document.Entries["str3"]).Value
             );
         }
 
@@ -75,10 +75,10 @@ namespace Tomlet.Tests
 
             //Check values
             Assert.Collection(document.Entries.Values,
-                entry => Assert.Equal("Here are two quotation marks: \"\". Simple enough.", Assert.IsType<TomlString>(entry).Value),
-                entry => Assert.Equal("Here are three quotation marks: \"\"\".", Assert.IsType<TomlString>(entry).Value),
-                entry => Assert.Equal("Here are fifteen quotation marks: \"\"\"\"\"\"\"\"\"\"\"\"\"\"\".", Assert.IsType<TomlString>(entry).Value),
-                entry => Assert.Equal("\"This,\" she said, \"is just a pointless statement.\"", Assert.IsType<TomlString>(entry).Value)
+                entry => Assert.Equal("Here are two quotation marks: \"\". Simple enough.", Assert.IsType<JomlString>(entry).Value),
+                entry => Assert.Equal("Here are three quotation marks: \"\"\".", Assert.IsType<JomlString>(entry).Value),
+                entry => Assert.Equal("Here are fifteen quotation marks: \"\"\"\"\"\"\"\"\"\"\"\"\"\"\".", Assert.IsType<JomlString>(entry).Value),
+                entry => Assert.Equal("\"This,\" she said, \"is just a pointless statement.\"", Assert.IsType<JomlString>(entry).Value)
             );
         }
 
@@ -100,11 +100,11 @@ namespace Tomlet.Tests
 
             //Check values
             Assert.Collection(document.Entries.Values,
-                entry => Assert.Equal(@"C:\Users\nodejs\templates", Assert.IsType<TomlString>(entry).Value),
-                entry => Assert.Equal(@"\\ServerX\admin$\system32\", Assert.IsType<TomlString>(entry).Value),
-                entry => Assert.Equal("Tom \"Dubs\" Preston-Werner", Assert.IsType<TomlString>(entry).Value),
-                entry => Assert.Equal(@"<\i\c*\s*>", Assert.IsType<TomlString>(entry).Value),
-                entry => Assert.Empty(Assert.IsType<TomlString>(entry).Value)
+                entry => Assert.Equal(@"C:\Users\nodejs\templates", Assert.IsType<JomlString>(entry).Value),
+                entry => Assert.Equal(@"\\ServerX\admin$\system32\", Assert.IsType<JomlString>(entry).Value),
+                entry => Assert.Equal("Tom \"Dubs\" Preston-Werner", Assert.IsType<JomlString>(entry).Value),
+                entry => Assert.Equal(@"<\i\c*\s*>", Assert.IsType<JomlString>(entry).Value),
+                entry => Assert.Empty(Assert.IsType<JomlString>(entry).Value)
             );
         }
         
@@ -123,8 +123,8 @@ namespace Tomlet.Tests
 
             //Check values
             Assert.Collection(document.Entries.Values,
-                entry => Assert.Equal(@"I [dw]on't need \d{2} apples", Assert.IsType<TomlString>(entry).Value),
-                entry => Assert.Equal($"The first newline is\ntrimmed in raw strings.\n   All other whitespace\n   is preserved.\n", Assert.IsType<TomlString>(entry).Value.Replace("\r\n", "\n"))
+                entry => Assert.Equal(@"I [dw]on't need \d{2} apples", Assert.IsType<JomlString>(entry).Value),
+                entry => Assert.Equal($"The first newline is\ntrimmed in raw strings.\n   All other whitespace\n   is preserved.\n", Assert.IsType<JomlString>(entry).Value.Replace("\r\n", "\n"))
             );
         }
         
@@ -144,9 +144,9 @@ namespace Tomlet.Tests
 
             //Check values
             Assert.Collection(document.Entries.Values,
-                entry => Assert.Equal("Here are fifteen quotation marks: \"\"\"\"\"\"\"\"\"\"\"\"\"\"\"", Assert.IsType<TomlString>(entry).Value),
-                entry => Assert.Equal("Here are fifteen apostrophes: '''''''''''''''", Assert.IsType<TomlString>(entry).Value),
-                entry => Assert.Equal("'That,' she said, 'is still pointless.'", Assert.IsType<TomlString>(entry).Value)
+                entry => Assert.Equal("Here are fifteen quotation marks: \"\"\"\"\"\"\"\"\"\"\"\"\"\"\"", Assert.IsType<JomlString>(entry).Value),
+                entry => Assert.Equal("Here are fifteen apostrophes: '''''''''''''''", Assert.IsType<JomlString>(entry).Value),
+                entry => Assert.Equal("'That,' she said, 'is still pointless.'", Assert.IsType<JomlString>(entry).Value)
             );
         }
 
@@ -192,9 +192,9 @@ namespace Tomlet.Tests
             var document = GetDocument(TestResources.StringEqualsToStringInput);
 
             Assert.Collection(document.Entries.Values,
-                entry => Assert.Equal(Assert.IsType<TomlString>(entry).StringValue, Assert.IsType<TomlString>(entry).ToString()),
-                entry => Assert.Equal(Assert.IsType<TomlString>(entry).StringValue, Assert.IsType<TomlString>(entry).ToString()),
-                entry => Assert.Equal(Assert.IsType<TomlString>(entry).StringValue, Assert.IsType<TomlString>(entry).ToString()),
+                entry => Assert.Equal(Assert.IsType<JomlString>(entry).StringValue, Assert.IsType<JomlString>(entry).ToString()),
+                entry => Assert.Equal(Assert.IsType<JomlString>(entry).StringValue, Assert.IsType<JomlString>(entry).ToString()),
+                entry => Assert.Equal(Assert.IsType<JomlString>(entry).StringValue, Assert.IsType<JomlString>(entry).ToString()),
                 entry => Assert.Equal(Assert.IsType<JomlLong>(entry).StringValue, Assert.IsType<JomlLong>(entry).ToString()),
                 entry => Assert.Equal(Assert.IsType<JomlLong>(entry).StringValue, Assert.IsType<JomlLong>(entry).ToString())
             );

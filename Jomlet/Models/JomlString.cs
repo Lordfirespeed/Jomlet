@@ -4,13 +4,13 @@ using Tomlet.Extensions;
 
 namespace Tomlet.Models;
 
-public class TomlString : TomlValue
+public class JomlString : TomlValue
 {
-    public static TomlString Empty => new("");
+    public static JomlString Empty => new("");
 
     private readonly string _value;
 
-    public TomlString(string? value)
+    public JomlString(string? value)
     {
         this._value = value ?? throw new ArgumentNullException(nameof(value), "TomlString's value cannot be null");
     }
