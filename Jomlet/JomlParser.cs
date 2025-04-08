@@ -292,8 +292,9 @@ public class JomlParser
             case 'n':
             {
                 // n indicates 'null' or 'nan' (a special floating point value).
-                var charsRead = reader.ReadChars(4);
-                string stringRead = new string(charsRead);
+                char[] charsRead = new char[4];
+                var charReadCount = reader.ReadBlock(charsRead, 0, 4);
+                string stringRead = new string(charsRead, 0, charReadCount);
 
                 if (stringRead is "null")
                 {
@@ -303,7 +304,7 @@ public class JomlParser
 
                 if (stringRead.StartsWith("nan"))
                 {
-                    reader.Backtrack(1);
+                    if (charReadCount > 3) reader.Backtrack(1);
                     value = new JomlDouble(double.NaN);
                     break;
                 }
