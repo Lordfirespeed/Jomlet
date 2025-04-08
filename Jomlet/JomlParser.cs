@@ -289,6 +289,27 @@ public class JomlParser
                 }
 
                 break;
+            case 'n':
+            {
+                // n indicates 'null' or 'nan' (a special floating point value).
+                var charsRead = reader.ReadChars(4);
+                string stringRead = new string(charsRead);
+
+                if (stringRead is "null")
+                {
+                    value = JomlNull.Instance;
+                    break;
+                }
+
+                if (stringRead.StartsWith("nan"))
+                {
+                    reader.Backtrack(1);
+                    value = new JomlDouble(double.NaN);
+                    break;
+                }
+                
+                throw new JomlInvalidValueException(_lineNumber, (char) startOfValue);
+            }
             case '+':
             case '-':
             case '0':
@@ -302,10 +323,9 @@ public class JomlParser
             case '8':
             case '9':
             case 'i':
-            case 'n':
                 //I kind of hate that but it's probably fast.
                 //Number. Maybe floating-point.
-                //i and n indicate special floating point values (inf and nan).
+                //i indicates 'inf' (a special floating point value)
 
                 //Read a string, stopping if we hit an equals, whitespace, newline, or comment.
                 var stringValue = reader.ReadWhile(valueChar => !valueChar.IsEquals() && !valueChar.IsNewline() && !valueChar.IsHashSign() && !valueChar.IsComma() && !valueChar.IsEndOfArrayChar() && !valueChar.IsEndOfInlineObjectChar())

@@ -209,6 +209,9 @@ apos15 = "Here are fifteen apostrophes: '''''''''''''''"
 # 'That,' she said, 'is still pointless.'
 str = ''''That,' she said, 'is still pointless.''''</value>
   </data>
+  <data name="BasicNullTestInput" xml:space="preserve">
+    <value>null1 = null</value>
+  </data>
   <data name="BasicIntegerTestInput" xml:space="preserve">
     <value>int1 = +99
 int2 = 42

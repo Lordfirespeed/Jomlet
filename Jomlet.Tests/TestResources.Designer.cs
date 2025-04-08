@@ -8,6 +8,9 @@
 //------------------------------------------------------------------------------
 
 namespace Jomlet.Tests {
+    using System;
+    
+    
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -136,6 +139,15 @@ namespace Jomlet.Tests {
         internal static string BasicKVPTestInput {
             get {
                 return ResourceManager.GetString("BasicKVPTestInput", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to null1 = null.
+        /// </summary>
+        internal static string BasicNullTestInput {
+            get {
+                return ResourceManager.GetString("BasicNullTestInput", resourceCulture);
             }
         }
         
