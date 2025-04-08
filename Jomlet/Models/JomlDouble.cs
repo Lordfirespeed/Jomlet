@@ -2,23 +2,23 @@
 
 namespace Tomlet.Models;
 
-public class TomlDouble : TomlValue
+public class JomlDouble : TomlValue
 {
     private double _value;
 
-    public TomlDouble(double value)
+    public JomlDouble(double value)
     {
         _value = value;
     }
 
-    internal static TomlDouble? Parse(string valueInToml)
+    internal static JomlDouble? Parse(string valueInToml)
     {
         var nullableDouble = JomlNumberUtils.GetDoubleValue(valueInToml);
 
         if (!nullableDouble.HasValue)
             return null;
 
-        return new TomlDouble(nullableDouble.Value);
+        return new JomlDouble(nullableDouble.Value);
     }
 
     public bool HasDecimal => Value != (int) Value;

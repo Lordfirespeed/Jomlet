@@ -404,8 +404,8 @@ public class TomlTable : TomlValue, IEnumerable<KeyValuePair<string, TomlValue>>
 
         var value = GetValue(JomlUtils.AddCorrectQuotes(key));
 
-        if (value is not TomlDouble dbl)
-            throw new TomlTypeMismatchException(typeof(TomlDouble), value.GetType(), typeof(float));
+        if (value is not JomlDouble dbl)
+            throw new TomlTypeMismatchException(typeof(JomlDouble), value.GetType(), typeof(float));
 
         return (float)dbl.Value;
     }

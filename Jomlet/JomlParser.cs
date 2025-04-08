@@ -315,7 +315,7 @@ public class JomlParser
                     value = JomlDateTimeUtils.ParseDateString(stringValue, _lineNumber) ?? throw new InvalidTomlDateTimeException(_lineNumber, stringValue);
                 else if (stringValue.Contains('.') || (stringValue.Contains('e') && !stringValue.StartsWith("0x")) || stringValue.Contains('n') || stringValue.Contains('i'))
                     //Try parse as a double, then fall back to a date/time.
-                    value = TomlDouble.Parse(stringValue) ?? JomlDateTimeUtils.ParseDateString(stringValue, _lineNumber) ?? throw new InvalidTomlNumberException(_lineNumber, stringValue);
+                    value = JomlDouble.Parse(stringValue) ?? JomlDateTimeUtils.ParseDateString(stringValue, _lineNumber) ?? throw new InvalidTomlNumberException(_lineNumber, stringValue);
                 else
                     //Try parse as a long, then fall back to a date/time.
                     value = TomlLong.Parse(stringValue) ?? JomlDateTimeUtils.ParseDateString(stringValue, _lineNumber) ?? throw new InvalidTomlNumberException(_lineNumber, stringValue);

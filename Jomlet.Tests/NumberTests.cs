@@ -80,13 +80,13 @@ namespace Tomlet.Tests
             
             //Check values
             Assert.Collection(document.Entries.Values,
-                entry => Assert.Equal(1.0, Assert.IsType<TomlDouble>(entry).Value),
-                entry => Assert.Equal(3.1415, Assert.IsType<TomlDouble>(entry).Value),
-                entry => Assert.Equal(-0.01, Assert.IsType<TomlDouble>(entry).Value),
-                entry => Assert.Equal(5e+22, Assert.IsType<TomlDouble>(entry).Value),
-                entry => Assert.Equal(1e06, Assert.IsType<TomlDouble>(entry).Value),
-                entry => Assert.Equal(-2e-2, Assert.IsType<TomlDouble>(entry).Value),
-                entry => Assert.Equal(6.626e-34, Assert.IsType<TomlDouble>(entry).Value)
+                entry => Assert.Equal(1.0, Assert.IsType<JomlDouble>(entry).Value),
+                entry => Assert.Equal(3.1415, Assert.IsType<JomlDouble>(entry).Value),
+                entry => Assert.Equal(-0.01, Assert.IsType<JomlDouble>(entry).Value),
+                entry => Assert.Equal(5e+22, Assert.IsType<JomlDouble>(entry).Value),
+                entry => Assert.Equal(1e06, Assert.IsType<JomlDouble>(entry).Value),
+                entry => Assert.Equal(-2e-2, Assert.IsType<JomlDouble>(entry).Value),
+                entry => Assert.Equal(6.626e-34, Assert.IsType<JomlDouble>(entry).Value)
             );
         }
 
@@ -95,7 +95,7 @@ namespace Tomlet.Tests
         {
             var document = GetDocument(TestResources.FloatWithUnderscoresTestInput);
 
-            Assert.Single(document.Entries, kvp => kvp.Key == "flt8" && kvp.Value is TomlDouble {Value: 224617.445991228});
+            Assert.Single(document.Entries, kvp => kvp.Key == "flt8" && kvp.Value is JomlDouble {Value: 224617.445991228});
         }
 
         [Fact]
@@ -117,12 +117,12 @@ namespace Tomlet.Tests
             
             //Check values
             Assert.Collection(document.Entries.Values,
-                entry => Assert.Equal(double.PositiveInfinity, Assert.IsType<TomlDouble>(entry).Value),
-                entry => Assert.Equal(double.PositiveInfinity, Assert.IsType<TomlDouble>(entry).Value),
-                entry => Assert.Equal(double.NegativeInfinity, Assert.IsType<TomlDouble>(entry).Value),
-                entry => Assert.Equal(double.NaN, Assert.IsType<TomlDouble>(entry).Value),
-                entry => Assert.Equal(double.NaN, Assert.IsType<TomlDouble>(entry).Value),
-                entry => Assert.Equal(double.NaN, Assert.IsType<TomlDouble>(entry).Value)
+                entry => Assert.Equal(double.PositiveInfinity, Assert.IsType<JomlDouble>(entry).Value),
+                entry => Assert.Equal(double.PositiveInfinity, Assert.IsType<JomlDouble>(entry).Value),
+                entry => Assert.Equal(double.NegativeInfinity, Assert.IsType<JomlDouble>(entry).Value),
+                entry => Assert.Equal(double.NaN, Assert.IsType<JomlDouble>(entry).Value),
+                entry => Assert.Equal(double.NaN, Assert.IsType<JomlDouble>(entry).Value),
+                entry => Assert.Equal(double.NaN, Assert.IsType<JomlDouble>(entry).Value)
             );
         }
 
