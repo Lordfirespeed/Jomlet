@@ -18,21 +18,21 @@ jobs:
             -   name: Restore dependencies
                 run: dotnet restore
             -   name: Test
-                run: dotnet test --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput='./lcov.info' /p:ExcludeByAttribute="Tomlet.Attributes.NoCoverageAttribute"
+                run: dotnet test --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=lcov /p:CoverletOutput='./lcov.info' /p:ExcludeByAttribute="Jomlet.Attributes.NoCoverageAttribute"
             -   name: Upload test coverage
                 uses: coverallsapp/github-action@v2.3.4
                 with:
                     github-token: ${{ secrets.GITHUB_TOKEN }}
-                    path-to-lcov: ./Tomlet.Tests/lcov.info
+                    path-to-lcov: ./Jomlet.Tests/lcov.info
             -   name: Build
                 run: dotnet build -c Release
             -   name: Upload NuGet Artifact
                 uses: actions/upload-artifact@v4.5.0
                 with:
-                    name: Tomlet.nupkg
-                    path: Tomlet/bin/Release/*.nupkg
+                    name: Jomlet.nupkg
+                    path: Jomlet/bin/Release/*.nupkg
             -   name: Upload to NuGet
                 if: contains(github.event.head_commit.message, '[publish]') == true && github.event_name == 'push'
                 env:
                     NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
-                run: dotnet nuget push ./Tomlet/bin/Release/*.nupkg -s https://api.nuget.org/v3/index.json -k $NUGET_API_KEY
+                run: dotnet nuget push ./Jomlet/bin/Release/*.nupkg -s https://api.nuget.org/v3/index.json -k $NUGET_API_KEY
