@@ -13,16 +13,16 @@ internal static class JomlCompositeSerializer
 {
 #if MODERN_DOTNET
     [UnconditionalSuppressMessage("AOT", "IL2072", Justification = "Any field that is being serialized must have been used as a field in the consuming code in order for the code path that queries it to run, so the dynamic code requirement is already satisfied.")]
-    public static TomlSerializationMethods.Serialize<object> For([DynamicallyAccessedMembers(TomlSerializationMethods.MainDeserializerAccessedMemberTypes)] Type type, TomlSerializerOptions options)
+    public static JomlSerializationMethods.Serialize<object> For([DynamicallyAccessedMembers(JomlSerializationMethods.MainDeserializerAccessedMemberTypes)] Type type, TomlSerializerOptions options)
 #else
-    public static TomlSerializationMethods.Serialize<object> For(Type type, TomlSerializerOptions options)
+    public static JomlSerializationMethods.Serialize<object> For(Type type, TomlSerializerOptions options)
 #endif
     {
-        TomlSerializationMethods.Serialize<object> serializer;
+        JomlSerializationMethods.Serialize<object> serializer;
 
         if (type.IsEnum)
         {
-            var stringSerializer = TomlSerializationMethods.GetSerializer(typeof(string), options);
+            var stringSerializer = JomlSerializationMethods.GetSerializer(typeof(string), options);
             serializer = o => stringSerializer.Invoke(Enum.GetName(type, o!) ?? throw new ArgumentException($"Tomlet: Cannot serialize {o} as an enum of type {type} because the enum type does not declare a name for that value"));
         }
         else
@@ -68,7 +68,7 @@ internal static class JomlCompositeSerializer
                     if (fieldValue == null)
                         continue; //Skip nulls - TOML doesn't support them.
 
-                    var tomlValue = TomlSerializationMethods.GetSerializer(field.FieldType, options).Invoke(fieldValue);
+                    var tomlValue = JomlSerializationMethods.GetSerializer(field.FieldType, options).Invoke(fieldValue);
                     
                     if(tomlValue == null)
                         continue;
@@ -103,7 +103,7 @@ internal static class JomlCompositeSerializer
                     if(propValue == null)
                         continue;
                     
-                    var tomlValue = TomlSerializationMethods.GetSerializer(prop.PropertyType, options).Invoke(propValue);
+                    var tomlValue = JomlSerializationMethods.GetSerializer(prop.PropertyType, options).Invoke(propValue);
 
                     if (tomlValue == null) 
                         continue;
@@ -124,7 +124,7 @@ internal static class JomlCompositeSerializer
         }
 
         //Cache composite deserializer.
-        TomlSerializationMethods.Register(type, serializer, null);
+        JomlSerializationMethods.Register(type, serializer, null);
 
         return serializer;
     }

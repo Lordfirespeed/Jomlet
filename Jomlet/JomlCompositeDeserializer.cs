@@ -15,15 +15,15 @@ internal static class JomlCompositeDeserializer
 {
 #if MODERN_DOTNET
     [UnconditionalSuppressMessage("AOT", "IL2072", Justification = "Any field that is being deserialized to must have been used as a field in the consuming code in order for the code path that queries it to run, so the dynamic code requirement is already satisfied.")]
-    public static TomlSerializationMethods.Deserialize<object> For([DynamicallyAccessedMembers(TomlSerializationMethods.MainDeserializerAccessedMemberTypes)] Type type, TomlSerializerOptions options)
+    public static JomlSerializationMethods.Deserialize<object> For([DynamicallyAccessedMembers(JomlSerializationMethods.MainDeserializerAccessedMemberTypes)] Type type, TomlSerializerOptions options)
 #else
-    public static TomlSerializationMethods.Deserialize<object> For(Type type, TomlSerializerOptions options)
+    public static JomlSerializationMethods.Deserialize<object> For(Type type, TomlSerializerOptions options)
 #endif
     {
-        TomlSerializationMethods.Deserialize<object> deserializer;
+        JomlSerializationMethods.Deserialize<object> deserializer;
         if (type.IsEnum)
         {
-            var stringDeserializer = TomlSerializationMethods.GetDeserializer(typeof(string), options);
+            var stringDeserializer = JomlSerializationMethods.GetDeserializer(typeof(string), options);
             deserializer = value =>
             {
                 var enumName = (string)stringDeserializer.Invoke(value);
@@ -87,7 +87,7 @@ internal static class JomlCompositeDeserializer
                     object fieldValue;
                     try
                     {
-                        fieldValue = TomlSerializationMethods.GetDeserializer(field.FieldType, options).Invoke(entry);
+                        fieldValue = JomlSerializationMethods.GetDeserializer(field.FieldType, options).Invoke(entry);
                     }
                     catch (TomlTypeMismatchException e)
                     {
@@ -110,7 +110,7 @@ internal static class JomlCompositeDeserializer
 
                     try
                     {
-                        propValue = TomlSerializationMethods.GetDeserializer(prop.PropertyType, options).Invoke(entry);
+                        propValue = JomlSerializationMethods.GetDeserializer(prop.PropertyType, options).Invoke(entry);
                     }
                     catch (TomlTypeMismatchException e)
                     {
@@ -125,14 +125,14 @@ internal static class JomlCompositeDeserializer
         }
 
         //Cache composite deserializer.
-        TomlSerializationMethods.Register(type, null, deserializer);
+        JomlSerializationMethods.Register(type, null, deserializer);
 
         return deserializer;
     }
 
 #if MODERN_DOTNET
     [UnconditionalSuppressMessage("AOT", "IL2072", Justification = "Any constructor parameter must have been used somewhere in the consuming code in order for the code path that queries it to run, so the dynamic code requirement is already satisfied.")]
-    private static object CreateInstance([DynamicallyAccessedMembers(TomlSerializationMethods.MainDeserializerAccessedMemberTypes)] Type type, TomlValue tomlValue, TomlSerializerOptions options, out HashSet<string> assignedMembers)
+    private static object CreateInstance([DynamicallyAccessedMembers(JomlSerializationMethods.MainDeserializerAccessedMemberTypes)] Type type, TomlValue tomlValue, TomlSerializerOptions options, out HashSet<string> assignedMembers)
 #else
     private static object CreateInstance(Type type, TomlValue tomlValue, TomlSerializerOptions options, out HashSet<string> assignedMembers)
 #endif
@@ -164,7 +164,7 @@ internal static class JomlCompositeDeserializer
 
             try
             {
-                argument = TomlSerializationMethods.GetDeserializer(parameter.ParameterType, options).Invoke(entry);
+                argument = JomlSerializationMethods.GetDeserializer(parameter.ParameterType, options).Invoke(entry);
             }
             catch (TomlTypeMismatchException e)
             {

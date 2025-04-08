@@ -14,7 +14,7 @@ public class TomlArray : TomlValue, IEnumerable<TomlValue>
     public override string StringValue => $"Toml Array ({ArrayValues.Count} values)";
 
 #if MODERN_DOTNET
-    public void Add<[DynamicallyAccessedMembers(TomlSerializationMethods.MainDeserializerAccessedMemberTypes)] T>(T t) where T: new()
+    public void Add<[DynamicallyAccessedMembers(JomlSerializationMethods.MainDeserializerAccessedMemberTypes)] T>(T t) where T: new()
 #else
     public void Add<T>(T t) where T: new()
 #endif

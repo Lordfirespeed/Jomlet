@@ -11,16 +11,16 @@ using Tomlet.Models;
 
 namespace Tomlet;
 
-public static class TomlSerializationMethods
+public static class JomlSerializationMethods
 {
 #if MODERN_DOTNET
     internal const DynamicallyAccessedMemberTypes MainDeserializerAccessedMemberTypes = DynamicallyAccessedMemberTypes.PublicConstructors | DynamicallyAccessedMemberTypes.PublicFields | DynamicallyAccessedMemberTypes.PublicProperties | DynamicallyAccessedMemberTypes.NonPublicFields | DynamicallyAccessedMemberTypes.NonPublicProperties;
 #endif
         
-    private static MethodInfo _stringKeyedDictionaryMethod = typeof(TomlSerializationMethods).GetMethod(nameof(StringKeyedDictionaryDeserializerFor), BindingFlags.Static | BindingFlags.NonPublic)!;
-    private static MethodInfo _primitiveKeyedDictionaryMethod = typeof(TomlSerializationMethods).GetMethod(nameof(PrimitiveKeyedDictionaryDeserializerFor), BindingFlags.Static | BindingFlags.NonPublic)!;
-    private static MethodInfo _genericDictionarySerializerMethod = typeof(TomlSerializationMethods).GetMethod(nameof(GenericDictionarySerializer), BindingFlags.Static | BindingFlags.NonPublic)!;
-    private static MethodInfo _genericNullableSerializerMethod = typeof(TomlSerializationMethods).GetMethod(nameof(GenericNullableSerializer), BindingFlags.Static | BindingFlags.NonPublic)!;
+    private static MethodInfo _stringKeyedDictionaryMethod = typeof(JomlSerializationMethods).GetMethod(nameof(StringKeyedDictionaryDeserializerFor), BindingFlags.Static | BindingFlags.NonPublic)!;
+    private static MethodInfo _primitiveKeyedDictionaryMethod = typeof(JomlSerializationMethods).GetMethod(nameof(PrimitiveKeyedDictionaryDeserializerFor), BindingFlags.Static | BindingFlags.NonPublic)!;
+    private static MethodInfo _genericDictionarySerializerMethod = typeof(JomlSerializationMethods).GetMethod(nameof(GenericDictionarySerializer), BindingFlags.Static | BindingFlags.NonPublic)!;
+    private static MethodInfo _genericNullableSerializerMethod = typeof(JomlSerializationMethods).GetMethod(nameof(GenericNullableSerializer), BindingFlags.Static | BindingFlags.NonPublic)!;
 
     public delegate T Deserialize<out T>(TomlValue value);
     public delegate T ComplexDeserialize<out T>(TomlValue value, TomlSerializerOptions options);
@@ -32,7 +32,7 @@ public static class TomlSerializationMethods
 
 
     [Attributes.ExcludeFromCodeCoverage]
-    static TomlSerializationMethods()
+    static JomlSerializationMethods()
     {
         //Register built-in serializers
 

@@ -190,7 +190,7 @@ public class TomlTable : TomlValue, IEnumerable<KeyValuePair<string, TomlValue>>
     }
 
 #if MODERN_DOTNET
-    public void Put<[DynamicallyAccessedMembers(TomlSerializationMethods.MainDeserializerAccessedMemberTypes)] T>(string key, T t, bool quote = false)
+    public void Put<[DynamicallyAccessedMembers(JomlSerializationMethods.MainDeserializerAccessedMemberTypes)] T>(string key, T t, bool quote = false)
 #else
     public void Put<T>(string key, T t, bool quote = false)
 #endif
