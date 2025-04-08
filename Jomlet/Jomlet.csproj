@@ -1,29 +1,29 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <Authors>Sam Byass</Authors>
+        <Authors>Sam Byass, Joe Clack</Authors>
         <Company>N/A</Company>
         <Configurations>Debug;Release</Configurations>
         <DebugType>embedded</DebugType>
         <Description>
-            Tomlet allows consumption and creation of TOML files (often used as configuration files) in .NET applications.
-            It supports serialization and deserialization of objects to and from TOML, and is compliant with version 1.0.0 of the TOML specification.
+            Jomlet allows consumption and creation of JOML files (often used as configuration files) in .NET applications.
+            It supports serialization and deserialization of objects to and from JOML.
         </Description>
         <EmbedUntrackedSources>true</EmbedUntrackedSources>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <LangVersion>10</LangVersion>
         <Nullable>enable</Nullable>
-        <PackageId>Samboy063.Tomlet</PackageId>
+        <PackageId>Lordfirespeed.Jomlet</PackageId>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <PackageProjectUrl>https://github.com/SamboyCoding/Tomlet</PackageProjectUrl>
-        <PackageTags>toml</PackageTags>
+        <PackageProjectUrl>https://github.com/Lordfirespeed/Jomlet</PackageProjectUrl>
+        <PackageTags>joml</PackageTags>
         <Platforms>AnyCPU</Platforms>
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
         <RepositoryType>git</RepositoryType>
-        <RepositoryUrl>https://github.com/SamboyCoding/Tomlet.git</RepositoryUrl>
+        <RepositoryUrl>https://github.com/Lordfirespeed/Jomlet.git</RepositoryUrl>
         <TargetFrameworks>net6;net7;net8;net9;netstandard2.0;netframework3.5</TargetFrameworks>
-        <Title>Tomlet</Title>
-        <Version>6.0.0</Version>
+        <Title>Jomlet</Title>
+        <Version>0.1.0</Version>
         <IsTrimmable>true</IsTrimmable>
         <NoWarn>SYSLIB0050</NoWarn>
 
