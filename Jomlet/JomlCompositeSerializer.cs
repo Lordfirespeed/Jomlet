@@ -35,11 +35,11 @@ internal static class JomlCompositeSerializer
 
             var fields = type.GetFields(memberFlags);
             var fieldAttribs = fields
-                .ToDictionary(f => f, f => new {inline = GenericExtensions.GetCustomAttribute<TomlInlineCommentAttribute>(f), preceding = GenericExtensions.GetCustomAttribute<TomlPrecedingCommentAttribute>(f), field = GenericExtensions.GetCustomAttribute<JomlFieldAttribute>(f), noInline = GenericExtensions.GetCustomAttribute<JomlDoNotInlineObjectAttribute>(f)});
+                .ToDictionary(f => f, f => new {inline = GenericExtensions.GetCustomAttribute<JomlInlineCommentAttribute>(f), preceding = GenericExtensions.GetCustomAttribute<TomlPrecedingCommentAttribute>(f), field = GenericExtensions.GetCustomAttribute<JomlFieldAttribute>(f), noInline = GenericExtensions.GetCustomAttribute<JomlDoNotInlineObjectAttribute>(f)});
             var props = type.GetProperties(memberFlags)
                 .ToArray();
             var propAttribs = props
-                .ToDictionary(p => p, p => new {inline = GenericExtensions.GetCustomAttribute<TomlInlineCommentAttribute>(p), preceding = GenericExtensions.GetCustomAttribute<TomlPrecedingCommentAttribute>(p), prop = GenericExtensions.GetCustomAttribute<JomlPropertyAttribute>(p), noInline = GenericExtensions.GetCustomAttribute<JomlDoNotInlineObjectAttribute>(p)});
+                .ToDictionary(p => p, p => new {inline = GenericExtensions.GetCustomAttribute<JomlInlineCommentAttribute>(p), preceding = GenericExtensions.GetCustomAttribute<TomlPrecedingCommentAttribute>(p), prop = GenericExtensions.GetCustomAttribute<JomlPropertyAttribute>(p), noInline = GenericExtensions.GetCustomAttribute<JomlDoNotInlineObjectAttribute>(p)});
 
             var isForcedNoInline = GenericExtensions.GetCustomAttribute<JomlDoNotInlineObjectAttribute>(type) != null;
 

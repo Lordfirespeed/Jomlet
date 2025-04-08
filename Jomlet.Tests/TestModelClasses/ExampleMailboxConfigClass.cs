@@ -8,11 +8,11 @@ namespace Jomlet.Tests.TestModelClasses;
 [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
 public class ExampleMailboxConfigClass
 {
-    [TomlInlineComment("The name of the mailbox")]
+    [JomlInlineComment("The name of the mailbox")]
     public string mailbox;
-    [TomlInlineComment("Your username for the mailbox")]
+    [JomlInlineComment("Your username for the mailbox")]
     public string username;
-    [TomlInlineComment("The password you use to access the mailbox")]
+    [JomlInlineComment("The password you use to access the mailbox")]
     public string password;
 
     [TomlPrecedingComment("The rules for the mailbox follow")]

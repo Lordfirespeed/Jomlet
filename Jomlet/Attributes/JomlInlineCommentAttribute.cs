@@ -3,11 +3,11 @@ using System;
 namespace Jomlet.Attributes;
 
 [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
-public class TomlInlineCommentAttribute : Attribute
+public class JomlInlineCommentAttribute : Attribute
 {
     internal string Comment { get; }
 
-    public TomlInlineCommentAttribute(string comment)
+    public JomlInlineCommentAttribute(string comment)
     {
         Comment = comment;
     }
